@@ -144,246 +144,271 @@ function Login() {
       </nav>
 
       <div className="login-page">
-        <div className="auth-card">
-          <div className="auth-tabs">
-            <button
-              className={`auth-tab${tab === 'login' ? ' active' : ''}`}
-              onClick={() => setTab('login')}
-            >Войти</button>
-            <button
-              className={`auth-tab${tab === 'register' ? ' active' : ''}`}
-              onClick={() => setTab('register')}
-            >Регистрация</button>
+        {/* Левая часть: форма */}
+        <div className="login-left">
+          <div className="auth-card">
+            <div className="auth-tabs">
+              <button
+                className={`auth-tab${tab === 'login' ? ' active' : ''}`}
+                onClick={() => setTab('login')}
+              >Войти</button>
+              <button
+                className={`auth-tab${tab === 'register' ? ' active' : ''}`}
+                onClick={() => setTab('register')}
+              >Регистрация</button>
+            </div>
+
+            {tab === 'login' && (
+              <>
+                <div className="auth-title">С возвращением</div>
+                <div className="auth-sub">Войдите в аккаунт BizFlow AI</div>
+
+                <button className="btn-tg">
+                  <TgIcon /> Войти через Telegram
+                </button>
+
+                <div className="auth-divider">
+                  <div className="auth-divider-line" />
+                  <span className="auth-divider-text">или по email</span>
+                  <div className="auth-divider-line" />
+                </div>
+
+                <div className="auth-secure">
+                  <span className="auth-secure-dot" />
+                  Соединение защищено · данные зашифрованы
+                </div>
+
+                <div className="auth-form">
+                  <div className="field-wrap">
+                    <label className={`field-label${focused === 'email' ? ' focused' : ''}`}>Email</label>
+                    <div className="field-input-wrap">
+                      <span className="field-icon"><EmailIcon /></span>
+                      <input
+                        className="field-input"
+                            type="email"
+                            placeholder="you@example.com"
+                            autoComplete="email"
+                            value={loginEmail}
+                            onChange={e => setLoginEmail(e.target.value)}
+                            onFocus={() => setFocused('email')}
+                            onBlur={() => setFocused('')}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="field-wrap">
+                    <label className={`field-label${focused === 'pwd' ? ' focused' : ''}`}>Пароль</label>
+                    <div className="field-input-wrap">
+                      <span className="field-icon"><LockIcon /></span>
+                      <input
+                        className="field-input"
+                        type={showPwd ? 'text' : 'password'}
+                        placeholder="••••••••"
+                        autoComplete="current-password"
+                        value={loginPwd}
+                        onChange={e => setLoginPwd(e.target.value)}
+                        onFocus={() => setFocused('pwd')}
+                        onBlur={() => setFocused('')}
+                      />
+                      <button
+                        className={`field-eye${showPwd ? ' visible' : ''}`}
+                        onClick={() => setShowPwd(p => !p)}
+                        type="button"
+                      >
+                        <EyeIcon visible={showPwd} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="auth-row">
+                  <label className="auth-remember">
+                    <input
+                      type="checkbox"
+                      className="auth-checkbox"
+                      checked={remember}
+                      onChange={e => setRemember(e.target.checked)}
+                    />
+                    <span className="auth-remember-label">Запомнить меня</span>
+                  </label>
+                  <a href="#" className="auth-forgot">Забыли пароль?</a>
+                </div>
+
+                {message && <div className="auth-message">{message}</div>}
+                <button
+                  className="btn-submit"
+                  onClick={async () => {
+                    setMessage('');
+                    setLoadingLogin(true);
+                    try {
+                      const data = await fetchJson('/api/auth/login', {
+                        method: 'POST',
+                        body: JSON.stringify({ email: loginEmail, password: loginPwd, remember }),
+                      });
+                      // on success, redirect or show message
+                      if (data && data.redirect) {
+                        window.location.href = data.redirect;
+                        return;
+                      }
+                      setMessage('Вход выполнен успешно');
+                      setTimeout(() => window.location.href = 'index.html', 700);
+                    } catch (err) {
+                      setMessage(err && err.body && err.body.message ? err.body.message : err.message || 'Ошибка входа');
+                    } finally {
+                      setLoadingLogin(false);
+                    }
+                  }}
+                  disabled={loadingLogin}
+                >{loadingLogin ? 'Вход...' : 'Войти →'}</button>
+
+                <div className="auth-switch">
+                  Нет аккаунта?{' '}
+                  <a href="#" onClick={e => { e.preventDefault(); setTab('register'); }}>
+                    Зарегистрироваться
+                  </a>
+                </div>
+              </>
+            )}
+
+            {tab === 'register' && (
+              <>
+                <div className="auth-title">Создать аккаунт</div>
+                <div className="auth-sub">Начните бесплатно — без карты</div>
+
+                <button className="btn-tg">
+                  <TgIcon /> Зарегистрироваться через Telegram
+                </button>
+
+                <div className="auth-divider">
+                  <div className="auth-divider-line" />
+                  <span className="auth-divider-text">или по email</span>
+                  <div className="auth-divider-line" />
+                </div>
+
+                <div className="auth-form">
+                  <div className="field-wrap">
+                    <label className={`field-label${focused === 'name' ? ' focused' : ''}`}>Имя</label>
+                    <div className="field-input-wrap">
+                      <span className="field-icon"><UserIcon /></span>
+                      <input
+                        className="field-input"
+                        type="text"
+                        placeholder="Ваше имя"
+                        autoComplete="name"
+                        value={regName}
+                        onChange={e => setRegName(e.target.value)}
+                        onFocus={() => setFocused('name')}
+                        onBlur={() => setFocused('')}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="field-wrap">
+                    <label className={`field-label${focused === 'email-r' ? ' focused' : ''}`}>Email</label>
+                    <div className="field-input-wrap">
+                      <span className="field-icon"><EmailIcon /></span>
+                      <input
+                        className="field-input"
+                        type="email"
+                        placeholder="you@example.com"
+                        autoComplete="email"
+                        value={regEmail}
+                        onChange={e => setRegEmail(e.target.value)}
+                        onFocus={() => setFocused('email-r')}
+                        onBlur={() => setFocused('')}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="field-wrap">
+                    <label className={`field-label${focused === 'pwd-r' ? ' focused' : ''}`}>Пароль</label>
+                    <div className="field-input-wrap">
+                      <span className="field-icon"><LockIcon /></span>
+                      <input
+                        className="field-input"
+                        type={showPwdReg ? 'text' : 'password'}
+                        placeholder="Минимум 8 символов"
+                        autoComplete="new-password"
+                        value={regPwd}
+                        onChange={e => { setRegPwd(e.target.value); checkStrength(e.target.value); }}
+                        onFocus={() => setFocused('pwd-r')}
+                        onBlur={() => setFocused('')}
+                      />
+                      <button
+                        className={`field-eye${showPwdReg ? ' visible' : ''}`}
+                        onClick={() => setShowPwdReg(p => !p)}
+                        type="button"
+                      >
+                        <EyeIcon visible={showPwdReg} />
+                      </button>
+                    </div>
+                    <div className="pwd-strength">
+                      <div className={barClass(1)} />
+                      <div className={barClass(2)} />
+                      <div className={barClass(3)} />
+                    </div>
+                  </div>
+                </div>
+
+                {message && <div className="auth-message">{message}</div>}
+                <button
+                  className="btn-submit"
+                  style={{ marginTop: '8px' }}
+                  onClick={async () => {
+                    setMessage('');
+                    setLoadingRegister(true);
+                    try {
+                      const data = await fetchJson('/api/auth/register', {
+                        method: 'POST',
+                        body: JSON.stringify({ name: regName, email: regEmail, password: regPwd }),
+                      });
+                      if (data && data.redirect) {
+                        window.location.href = data.redirect;
+                        return;
+                      }
+                      setMessage('Аккаунт создан — вы вошли');
+                      setTimeout(() => window.location.href = 'index.html', 800);
+                    } catch (err) {
+                      setMessage(err && err.body && err.body.message ? err.body.message : err.message || 'Ошибка регистрации');
+                    } finally {
+                      setLoadingRegister(false);
+                    }
+                  }}
+                  disabled={loadingRegister}
+                >{loadingRegister ? 'Создание...' : 'Создать аккаунт →'}</button>
+
+                <div className="auth-switch">
+                  Уже есть аккаунт?{' '}
+                  <a href="#" onClick={e => { e.preventDefault(); setTab('login'); }}>
+                    Войти
+                  </a>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* Правая часть: 3D иллюстрации */}
+        <div className="login-right">
+          <div className="login-right-text">
+            <div className="login-right-title">Ваш AI-ассистент</div>
+            <div className="login-right-desc">
+              Автоматизирует общение с клиентами и помогает эффективно работать
+            </div>
           </div>
 
-          {tab === 'login' && (
-            <>
-              <div className="auth-title">С возвращением</div>
-              <div className="auth-sub">Войдите в аккаунт BizFlow AI</div>
-
-              <button className="btn-tg">
-                <TgIcon /> Войти через Telegram
-              </button>
-
-              <div className="auth-divider">
-                <div className="auth-divider-line" />
-                <span className="auth-divider-text">или по email</span>
-                <div className="auth-divider-line" />
-              </div>
-
-              <div className="auth-secure">
-                <span className="auth-secure-dot" />
-                Соединение защищено · данные зашифрованы
-              </div>
-
-              <div className="auth-form">
-                <div className="field-wrap">
-                  <label className={`field-label${focused === 'email' ? ' focused' : ''}`}>Email</label>
-                  <div className="field-input-wrap">
-                    <span className="field-icon"><EmailIcon /></span>
-                    <input
-                      className="field-input"
-                          type="email"
-                          placeholder="you@example.com"
-                          autoComplete="email"
-                          value={loginEmail}
-                          onChange={e => setLoginEmail(e.target.value)}
-                          onFocus={() => setFocused('email')}
-                          onBlur={() => setFocused('')}
-                    />
-                  </div>
-                </div>
-
-                <div className="field-wrap">
-                  <label className={`field-label${focused === 'pwd' ? ' focused' : ''}`}>Пароль</label>
-                  <div className="field-input-wrap">
-                    <span className="field-icon"><LockIcon /></span>
-                    <input
-                      className="field-input"
-                      type={showPwd ? 'text' : 'password'}
-                      placeholder="••••••••"
-                      autoComplete="current-password"
-                      value={loginPwd}
-                      onChange={e => setLoginPwd(e.target.value)}
-                      onFocus={() => setFocused('pwd')}
-                      onBlur={() => setFocused('')}
-                    />
-                    <button
-                      className={`field-eye${showPwd ? ' visible' : ''}`}
-                      onClick={() => setShowPwd(p => !p)}
-                      type="button"
-                    >
-                      <EyeIcon visible={showPwd} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="auth-row">
-                <label className="auth-remember">
-                  <input
-                    type="checkbox"
-                    className="auth-checkbox"
-                    checked={remember}
-                    onChange={e => setRemember(e.target.checked)}
-                  />
-                  <span className="auth-remember-label">Запомнить меня</span>
-                </label>
-                <a href="#" className="auth-forgot">Забыли пароль?</a>
-              </div>
-
-              {message && <div className="auth-message">{message}</div>}
-              <button
-                className="btn-submit"
-                onClick={async () => {
-                  setMessage('');
-                  setLoadingLogin(true);
-                  try {
-                    const data = await fetchJson('/api/auth/login', {
-                      method: 'POST',
-                      body: JSON.stringify({ email: loginEmail, password: loginPwd, remember }),
-                    });
-                    // on success, redirect or show message
-                    if (data && data.redirect) {
-                      window.location.href = data.redirect;
-                      return;
-                    }
-                    setMessage('Вход выполнен успешно');
-                    setTimeout(() => window.location.href = 'index.html', 700);
-                  } catch (err) {
-                    setMessage(err && err.body && err.body.message ? err.body.message : err.message || 'Ошибка входа');
-                  } finally {
-                    setLoadingLogin(false);
-                  }
-                }}
-                disabled={loadingLogin}
-              >{loadingLogin ? 'Вход...' : 'Войти →'}</button>
-
-              <div className="auth-switch">
-                Нет аккаунта?{' '}
-                <a href="#" onClick={e => { e.preventDefault(); setTab('register'); }}>
-                  Зарегистрироваться
-                </a>
-              </div>
-            </>
-          )}
-
-          {tab === 'register' && (
-            <>
-              <div className="auth-title">Создать аккаунт</div>
-              <div className="auth-sub">Начните бесплатно — без карты</div>
-
-              <button className="btn-tg">
-                <TgIcon /> Зарегистрироваться через Telegram
-              </button>
-
-              <div className="auth-divider">
-                <div className="auth-divider-line" />
-                <span className="auth-divider-text">или по email</span>
-                <div className="auth-divider-line" />
-              </div>
-
-              <div className="auth-form">
-                <div className="field-wrap">
-                  <label className={`field-label${focused === 'name' ? ' focused' : ''}`}>Имя</label>
-                  <div className="field-input-wrap">
-                    <span className="field-icon"><UserIcon /></span>
-                    <input
-                      className="field-input"
-                      type="text"
-                      placeholder="Ваше имя"
-                      autoComplete="name"
-                      value={regName}
-                      onChange={e => setRegName(e.target.value)}
-                      onFocus={() => setFocused('name')}
-                      onBlur={() => setFocused('')}
-                    />
-                  </div>
-                </div>
-
-                <div className="field-wrap">
-                  <label className={`field-label${focused === 'email-r' ? ' focused' : ''}`}>Email</label>
-                  <div className="field-input-wrap">
-                    <span className="field-icon"><EmailIcon /></span>
-                    <input
-                      className="field-input"
-                      type="email"
-                      placeholder="you@example.com"
-                      autoComplete="email"
-                      value={regEmail}
-                      onChange={e => setRegEmail(e.target.value)}
-                      onFocus={() => setFocused('email-r')}
-                      onBlur={() => setFocused('')}
-                    />
-                  </div>
-                </div>
-
-                <div className="field-wrap">
-                  <label className={`field-label${focused === 'pwd-r' ? ' focused' : ''}`}>Пароль</label>
-                  <div className="field-input-wrap">
-                    <span className="field-icon"><LockIcon /></span>
-                    <input
-                      className="field-input"
-                      type={showPwdReg ? 'text' : 'password'}
-                      placeholder="Минимум 8 символов"
-                      autoComplete="new-password"
-                      value={regPwd}
-                      onChange={e => { setRegPwd(e.target.value); checkStrength(e.target.value); }}
-                      onFocus={() => setFocused('pwd-r')}
-                      onBlur={() => setFocused('')}
-                    />
-                    <button
-                      className={`field-eye${showPwdReg ? ' visible' : ''}`}
-                      onClick={() => setShowPwdReg(p => !p)}
-                      type="button"
-                    >
-                      <EyeIcon visible={showPwdReg} />
-                    </button>
-                  </div>
-                  <div className="pwd-strength">
-                    <div className={barClass(1)} />
-                    <div className={barClass(2)} />
-                    <div className={barClass(3)} />
-                  </div>
-                </div>
-              </div>
-
-              {message && <div className="auth-message">{message}</div>}
-              <button
-                className="btn-submit"
-                style={{ marginTop: '8px' }}
-                onClick={async () => {
-                  setMessage('');
-                  setLoadingRegister(true);
-                  try {
-                    const data = await fetchJson('/api/auth/register', {
-                      method: 'POST',
-                      body: JSON.stringify({ name: regName, email: regEmail, password: regPwd }),
-                    });
-                    if (data && data.redirect) {
-                      window.location.href = data.redirect;
-                      return;
-                    }
-                    setMessage('Аккаунт создан — вы вошли');
-                    setTimeout(() => window.location.href = 'index.html', 800);
-                  } catch (err) {
-                    setMessage(err && err.body && err.body.message ? err.body.message : err.message || 'Ошибка регистрации');
-                  } finally {
-                    setLoadingRegister(false);
-                  }
-                }}
-                disabled={loadingRegister}
-              >{loadingRegister ? 'Создание...' : 'Создать аккаунт →'}</button>
-
-              <div className="auth-switch">
-                Уже есть аккаунт?{' '}
-                <a href="#" onClick={e => { e.preventDefault(); setTab('login'); }}>
-                  Войти
-                </a>
-              </div>
-            </>
-          )}
-
+          <div className="login-3d-container">
+            <img 
+              className="login-3d-girl" 
+              src="icon/Character-working-laptop-sitting-chair.png" 
+              alt="Girl with laptop" 
+            />
+            <img 
+              className="login-3d-cactus" 
+              src="icon/cactus.png" 
+              alt="Cactus" 
+            />
+          </div>
         </div>
       </div>
     </>

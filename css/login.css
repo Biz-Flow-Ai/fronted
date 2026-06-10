@@ -77,15 +77,85 @@ html, body, #app {
   100% { opacity:0; transform:translateY(-150px) scale(1.1); }
 }
 
-/* ── PAGE LAYOUT ── */
+/* ── PAGE LAYOUT (SPLIT) ── */
 .login-page {
   position: relative;
   z-index: 1;
   min-height: 100vh;
+  display: grid;
+  grid-template-columns: 45% 55%;
+  align-items: stretch;
+}
+
+/* ── LEFT SIDE (FORM) ── */
+.login-left {
   display: flex;
+  flex-direction: column;
+  padding: 40px;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+}
+
+/* ── RIGHT SIDE (3D FIGURES) ── */
+.login-right {
+  background: linear-gradient(135deg, rgba(123,97,255,0.15) 0%, rgba(74,158,255,0.12) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  border-left: 1px solid rgba(255,255,255,0.06);
+}
+
+.login-3d-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  height: 700px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.login-3d-girl {
+  width: 778px;
+  height: 703px;
+  position: relative;
+  z-index: 2;
+  object-fit: contain;
+}
+
+.login-3d-cactus {
+  width: 198px;
+  height: 550px;
+  position: relative;
+  z-index: 1;
+  margin-left: -100px;
+  margin-bottom: 80px;
+  object-fit: contain;
+}
+
+.login-right-text {
+  position: absolute;
+  top: 60px;
+  left: 40px;
+  right: 40px;
+  text-align: center;
+}
+
+.login-right-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.login-right-desc {
+  font-size: 15px;
+  color: rgba(255,255,255,0.7);
 }
 
 /* ── NAV BAR ── */
@@ -408,7 +478,13 @@ html, body, #app {
 .auth-switch a:hover { color:#b8caff; }
 
 /* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .login-page { grid-template-columns: 1fr; }
+  .login-right { display: none; }
+}
+
 @media (max-width: 480px) {
   .auth-card { padding: 28px 20px 24px; border-radius: 20px; }
   .login-nav { padding: 14px 20px; }
+  .login-left { padding: 20px; }
 }
