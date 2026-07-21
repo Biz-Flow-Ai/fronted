@@ -1,0 +1,329 @@
+.prf-page {
+    background: var(--bf-bg);
+    min-height: 100vh;
+}
+
+.prf-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 28px 32px 0;
+}
+
+.prf-header h1 {
+    margin: 0 0 6px;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+
+.prf-header p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--bf-text-muted);
+}
+
+.prf-header-actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.prf-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 0 18px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.prf-btn--primary {
+    background: linear-gradient(135deg, #7c3aed, #6366f1);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35);
+}
+
+.prf-btn--primary:hover {
+    box-shadow: 0 6px 28px rgba(124, 58, 237, 0.45);
+}
+
+.prf-btn--ghost {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: var(--bf-card-border);
+    color: var(--bf-text-muted);
+}
+
+.prf-btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--bf-text);
+}
+
+.prf-content {
+    padding: 24px 32px 40px;
+}
+
+.prf-hero {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 24px;
+    margin-bottom: 24px;
+    border-radius: 16px;
+    border: 1px solid var(--bf-card-border);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(124, 58, 237, 0.06));
+}
+
+.prf-hero-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
+}
+
+.prf-hero-body {
+    min-width: 0;
+}
+
+.prf-hero-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+}
+
+.prf-hero-top h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.prf-hero-email {
+    margin: 0 0 4px;
+    font-size: 14px;
+    color: var(--bf-text-muted);
+}
+
+.prf-hero-meta {
+    margin: 0;
+    font-size: 12px;
+    color: var(--bf-text-dim);
+}
+
+.prf-hero-tariff {
+    text-align: right;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--bf-card-border);
+}
+
+.prf-hero-tariff-label {
+    display: block;
+    font-size: 11px;
+    color: var(--bf-text-dim);
+    margin-bottom: 4px;
+}
+
+.prf-hero-tariff strong {
+    font-size: 18px;
+    color: #c4b5fd;
+}
+
+.prf-badge {
+    display: inline-flex;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.prf-badge--role {
+    background: rgba(59, 130, 246, 0.15);
+    color: #93c5fd;
+    border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+.prf-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.prf-card {
+    padding: 22px;
+    border-radius: 14px;
+    border: 1px solid var(--bf-card-border);
+    background: var(--bf-card);
+}
+
+.prf-card-head {
+    margin-bottom: 18px;
+}
+
+.prf-card-head h3 {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.prf-card-head p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--bf-text-dim);
+}
+
+.prf-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.prf-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.prf-field--full {
+    grid-column: 1 / -1;
+}
+
+.prf-field span {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--bf-text-dim);
+}
+
+.prf-field input,
+.prf-field textarea {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--bf-card-border);
+    background: rgba(0, 0, 0, 0.22);
+    color: var(--bf-text);
+    font-size: 14px;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.prf-field input:focus,
+.prf-field textarea:focus {
+    outline: none;
+    border-color: rgba(124, 58, 237, 0.5);
+}
+
+.prf-field input[readonly],
+.prf-field textarea[readonly] {
+    opacity: 0.75;
+    cursor: default;
+}
+
+.prf-info-list {
+    display: grid;
+    gap: 12px;
+}
+
+.prf-info-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid var(--bf-card-border);
+    font-size: 13px;
+}
+
+.prf-info-row span {
+    color: var(--bf-text-muted);
+}
+
+.prf-info-row strong {
+    color: var(--bf-text);
+    font-weight: 600;
+    text-align: right;
+}
+
+.prf-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.prf-stat {
+    padding: 16px 12px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid var(--bf-card-border);
+    text-align: center;
+}
+
+.prf-stat-value {
+    display: block;
+    font-size: 24px;
+    font-weight: 800;
+    color: #c4b5fd;
+    line-height: 1.1;
+}
+
+.prf-stat-label {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--bf-text-dim);
+}
+
+@media (max-width: 960px) {
+    .prf-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .prf-hero {
+        grid-template-columns: auto 1fr;
+    }
+
+    .prf-hero-tariff {
+        grid-column: 1 / -1;
+        text-align: left;
+    }
+}
+
+@media (max-width: 640px) {
+    .prf-header {
+        flex-direction: column;
+        padding: 20px 20px 0;
+    }
+
+    .prf-content {
+        padding: 20px;
+    }
+
+    .prf-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .prf-stats {
+        grid-template-columns: 1fr;
+    }
+}

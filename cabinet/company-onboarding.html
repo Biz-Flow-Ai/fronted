@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Настройка проекта — BizFlow AI</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="/assets/company-shell.css?v=5" />
+        <link rel="stylesheet" href="/assets/company-onboarding.css?v=1" />
+    </head>
+    <body class="bf-app bf-onboarding-page" data-page="onboarding">
+        <div class="bf-onboarding-wrap">
+            <header class="bf-onboarding-header">
+                <a href="/" class="bf-logo bf-logo--compact">
+                    <div class="bf-logo-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <span class="bf-logo-text">BizFlow AI</span>
+                </a>
+                <span class="bf-onboarding-step-label" id="stepLabel">Шаг 1 из 2</span>
+            </header>
+
+            <main class="bf-onboarding-card">
+                <div class="bf-onboarding-intro">
+                    <p class="bf-onboarding-eyebrow">Добро пожаловать</p>
+                    <h1 id="onboardingTitle">Расскажите о проекте</h1>
+                    <p class="bf-onboarding-lead" id="onboardingLead">
+                        Это нужно, чтобы ИИ-ассистент понимал ваш бизнес и отвечал клиентам правильно.
+                    </p>
+                </div>
+
+                <form id="onboardingForm" class="bf-onboarding-form">
+                    <section id="stepProject" class="bf-onboarding-step">
+                        <label class="bf-field">
+                            <span>Название проекта / компании</span>
+                            <input id="projectName" type="text" placeholder="Например: Салон красоты Aurora" required />
+                        </label>
+                        <label class="bf-field">
+                            <span>Кратко о проекте</span>
+                            <textarea id="projectDescription" rows="3" placeholder="Чем занимаетесь, для кого, что продаёте или какие услуги оказываете"></textarea>
+                        </label>
+                    </section>
+
+                    <section id="stepBusiness" class="bf-onboarding-step" hidden>
+                        <p class="bf-field-label">Тип бизнеса</p>
+                        <div id="businessTypeGrid" class="bf-type-grid"></div>
+                        <label class="bf-field">
+                            <span>Дополнительно для ИИ (необязательно)</span>
+                            <textarea id="businessDescription" rows="3" placeholder="Цены, условия, особенности — всё, что важно в ответах клиентам"></textarea>
+                        </label>
+                    </section>
+
+                    <p id="onboardingMessage" class="bf-onboarding-message" role="status" hidden></p>
+
+                    <div class="bf-onboarding-actions">
+                        <button type="button" class="bf-btn bf-btn--ghost" id="backBtn" hidden>Назад</button>
+                        <button type="button" class="bf-btn bf-btn--primary" id="nextBtn">Далее</button>
+                    </div>
+                </form>
+
+                <p class="bf-onboarding-note">Тариф по умолчанию: <strong>Бесплатный</strong> — можно пользоваться и позже выбрать платный план.</p>
+            </main>
+        </div>
+
+        <script src="/assets/company-api.js?v=6"></script>
+        <script src="/assets/company-shell.js?v=6"></script>
+        <script src="/assets/company-onboarding.js?v=1"></script>
+    </body>
+</html>

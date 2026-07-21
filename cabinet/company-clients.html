@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Клиенты — BizFlow</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="/assets/company-shell.css?v=13" />
+        <link rel="stylesheet" href="/assets/company-extras.css?v=1" />
+    </head>
+    <body class="bf-app ex-page" data-page="clients">
+        <div class="bf-layout">
+            <aside class="bf-sidebar" id="companySidebar"></aside>
+            <div class="bf-main">
+                <header class="ex-header">
+                    <div>
+                        <h1>Клиенты</h1>
+                        <p id="clientsSubtitle">База контактов из VK-диалогов</p>
+                    </div>
+                </header>
+                <div class="ex-layout">
+                    <aside class="ex-list-panel">
+                        <div class="ex-search-row">
+                            <input type="search" class="ex-search" id="clientSearch" placeholder="Поиск по имени, телефону, email..." />
+                        </div>
+                        <div class="ex-list" id="clientsList"></div>
+                    </aside>
+                    <section class="ex-detail-panel" id="clientDetail">
+                        <div class="ex-empty"><h3>Выберите клиента</h3><p>Карточка с контактами, заявками и консультациями</p></div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <script src="/assets/company-api.js?v=9"></script>
+        <script src="/assets/company-shell.js?v=13"></script>
+        <script src="/assets/company-clients.js?v=1"></script>
+    </body>
+</html>

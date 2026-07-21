@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Заявки — BizFlow</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/assets/company-shell.css?v=12" />
+        <link rel="stylesheet" href="/assets/company-leads.css?v=1" />
+    </head>
+    <body class="bf-app ld-page" data-page="leads">
+        <div class="bf-layout">
+            <aside class="bf-sidebar" id="companySidebar"></aside>
+
+            <div class="bf-main">
+                <header class="ld-header">
+                    <div>
+                        <h1>Заявки</h1>
+                        <p id="leadsSubtitle">Карточки клиентов из диалогов VK</p>
+                    </div>
+                </header>
+
+                <div class="ld-layout">
+                    <aside class="ld-list-panel">
+                        <div class="ld-filters" id="leadFilters"></div>
+
+                        <div class="ld-search-row">
+                            <input
+                                type="search"
+                                class="ld-search"
+                                id="leadSearch"
+                                placeholder="Поиск по имени, бюджету, запросу..."
+                                autocomplete="off"
+                            />
+                        </div>
+
+                        <div class="ld-list" id="leadsList"></div>
+                    </aside>
+
+                    <section class="ld-detail-panel" id="leadDetail">
+                        <div class="ld-empty">
+                            <h3>Выберите заявку</h3>
+                            <p>Слева список лидов из переписок. У каждой заявки видны бюджет, запрос и статус воронки.</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <script src="/assets/company-api.js?v=9"></script>
+        <script src="/assets/company-shell.js?v=12"></script>
+        <script src="/assets/company-leads.js?v=1"></script>
+    </body>
+</html>

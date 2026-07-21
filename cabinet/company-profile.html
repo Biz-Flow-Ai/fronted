@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Профиль — BizFlow</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/assets/company-shell.css?v=10" />
+        <link rel="stylesheet" href="/assets/company-profile.css?v=1" />
+    </head>
+    <body class="bf-app" data-page="profile">
+        <div class="bf-layout">
+            <aside class="bf-sidebar" id="companySidebar"></aside>
+
+            <div class="bf-main prf-page">
+                <header class="prf-header">
+                    <div>
+                        <h1>Профиль</h1>
+                        <p>Данные владельца аккаунта и вашей организации</p>
+                    </div>
+                    <div class="prf-header-actions">
+                        <button type="button" class="prf-btn prf-btn--ghost" id="logoutButton">Выйти</button>
+                        <button type="button" class="prf-btn prf-btn--primary" id="saveButton">
+                            Сохранить изменения
+                        </button>
+                    </div>
+                </header>
+
+                <div class="prf-content">
+                    <section class="prf-hero" id="profileHero">
+                        <div class="prf-hero-avatar" id="heroAvatar">?</div>
+                        <div class="prf-hero-body">
+                            <div class="prf-hero-top">
+                                <h2 id="heroName">Загрузка…</h2>
+                                <span class="prf-badge prf-badge--role" id="heroRole">—</span>
+                            </div>
+                            <p class="prf-hero-email" id="heroEmail">—</p>
+                            <p class="prf-hero-meta" id="heroMeta">—</p>
+                        </div>
+                        <div class="prf-hero-tariff" id="heroTariff">
+                            <span class="prf-hero-tariff-label">Тариф</span>
+                            <strong id="heroTariffValue">—</strong>
+                        </div>
+                    </section>
+
+                    <div class="prf-grid">
+                        <section class="prf-card">
+                            <div class="prf-card-head">
+                                <h3>Личные данные</h3>
+                                <p>Имя владельца аккаунта</p>
+                            </div>
+                            <div class="prf-fields">
+                                <label class="prf-field">
+                                    <span>Имя</span>
+                                    <input type="text" id="firstName" autocomplete="given-name" placeholder="Иван" />
+                                </label>
+                                <label class="prf-field">
+                                    <span>Фамилия</span>
+                                    <input type="text" id="lastName" autocomplete="family-name" placeholder="Иванов" />
+                                </label>
+                                <label class="prf-field">
+                                    <span>Email</span>
+                                    <input type="email" id="email" readonly />
+                                </label>
+                                <label class="prf-field">
+                                    <span>Роль</span>
+                                    <input type="text" id="roleLabel" readonly />
+                                </label>
+                            </div>
+                        </section>
+
+                        <section class="prf-card">
+                            <div class="prf-card-head">
+                                <h3>Организация</h3>
+                                <p>Компания, которой принадлежит аккаунт</p>
+                            </div>
+                            <div class="prf-fields">
+                                <label class="prf-field">
+                                    <span>Название организации</span>
+                                    <input type="text" id="companyName" placeholder="ООО «Моя компания»" />
+                                </label>
+                                <label class="prf-field prf-field--full">
+                                    <span>Описание бизнеса</span>
+                                    <textarea id="companyDescription" rows="4" placeholder="Чем занимается компания…"></textarea>
+                                </label>
+                                <label class="prf-field">
+                                    <span>ID компании</span>
+                                    <input type="text" id="companyId" readonly />
+                                </label>
+                                <label class="prf-field">
+                                    <span>Дата регистрации</span>
+                                    <input type="text" id="companyCreatedAt" readonly />
+                                </label>
+                            </div>
+                        </section>
+
+                        <section class="prf-card">
+                            <div class="prf-card-head">
+                                <h3>Подписка и доступ</h3>
+                                <p>Тариф и статус аккаунта</p>
+                            </div>
+                            <div class="prf-info-list">
+                                <div class="prf-info-row">
+                                    <span>Тарифный план</span>
+                                    <strong id="tariffLabel">—</strong>
+                                </div>
+                                <div class="prf-info-row">
+                                    <span>Статус аккаунта</span>
+                                    <strong id="accountStatus">—</strong>
+                                </div>
+                                <div class="prf-info-row">
+                                    <span>Аккаунт создан</span>
+                                    <strong id="userCreatedAt">—</strong>
+                                </div>
+                                <div class="prf-info-row">
+                                    <span>VK интеграция</span>
+                                    <strong id="vkStatus">—</strong>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="prf-card">
+                            <div class="prf-card-head">
+                                <h3>Активность</h3>
+                                <p>Сводка по вашему кабинету</p>
+                            </div>
+                            <div class="prf-stats">
+                                <div class="prf-stat">
+                                    <span class="prf-stat-value" id="statDialogs">0</span>
+                                    <span class="prf-stat-label">Диалогов</span>
+                                </div>
+                                <div class="prf-stat">
+                                    <span class="prf-stat-value" id="statClients">0</span>
+                                    <span class="prf-stat-label">Клиентов</span>
+                                </div>
+                                <div class="prf-stat">
+                                    <span class="prf-stat-value" id="statMessages">0</span>
+                                    <span class="prf-stat-label">Сообщений</span>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="/assets/company-api.js?v=9"></script>
+        <script src="/assets/company-shell.js?v=11"></script>
+        <script src="/assets/company-profile.js?v=1"></script>
+    </body>
+</html>

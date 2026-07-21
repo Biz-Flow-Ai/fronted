@@ -1,0 +1,175 @@
+.bf-onboarding-page {
+  min-height: 100dvh;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99, 102, 241, 0.18), transparent),
+    var(--bf-bg, #0b0b14);
+}
+
+.bf-onboarding-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+
+.bf-onboarding-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.bf-logo--compact {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.bf-onboarding-step-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 500;
+}
+
+.bf-onboarding-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 32px 28px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.bf-onboarding-eyebrow {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #818cf8;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.bf-onboarding-card h1 {
+  font-size: 28px;
+  line-height: 1.2;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.bf-onboarding-lead {
+  color: rgba(255, 255, 255, 0.62);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.bf-onboarding-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bf-field span,
+.bf-field-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.bf-field input,
+.bf-field textarea {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  padding: 14px 16px;
+  font: inherit;
+  resize: vertical;
+}
+
+.bf-field input:focus,
+.bf-field textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.bf-type-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.bf-type-card {
+  text-align: left;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: inherit;
+  padding: 14px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.bf-type-card:hover {
+  border-color: rgba(99, 102, 241, 0.45);
+}
+
+.bf-type-card.selected {
+  border-color: #6366f1;
+  background: rgba(99, 102, 241, 0.14);
+}
+
+.bf-type-card strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.bf-type-card span {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.45;
+}
+
+.bf-onboarding-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.bf-onboarding-message {
+  font-size: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #fecaca;
+}
+
+.bf-onboarding-message.success {
+  background: rgba(34, 197, 94, 0.12);
+  border-color: rgba(34, 197, 94, 0.25);
+  color: #bbf7d0;
+}
+
+.bf-onboarding-note {
+  margin-top: 20px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .bf-type-grid {
+    grid-template-columns: 1fr;
+  }
+}

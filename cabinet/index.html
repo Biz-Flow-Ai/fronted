@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Вход — BizFlow</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/assets/styles.css" />
+    </head>
+    <body class="login-page">
+        <main class="login-shell">
+            <section class="brand-panel" aria-label="BizFlow">
+                <div class="brand-mark">BF</div>
+                <div>
+                    <p class="eyebrow">BizFlow</p>
+                    <h1>Платформа для бизнеса и поддержки клиентов</h1>
+                    <p class="brand-copy">
+                        Подключение VK, автоответчик и панель управления в
+                        одном месте. После входа откроется нужный раздел по
+                        вашей роли.
+                    </p>
+                </div>
+            </section>
+
+            <section class="login-card" aria-label="Форма входа">
+                <div class="card-heading">
+                    <p class="eyebrow">Авторизация</p>
+                    <h2>Вход в систему</h2>
+                </div>
+
+                <form id="loginForm" class="stack-form">
+                    <label>
+                        <span>Email</span>
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            autocomplete="email"
+                            required
+                            placeholder="you@company.ru"
+                        />
+                    </label>
+
+                    <label>
+                        <span>Пароль</span>
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            autocomplete="current-password"
+                            required
+                            placeholder="Введите пароль"
+                        />
+                    </label>
+
+                    <button class="primary-button" type="submit">
+                        Войти
+                    </button>
+
+                    <p id="loginMessage" class="form-message" role="status"></p>
+                </form>
+
+                <section id="bootstrapPanel" class="info-panel" hidden>
+                    <div class="info-panel-head">
+                        <div>
+                            <p class="eyebrow">Первый запуск</p>
+                            <h3>Создать администратора</h3>
+                        </div>
+                        <span id="bootstrapStatusBadge" class="badge">Проверка...</span>
+                    </div>
+                    <p id="bootstrapHint" class="muted-copy"></p>
+
+                    <form id="bootstrapForm" class="stack-form compact-form">
+                        <label>
+                            <span>Email</span>
+                            <input
+                                id="bootstrapEmail"
+                                type="email"
+                                placeholder="admin@company.ru"
+                                required
+                            />
+                        </label>
+                        <label>
+                            <span>Пароль</span>
+                            <input
+                                id="bootstrapPassword"
+                                type="password"
+                                placeholder="Не менее 6 символов"
+                                required
+                            />
+                        </label>
+                        <div class="two-column-grid">
+                            <label>
+                                <span>Имя</span>
+                                <input
+                                    id="bootstrapFirstName"
+                                    type="text"
+                                    placeholder="Имя"
+                                />
+                            </label>
+                            <label>
+                                <span>Фамилия</span>
+                                <input
+                                    id="bootstrapLastName"
+                                    type="text"
+                                    placeholder="Фамилия"
+                                />
+                            </label>
+                        </div>
+                        <label>
+                            <span>Название компании</span>
+                            <input
+                                id="bootstrapCompanyName"
+                                type="text"
+                                placeholder="Название компании"
+                                required
+                            />
+                        </label>
+                        <button class="primary-button" type="submit">
+                            Создать администратора
+                        </button>
+                        <p
+                            id="bootstrapMessage"
+                            class="form-message"
+                            role="status"
+                        ></p>
+                    </form>
+                </section>
+            </section>
+        </main>
+
+        <script src="/assets/auth.js"></script>
+    </body>
+</html>

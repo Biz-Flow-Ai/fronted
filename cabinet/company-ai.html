@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Настройки AI — BizFlow</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/assets/company-shell.css?v=7" />
+        <link rel="stylesheet" href="/assets/company-ai.css?v=9" />
+    </head>
+    <body class="bf-app" data-page="ai">
+        <div class="bf-layout">
+            <aside class="bf-sidebar" id="companySidebar"></aside>
+
+            <div class="bf-main ais-page">
+                <header class="ais-header">
+                    <div>
+                        <h1>Настройки AI</h1>
+                        <p>Настройте поведение AI-менеджера под ваш бизнес</p>
+                    </div>
+                    <div class="ais-header-actions">
+                        <button type="button" class="ais-btn ais-btn--ghost" id="resetButton">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                            Сбросить настройки
+                        </button>
+                        <button type="button" class="ais-btn ais-btn--primary" id="saveButton">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                            Сохранить изменения
+                        </button>
+                    </div>
+                </header>
+
+                <nav class="ais-tabs" aria-label="Разделы настроек">
+                    <button type="button" class="ais-tab active" data-tab="main">Основные настройки</button>
+                    <button type="button" class="ais-tab" data-tab="business">О бизнесе</button>
+                    <button type="button" class="ais-tab" data-tab="templates">Шаблоны сообщений</button>
+                    <button type="button" class="ais-tab" data-tab="scenarios">Сценарии диалога</button>
+                    <button type="button" class="ais-tab" data-tab="integrations">Интеграции</button>
+                </nav>
+
+                <div class="ais-content">
+                    <div class="ais-tab-panel active" data-panel="main">
+                        <div class="ais-grid">
+                            <section class="ais-card">
+                                <div class="ais-card-head">
+                                    <h2>Тип бизнеса</h2>
+                                    <p>Выберите направление — AI подстроит стиль и сценарии</p>
+                                </div>
+                                <div id="presetGrid" class="ais-preset-grid"></div>
+                            </section>
+
+                            <section class="ais-card">
+                                <div class="ais-card-head">
+                                    <h2>Услуги компании</h2>
+                                    <p>Цены и услуги, которые бот может предлагать клиентам</p>
+                                </div>
+                                <div id="servicesList" class="ais-services-list"></div>
+                                <div id="emptyServices" class="ais-empty" hidden>
+                                    <p>Добавьте услуги с ценами</p>
+                                </div>
+                                <button type="button" class="ais-btn ais-btn--dashed" id="addServiceButton">
+                                    + Добавить услугу
+                                </button>
+                            </section>
+
+                            <section class="ais-card">
+                                <div class="ais-card-head">
+                                    <h2>Стиль общения</h2>
+                                    <p>Как AI-менеджер будет общаться с клиентами</p>
+                                </div>
+                                <div class="ais-style-grid" id="styleGrid">
+                                    <button type="button" class="ais-style-card active" data-tone="friendly">
+                                        <span class="ais-style-icon">
+                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                                        </span>
+                                        <strong>Дружелюбный</strong>
+                                        <span>Тёплый и открытый тон, подходит для большинства бизнесов</span>
+                                    </button>
+                                    <button type="button" class="ais-style-card" data-tone="professional">
+                                        <span class="ais-style-icon">
+                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                                        </span>
+                                        <strong>Профессиональный</strong>
+                                        <span>Деловой стиль, чёткие формулировки</span>
+                                    </button>
+                                    <button type="button" class="ais-style-card" data-tone="formal">
+                                        <span class="ais-style-icon">
+                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                        </span>
+                                        <strong>Экспертный</strong>
+                                        <span>Уверенный тон специалиста, акцент на компетенции</span>
+                                    </button>
+                                    <button type="button" class="ais-style-card" data-tone="casual">
+                                        <span class="ais-style-icon">
+                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                        </span>
+                                        <strong>Неформальный</strong>
+                                        <span>Лёгкий разговорный стиль без официоза</span>
+                                    </button>
+                                </div>
+                                <input type="hidden" id="tone" value="friendly" />
+                            </section>
+
+                            <section class="ais-card">
+                                <div class="ais-card-head">
+                                    <h2>Сценарии диалога</h2>
+                                    <p>Логика ведения разговора с клиентом</p>
+                                </div>
+                                <div class="ais-scenario-select">
+                                    <div class="ais-scenario-current">
+                                        <span>Стандартный сценарий</span>
+                                        <span class="ais-badge ais-badge--green">Активен</span>
+                                    </div>
+                                </div>
+                                <div class="ais-scenario-actions">
+                                    <button type="button" class="ais-btn ais-btn--ghost ais-btn--block" id="configureScenarioBtn">Настроить сценарий</button>
+                                    <button type="button" class="ais-btn ais-btn--ghost ais-btn--block" disabled>Создать сценарий</button>
+                                </div>
+                            </section>
+
+                            <section class="ais-card">
+                                <div class="ais-card-head">
+                                    <h2>Поведение AI-менеджера</h2>
+                                    <p>Что бот должен делать в диалоге</p>
+                                </div>
+                                <ul class="ais-toggle-list">
+                                    <li>
+                                        <span class="ais-toggle-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                                        <span>Представляться от имени компании</span>
+                                        <label class="ais-switch"><input type="checkbox" id="behaviorIntro" checked /><span></span></label>
+                                    </li>
+                                    <li>
+                                        <span class="ais-toggle-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+                                        <span>Уточнять бюджет проекта</span>
+                                        <label class="ais-switch"><input type="checkbox" id="behaviorBudget" checked /><span></span></label>
+                                    </li>
+                                    <li>
+                                        <span class="ais-toggle-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+                                        <span>Уточнять сроки выполнения</span>
+                                        <label class="ais-switch"><input type="checkbox" id="behaviorDeadline" checked /><span></span></label>
+                                    </li>
+                                    <li>
+                                        <span class="ais-toggle-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+                                        <span>Собирать контакты клиента</span>
+                                        <label class="ais-switch"><input type="checkbox" id="behaviorContacts" checked /><span></span></label>
+                                    </li>
+                                </ul>
+                            </section>
+
+                            <section class="ais-card">
+                                <div class="ais-card-head">
+                                    <h2>Параметры ответов</h2>
+                                    <p>Тонкие настройки генерации ответов</p>
+                                </div>
+
+                                <div class="ais-slider-field">
+                                    <div class="ais-slider-labels">
+                                        <span>Температура творчества</span>
+                                        <strong id="creativityValue">0.7</strong>
+                                    </div>
+                                    <div class="ais-slider-marks"><span>Точность</span><span>Креативность</span></div>
+                                    <input type="range" id="creativityRange" min="0" max="100" value="70" class="ais-range" />
+                                </div>
+
+                                <div class="ais-slider-field">
+                                    <div class="ais-slider-labels">
+                                        <span>Максимальная длина ответа</span>
+                                        <strong id="maxLengthValue">1500</strong>
+                                    </div>
+                                    <div class="ais-slider-marks"><span>500</span><span>2000</span></div>
+                                    <input type="range" id="maxLengthRange" min="500" max="2000" step="100" value="1500" class="ais-range" />
+                                </div>
+
+                                <div class="ais-select-grid">
+                                    <label>
+                                        <span>Длина ответов</span>
+                                        <select id="responseLength">
+                                            <option value="short">Короткие</option>
+                                            <option value="medium" selected>Средние</option>
+                                            <option value="detailed">Длинные</option>
+                                        </select>
+                                    </label>
+                                    <label>
+                                        <span>Использование эмодзи</span>
+                                        <select id="emojiUsage">
+                                            <option value="none">Без эмодзи</option>
+                                            <option value="moderate" selected>Умеренное</option>
+                                            <option value="often">Часто</option>
+                                        </select>
+                                    </label>
+                                    <label>
+                                        <span>Формат ответов</span>
+                                        <select id="responseFormat">
+                                            <option value="paragraphs" selected>Абзацы</option>
+                                            <option value="bullets">Списки</option>
+                                            <option value="short">Короткие фразы</option>
+                                        </select>
+                                    </label>
+                                    <label>
+                                        <span>Язык общения</span>
+                                        <select id="language">
+                                            <option value="ru" selected>Русский</option>
+                                            <option value="en">English</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </section>
+
+                            <section class="ais-card" id="consultationCard">
+                                <div class="ais-card-head">
+                                    <h2>Консультации и запись</h2>
+                                    <p>ИИ предложит формат (телефон / видео), запишет клиента и отправит напоминание</p>
+                                </div>
+                                <label class="ais-field ais-field--inline">
+                                    <span>Запись на консультации включена</span>
+                                    <label class="ais-switch"><input type="checkbox" id="consultationEnabled" checked /><span></span></label>
+                                </label>
+                                <label class="ais-field ais-field--inline">
+                                    <span>Автонапоминания клиентам</span>
+                                    <label class="ais-switch"><input type="checkbox" id="consultationAutoRemind" checked /><span></span></label>
+                                </label>
+                                <label class="ais-field">
+                                    <span>Напоминать за (часов)</span>
+                                    <input type="number" id="consultationRemindHours" min="1" max="72" value="24" />
+                                </label>
+                                <div id="consultationTypesList" class="ais-consult-list"></div>
+                                <button type="button" class="ais-btn ais-btn--dashed" id="addConsultationTypeBtn">+ Добавить тип консультации</button>
+                            </section>
+                        </div>
+
+                        <details class="ais-card ais-details">
+                            <summary>Описание проекта и дополнительные правила</summary>
+                            <div class="ais-details-body">
+                                <label class="ais-field">
+                                    <span>Название компании</span>
+                                    <input id="businessName" type="text" placeholder="Название бренда" />
+                                </label>
+                                <label class="ais-field">
+                                    <span>Краткое описание</span>
+                                    <textarea id="businessDescription" rows="2" placeholder="Чем занимаетесь"></textarea>
+                                </label>
+                                <label class="ais-field">
+                                    <span>О проекте подробнее</span>
+                                    <textarea id="projectDescription" rows="4" placeholder="История, аудитория, преимущества"></textarea>
+                                </label>
+                                <label class="ais-field ais-field--schedule">
+                                    <span>Режим работы</span>
+                                    <div class="ais-schedule">
+                                        <div class="ais-day-toggle" id="workDaysToggle" role="group" aria-label="Дни недели">
+                                            <button type="button" class="ais-day-btn" data-day="1">Пн</button>
+                                            <button type="button" class="ais-day-btn" data-day="2">Вт</button>
+                                            <button type="button" class="ais-day-btn" data-day="3">Ср</button>
+                                            <button type="button" class="ais-day-btn" data-day="4">Чт</button>
+                                            <button type="button" class="ais-day-btn" data-day="5">Пт</button>
+                                            <button type="button" class="ais-day-btn" data-day="6">Сб</button>
+                                            <button type="button" class="ais-day-btn" data-day="7">Вс</button>
+                                        </div>
+                                        <div class="ais-time-row">
+                                            <label class="ais-time-field">
+                                                <span>С</span>
+                                                <input type="time" id="workTimeFrom" value="09:00" />
+                                            </label>
+                                            <label class="ais-time-field">
+                                                <span>До</span>
+                                                <input type="time" id="workTimeTo" value="18:00" />
+                                            </label>
+                                        </div>
+                                        <p class="ais-schedule-preview" id="workHoursPreview">Пн–Пт 09:00–18:00</p>
+                                    </div>
+                                    <input type="hidden" id="workingHours" />
+                                </label>
+                                <label class="ais-field">
+                                    <span>Пример приветствия</span>
+                                    <input id="greetingHint" type="text" placeholder="Здравствуйте! Чем могу помочь?" />
+                                </label>
+                                <label class="ais-field">
+                                    <span>Дополнительные правила</span>
+                                    <textarea id="customInstructions" rows="4" placeholder="Особые инструкции для бота"></textarea>
+                                </label>
+                                <label class="ais-field ais-field--inline">
+                                    <span>Автоответчик включён</span>
+                                    <label class="ais-switch"><input type="checkbox" id="isEnabled" checked /><span></span></label>
+                                </label>
+                            </div>
+                        </details>
+
+                        <section class="ais-card ais-test-card">
+                            <div class="ais-card-head">
+                                <h2>Проверка ответа</h2>
+                                <p>Отправьте тестовое сообщение и посмотрите ответ бота</p>
+                            </div>
+                            <div class="ais-test-row">
+                                <input id="sampleMessage" type="text" value="Здравствуйте! Сколько стоит разработка сайта?" />
+                                <button type="button" class="ais-btn ais-btn--ghost" id="previewButton">Промпт</button>
+                                <button type="button" class="ais-btn ais-btn--primary" id="testButton">Тест</button>
+                            </div>
+                            <div id="testResponseCard" class="ais-test-response" hidden>
+                                <p class="ais-test-label">Ответ бота</p>
+                                <p id="testResponse"></p>
+                            </div>
+                            <pre id="promptPreview" class="ais-prompt-preview" hidden></pre>
+                        </section>
+                    </div>
+
+                    <div class="ais-tab-panel" data-panel="business">
+                        <section class="ais-card ais-docs-card">
+                            <div class="ais-card-head">
+                                <h2>Что нужно заполнить</h2>
+                                <p>Чем подробнее данные — тем точнее AI отвечает клиентам. После заполнения нажмите «Анализировать с AI»: система определит тип бизнеса и предложит товары/услуги.</p>
+                            </div>
+                            <ul class="ais-docs-list">
+                                <li><strong>Город и адрес</strong> — где находится компания</li>
+                                <li><strong>Телефон</strong> — для записи и обратного звонка</li>
+                                <li><strong>Типы услуг</strong> — что именно вы делаете (продажа, ремонт, консультация…)</li>
+                                <li><strong>Товары</strong> — модели, марки, комплектации, цены «от»</li>
+                                <li><strong>Аудитория и преимущества</strong> — для кого и почему выбирают вас</li>
+                                <li><strong>Документ</strong> — загрузите .txt или .docx с описанием (2–3 страницы достаточно)</li>
+                            </ul>
+                        </section>
+
+                        <div class="ais-grid">
+                            <section class="ais-card">
+                                <div class="ais-card-head">
+                                    <h2>Контакты и локация</h2>
+                                </div>
+                                <label class="ais-field">
+                                    <span>Город</span>
+                                    <input id="bkCity" type="text" placeholder="Смоленск" />
+                                </label>
+                                <label class="ais-field">
+                                    <span>Адрес</span>
+                                    <input id="bkAddress" type="text" placeholder="ул. Примерная, 10" />
+                                </label>
+                                <label class="ais-field">
+                                    <span>Телефон компании</span>
+                                    <input id="bkPhone" type="tel" placeholder="+7 (4812) 00-00-00" />
+                                </label>
+                                <label class="ais-field">
+                                    <span>Сайт (если есть)</span>
+                                    <input id="bkWebsite" type="url" placeholder="https://example.ru" />
+                                </label>
+                            </section>
+
+                            <section class="ais-card">
+                                <div class="ais-card-head">
+                                    <h2>Услуги и товары</h2>
+                                </div>
+                                <label class="ais-field">
+                                    <span>Типы услуг</span>
+                                    <textarea id="bkServiceTypes" rows="3" placeholder="Продажа новых Lada, trade-in, кредит, страхование, ТО и ремонт…"></textarea>
+                                </label>
+                                <label class="ais-field">
+                                    <span>Товары и предложения</span>
+                                    <textarea id="bkProducts" rows="4" placeholder="Granta, Vesta, Niva — комплектации, цены от…"></textarea>
+                                </label>
+                                <label class="ais-field">
+                                    <span>Целевая аудитория</span>
+                                    <textarea id="bkAudience" rows="2" placeholder="Частные покупатели, семьи, таксопарки…"></textarea>
+                                </label>
+                            </section>
+
+                            <section class="ais-card ais-card--wide">
+                                <div class="ais-card-head">
+                                    <h2>Подробности о бизнесе</h2>
+                                </div>
+                                <label class="ais-field">
+                                    <span>Преимущества</span>
+                                    <textarea id="bkAdvantages" rows="3" placeholder="Официальный дилер, свой сервис, гарантия…"></textarea>
+                                </label>
+                                <label class="ais-field">
+                                    <span>Условия (оплата, гарантия, доставка)</span>
+                                    <textarea id="bkPolicies" rows="3" placeholder="Рассрочка, trade-in, гарантия производителя…"></textarea>
+                                </label>
+                                <label class="ais-field">
+                                    <span>Полное описание для AI</span>
+                                    <textarea id="bkFullDetails" rows="6" placeholder="История компании, процесс покупки, что спрашивать у клиента…"></textarea>
+                                </label>
+                            </section>
+
+                            <section class="ais-card ais-card--wide">
+                                <div class="ais-card-head">
+                                    <h2>Документ с описанием</h2>
+                                    <p>Загрузите Word (.docx) или текстовый файл — AI извлечёт факты при анализе</p>
+                                </div>
+                                <div class="ais-upload-row">
+                                    <input type="file" id="bkDocumentFile" accept=".txt,.docx" hidden />
+                                    <button type="button" class="ais-btn ais-btn--ghost" id="bkUploadBtn">Загрузить документ</button>
+                                    <span id="bkDocumentStatus" class="ais-upload-status">Файл не выбран</span>
+                                </div>
+                                <pre id="bkDocumentPreview" class="ais-doc-preview" hidden></pre>
+                                <div class="ais-analyze-row">
+                                    <button type="button" class="ais-btn ais-btn--primary" id="analyzeBusinessBtn">
+                                        Анализировать с AI
+                                    </button>
+                                    <span class="ais-analyze-hint">Определит тип бизнеса, товары и заполнит каталог</span>
+                                </div>
+                                <div id="analysisResultCard" class="ais-analysis-card" hidden>
+                                    <p class="ais-test-label">Результат анализа</p>
+                                    <div id="analysisSummary" class="ais-analysis-summary"></div>
+                                    <div id="analysisProducts" class="ais-analysis-products"></div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <div class="ais-tab-panel" data-panel="templates">
+                        <section class="ais-card ais-placeholder">
+                            <h2>Шаблоны сообщений</h2>
+                            <p>Раздел в разработке. Используйте «Пример приветствия» в основных настройках.</p>
+                        </section>
+                    </div>
+
+                    <div class="ais-tab-panel" data-panel="scenarios">
+                        <section class="ais-card ais-placeholder">
+                            <h2>Сценарии диалога</h2>
+                            <p>Расширенные сценарии появятся в следующем обновлении. Сейчас активен стандартный сценарий.</p>
+                        </section>
+                    </div>
+
+                    <div class="ais-tab-panel" data-panel="integrations">
+                        <div class="ais-grid">
+                            <section class="ais-card">
+                                <div class="ais-card-head">
+                                    <h2>VK</h2>
+                                    <p>Основной канал для AI-бота — сообщения сообщества</p>
+                                </div>
+                                <a href="/company/vk" class="ais-btn ais-btn--ghost">Настроить VK →</a>
+                            </section>
+
+                            <section class="ais-card ais-card--wide ais-phone-test">
+                                <div class="ais-card-head">
+                                    <h2>Тест по номеру телефона</h2>
+                                    <p>Бесплатно проверьте, как AI ответит клиенту с учётом всех данных о бизнесе (вкладка «О бизнесе»)</p>
+                                </div>
+                                <div class="ais-phone-test-grid">
+                                    <label class="ais-field">
+                                        <span>Номер клиента</span>
+                                        <input id="testPhone" type="tel" placeholder="+7 (900) 123-45-67" />
+                                    </label>
+                                    <label class="ais-field ais-field--grow">
+                                        <span>Сообщение клиента</span>
+                                        <input id="testPhoneMessage" type="text" value="Здравствуйте! Интересует Lada Vesta в кредит" />
+                                    </label>
+                                    <button type="button" class="ais-btn ais-btn--primary" id="testPhoneBtn">Проверить ответ</button>
+                                </div>
+                                <div id="testPhoneResult" class="ais-test-response" hidden>
+                                    <p class="ais-test-label">Ответ AI для этого номера</p>
+                                    <p id="testPhoneResponse"></p>
+                                </div>
+                            </section>
+
+                            <section class="ais-card">
+                                <div class="ais-card-head">
+                                    <h2>GigaChat</h2>
+                                    <p>Модель подключается администратором платформы</p>
+                                </div>
+                                <p class="ais-muted">После заполнения «О бизнесе» AI использует все факты в диалогах VK и в тестах.</p>
+                            </section>
+                        </div>
+                    </div>
+
+                    <section class="ais-footer-card">
+                        <div>
+                            <h3>Шаблоны быстрых ответов</h3>
+                            <p>Готовые фразы для типовых ситуаций</p>
+                        </div>
+                        <button type="button" class="ais-btn ais-btn--ghost" id="templatesLink">
+                            Перейти к шаблонам
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </button>
+                    </section>
+
+                    <p id="formMessage" class="ais-form-message" role="status"></p>
+                </div>
+            </div>
+        </div>
+
+        <template id="serviceRowTemplate">
+            <div class="ais-service-row">
+                <span class="ais-drag" title="Перетащить">⠿</span>
+                <div class="ais-service-body">
+                    <input type="text" class="service-name" placeholder="Название услуги" />
+                    <div class="ais-price-wrap">
+                        <input type="text" class="service-price" placeholder="30 000" inputmode="decimal" />
+                        <span class="ais-price-suffix" aria-hidden="true">₽</span>
+                    </div>
+                </div>
+                <div class="ais-service-actions">
+                    <button type="button" class="ais-icon-btn service-remove" title="Удалить">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    </button>
+                </div>
+            </div>
+        </template>
+
+    <script src="/assets/company-api.js?v=10"></script>
+    <script src="/assets/company-shell.js?v=7"></script>
+    <script src="/assets/company-ai.js?v=10"></script>
+    </body>
+</html>

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Главная — BizFlow AI</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/assets/company-shell.css?v=5" />
+        <link rel="stylesheet" href="/assets/company-dashboard.css?v=3" />
+    </head>
+    <body class="bf-app" data-page="home">
+        <div class="bf-layout">
+            <aside class="bf-sidebar" id="companySidebar"></aside>
+
+            <div class="bf-main">
+                <header class="bf-header">
+                    <div class="bf-header-left">
+                        <h1 class="bf-greeting" id="greetingTitle">Добро пожаловать!</h1>
+                        <p class="bf-subtitle">Обзор работы платформы и ваших подключений</p>
+                    </div>
+                    <div class="bf-header-actions">
+                        <button class="bf-btn bf-btn--ghost" type="button">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+                            Что нового?
+                        </button>
+                        <button class="bf-icon-btn" type="button" aria-label="Уведомления">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                            <span class="bf-badge-dot">3</span>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="bf-content">
+                    <section class="bf-stats-grid" id="statsGrid">
+                        <article class="bf-stat-card bf-stat-card--blue">
+                            <div class="bf-stat-top">
+                            <div>
+                                    <p class="bf-stat-label">Новые диалоги</p>
+                                    <p class="bf-stat-value" id="statDialogs">—</p>
+                                    <p class="bf-stat-trend" id="statDialogsTrend">—</p>
+                                </div>
+                                <div class="bf-stat-icon bf-stat-icon--blue">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                </div>
+                            </div>
+                            <svg class="bf-sparkline" id="sparkDialogs" viewBox="0 0 120 32" preserveAspectRatio="none"></svg>
+                        </article>
+                        <article class="bf-stat-card bf-stat-card--green">
+                            <div class="bf-stat-top">
+                                <div>
+                                    <p class="bf-stat-label">Всего заявок</p>
+                                    <p class="bf-stat-value" id="statLeads">—</p>
+                                    <p class="bf-stat-trend" id="statLeadsTrend">—</p>
+                                </div>
+                                <div class="bf-stat-icon bf-stat-icon--green">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                        </div>
+                            </div>
+                            <svg class="bf-sparkline" id="sparkLeads" viewBox="0 0 120 32" preserveAspectRatio="none"></svg>
+                        </article>
+                        <article class="bf-stat-card bf-stat-card--purple">
+                            <div class="bf-stat-top">
+                                <div>
+                                    <p class="bf-stat-label">Клиентов</p>
+                                    <p class="bf-stat-value" id="statClients">—</p>
+                                    <p class="bf-stat-trend" id="statClientsTrend">—</p>
+                                    </div>
+                                <div class="bf-stat-icon bf-stat-icon--purple">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                    </div>
+                            </div>
+                            <svg class="bf-sparkline" id="sparkClients" viewBox="0 0 120 32" preserveAspectRatio="none"></svg>
+                        </article>
+                        <article class="bf-stat-card bf-stat-card--orange">
+                            <div class="bf-stat-top">
+                                <div>
+                                    <p class="bf-stat-label">Просмотры</p>
+                                    <p class="bf-stat-value" id="statViews">—</p>
+                                    <p class="bf-stat-trend" id="statViewsTrend">—</p>
+                                </div>
+                                <div class="bf-stat-icon bf-stat-icon--orange">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </div>
+                            </div>
+                            <svg class="bf-sparkline" id="sparkViews" viewBox="0 0 120 32" preserveAspectRatio="none"></svg>
+                        </article>
+                    </section>
+
+                    <div class="bf-grid-2">
+                        <div class="bf-col-left">
+                            <section class="bf-card">
+                                <h2 class="bf-card-title">Подключение каналов</h2>
+                                <div class="bf-channels" id="channelsList"></div>
+                            </section>
+
+                            <section class="bf-card">
+                                <h2 class="bf-card-title">Инструкция по подключению VK</h2>
+                                <div class="bf-vk-steps" id="vkSteps">
+                                    <div class="bf-vk-step" data-step="1">
+                                        <span class="bf-vk-step-num">1</span>
+                                        <span class="bf-vk-step-text">Создайте сообщество VK</span>
+                                    </div>
+                                    <div class="bf-vk-step" data-step="2">
+                                        <span class="bf-vk-step-num">2</span>
+                                        <span class="bf-vk-step-text">Получите ключ доступа</span>
+                                    </div>
+                                    <div class="bf-vk-step" data-step="3">
+                                        <span class="bf-vk-step-num">3</span>
+                                        <span class="bf-vk-step-text">Настройте бота</span>
+                                    </div>
+                                    <div class="bf-vk-step" data-step="4">
+                                        <span class="bf-vk-step-num">4</span>
+                                        <span class="bf-vk-step-text">Готово!</span>
+                            </div>
+                        </div>
+                                <a class="bf-btn bf-btn--outline" href="/company/vk">
+                                    Подробная инструкция
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                </a>
+                            </section>
+                        </div>
+
+                        <div class="bf-col-right">
+                            <section class="bf-card">
+                                <div class="bf-card-head">
+                                    <h2 class="bf-card-title">Активность за 7 дней</h2>
+                                    <select class="bf-select" id="activityRange">
+                                        <option>7 дней</option>
+                                    </select>
+                                </div>
+                                <div class="bf-chart-legend">
+                                    <span><i class="bf-legend-dot bf-legend-dot--purple"></i> Диалоги</span>
+                                    <span><i class="bf-legend-dot bf-legend-dot--green"></i> Заявки</span>
+                                </div>
+                                <div class="bf-chart-wrap">
+                                    <canvas id="activityChart" height="220"></canvas>
+                        </div>
+                    </section>
+
+                            <section class="bf-card">
+                                <h2 class="bf-card-title">Последние диалоги</h2>
+                                <div class="bf-dialog-list" id="recentDialogs"></div>
+                                <a class="bf-link-more" href="/company/dialogs">Перейти ко всем диалогам →</a>
+                            </section>
+                        </div>
+                    </div>
+
+                    <section class="bf-ai-banner">
+                        <div class="bf-ai-banner-glow"></div>
+                        <div class="bf-ai-banner-content">
+                            <h3>ИИ-ассистент готов помочь!</h3>
+                            <p>Настройте AI-ассистента для автоматической обработки сообщений и увеличения конверсии.</p>
+                        </div>
+                        <a class="bf-btn bf-btn--primary" href="/company/ai">
+                            Настроить ИИ-ассистента
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </a>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+        <script src="/assets/company-api.js?v=5"></script>
+        <script src="/assets/company-shell.js?v=4"></script>
+        <script src="/assets/company-dashboard.js?v=4"></script>
+    </body>
+</html>

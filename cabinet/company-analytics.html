@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Аналитика — BizFlow</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/assets/company-shell.css?v=11" />
+        <link rel="stylesheet" href="/assets/company-dashboard.css?v=4" />
+        <link rel="stylesheet" href="/assets/company-analytics.css?v=1" />
+    </head>
+    <body class="bf-app an-page" data-page="analytics">
+        <div class="bf-layout">
+            <aside class="bf-sidebar" id="companySidebar"></aside>
+
+            <div class="bf-main">
+                <header class="an-header">
+                    <div>
+                        <h1>Аналитика</h1>
+                        <p id="periodSubtitle">Статистика по диалогам, лидам и ИИ за период</p>
+                    </div>
+                    <div class="an-header-actions">
+                        <div class="an-period-tabs" id="periodTabs">
+                            <button type="button" class="an-period-btn active" data-days="7">7 дней</button>
+                            <button type="button" class="an-period-btn" data-days="30">30 дней</button>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="bf-content an-content">
+                    <section class="bf-stats-grid an-stats-grid" id="summaryGrid">
+                        <article class="bf-stat-card bf-stat-card--blue">
+                            <div class="bf-stat-top">
+                                <div>
+                                    <p class="bf-stat-label">Сообщения</p>
+                                    <p class="bf-stat-value" id="statMessages">—</p>
+                                    <p class="bf-stat-trend" id="statMessagesTrend">—</p>
+                                </div>
+                                <div class="bf-stat-icon bf-stat-icon--blue">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="bf-stat-card bf-stat-card--green">
+                            <div class="bf-stat-top">
+                                <div>
+                                    <p class="bf-stat-label">Новые диалоги</p>
+                                    <p class="bf-stat-value" id="statDialogs">—</p>
+                                    <p class="bf-stat-trend" id="statDialogsTrend">—</p>
+                                </div>
+                                <div class="bf-stat-icon bf-stat-icon--green">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="bf-stat-card bf-stat-card--purple">
+                            <div class="bf-stat-top">
+                                <div>
+                                    <p class="bf-stat-label">Ответы ИИ</p>
+                                    <p class="bf-stat-value" id="statAi">—</p>
+                                    <p class="bf-stat-trend" id="statAiRate">—</p>
+                                </div>
+                                <div class="bf-stat-icon bf-stat-icon--purple">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="bf-stat-card bf-stat-card--orange">
+                            <div class="bf-stat-top">
+                                <div>
+                                    <p class="bf-stat-label">Конверсия лидов</p>
+                                    <p class="bf-stat-value" id="statConversion">—</p>
+                                    <p class="bf-stat-trend" id="statLeadsTrend">—</p>
+                                </div>
+                                <div class="bf-stat-icon bf-stat-icon--orange">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                                </div>
+                            </div>
+                        </article>
+                    </section>
+
+                    <div class="an-grid-2">
+                        <section class="an-card an-card--chart">
+                            <div class="an-card-head">
+                                <h2>Активность</h2>
+                                <p>Диалоги, сообщения и лиды по дням</p>
+                            </div>
+                            <div class="an-chart-wrap">
+                                <canvas id="activityChart"></canvas>
+                            </div>
+                        </section>
+
+                        <section class="an-card">
+                            <div class="an-card-head">
+                                <h2>Воронка лидов</h2>
+                                <p>Статусы карточек клиентов</p>
+                            </div>
+                            <div class="an-funnel" id="leadFunnel"></div>
+                        </section>
+                    </div>
+
+                    <div class="an-grid-3">
+                        <section class="an-card">
+                            <div class="an-card-head">
+                                <h2>Тип сообщений</h2>
+                                <p>Клиент / ИИ / оператор</p>
+                            </div>
+                            <div class="an-chart-wrap an-chart-wrap--sm">
+                                <canvas id="mixChart"></canvas>
+                            </div>
+                        </section>
+
+                        <section class="an-card">
+                            <div class="an-card-head">
+                                <h2>Бюджеты клиентов</h2>
+                                <p>Распределение по сегментам</p>
+                            </div>
+                            <div class="an-bars" id="budgetBars"></div>
+                        </section>
+
+                        <section class="an-card">
+                            <div class="an-card-head">
+                                <h2>Каналы</h2>
+                                <p>Доля трафика</p>
+                            </div>
+                            <div class="an-channels" id="channelStats"></div>
+                        </section>
+                    </div>
+
+                    <div class="an-grid-2">
+                        <section class="an-card">
+                            <div class="an-card-head">
+                                <h2>Интересы клиентов</h2>
+                                <p>Что чаще всего спрашивают</p>
+                            </div>
+                            <div class="an-tags" id="interestTags"></div>
+                        </section>
+
+                        <section class="an-card">
+                            <div class="an-card-head">
+                                <h2>Последние лиды</h2>
+                                <p>С бюджетом и запросом</p>
+                            </div>
+                            <div class="an-leads" id="recentLeads"></div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+        <script src="/assets/company-api.js?v=9"></script>
+        <script src="/assets/company-shell.js?v=11"></script>
+        <script src="/assets/company-analytics.js?v=1"></script>
+    </body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Уведомления — BizFlow</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="/assets/company-shell.css?v=13" />
+        <link rel="stylesheet" href="/assets/company-extras.css?v=1" />
+    </head>
+    <body class="bf-app ex-page ex-page--notify" data-page="notify">
+        <div class="bf-layout">
+            <aside class="bf-sidebar" id="companySidebar"></aside>
+            <div class="bf-main">
+                <header class="ex-header">
+                    <div>
+                        <h1>Уведомления</h1>
+                        <p id="notifySubtitle">Записи на консультации, заявки и напоминания</p>
+                    </div>
+                    <button type="button" class="ex-btn" id="markAllReadBtn">Прочитать все</button>
+                </header>
+                <div class="ex-content">
+                    <div class="ex-filters" id="notifyFilters">
+                        <button type="button" class="ex-filter-btn active" data-filter="all">Все</button>
+                        <button type="button" class="ex-filter-btn" data-filter="unread">Непрочитанные</button>
+                    </div>
+                    <div class="ex-notify-list" id="notifyList"></div>
+                </div>
+            </div>
+        </div>
+        <script src="/assets/company-api.js?v=9"></script>
+        <script src="/assets/company-shell.js?v=13"></script>
+        <script src="/assets/company-notify.js?v=1"></script>
+    </body>
+</html>

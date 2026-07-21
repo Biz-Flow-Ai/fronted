@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Документация — BizFlow</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/assets/company-shell.css?v=8" />
+        <link rel="stylesheet" href="/assets/company-docs.css?v=2" />
+    </head>
+    <body class="bf-app docs-page" data-page="docs">
+        <div class="bf-layout">
+            <aside class="bf-sidebar" id="companySidebar"></aside>
+
+            <div class="bf-main">
+                <header class="docs-header">
+                    <div>
+                        <h1>Документация BizFlow</h1>
+                        <p>
+                            База знаний по платформе: быстрый старт, ИИ-ассистент, интеграция VK
+                            и решение типичных проблем.
+                        </p>
+                    </div>
+                    <div class="docs-header-actions">
+                        <button type="button" class="docs-btn docs-btn--ghost" id="copyPageLinkButton">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                            Скопировать ссылку
+                        </button>
+                        <a class="docs-btn docs-btn--primary" href="/company/vk">Перейти к VK</a>
+                    </div>
+                </header>
+
+                <div class="docs-layout">
+                    <aside class="docs-toc" aria-label="Содержание">
+                        <span class="docs-toc-label">Содержание</span>
+                        <input
+                            type="search"
+                            class="docs-search"
+                            id="docsSearch"
+                            placeholder="Поиск по разделам..."
+                            autocomplete="off"
+                        />
+                        <nav>
+                            <a href="#overview" data-section="overview">О платформе</a>
+                            <a href="#quick-start" data-section="quick-start">Быстрый старт</a>
+                            <a href="#ai-assistant" data-section="ai-assistant">ИИ-ассистент</a>
+                            <a href="#vk-integration" data-section="vk-integration">Интеграция VK</a>
+                            <a href="#vk-token" class="is-sub" data-section="vk-token">Access Token</a>
+                            <a href="#vk-callback" class="is-sub" data-section="vk-callback">Callback API</a>
+                            <a href="#vk-check" class="is-sub" data-section="vk-check">Проверка подключения</a>
+                            <a href="#dialogs" data-section="dialogs">Диалоги и заявки</a>
+                            <a href="#faq" data-section="faq">Частые вопросы</a>
+                            <a href="#support" data-section="support">Поддержка</a>
+                        </nav>
+                    </aside>
+
+                    <article class="docs-article">
+                        <div class="docs-hero">
+                            <h2>Добро пожаловать в базу знаний BizFlow</h2>
+                            <p>
+                                Здесь собраны пошаговые инструкции для настройки AI-менеджера и
+                                подключения VK. Используйте меню слева или поиск, чтобы быстро
+                                найти нужный раздел.
+                            </p>
+                            <div class="docs-chips">
+                                <span class="docs-chip">VK Callback API</span>
+                                <span class="docs-chip">GigaChat</span>
+                                <span class="docs-chip">Автонастройка</span>
+                                <span class="docs-chip">Автоответы 24/7</span>
+                            </div>
+                        </div>
+
+                        <section class="docs-section" id="overview">
+                            <h2>О платформе</h2>
+                            <p class="docs-lead">
+                                BizFlow — это панель управления для бизнеса, где ИИ-ассистент
+                                общается с клиентами в VK, собирает заявки и передаёт контекст
+                                менеджеру.
+                            </p>
+                            <div class="docs-card-grid">
+                                <div class="docs-card">
+                                    <div class="docs-card-icon">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                                    </div>
+                                    <h4>ИИ-ассистент</h4>
+                                    <p>Настройте тон, услуги, сценарии и шаблоны ответов под ваш бизнес.</p>
+                                    <a href="/company/ai">Открыть настройки →</a>
+                                </div>
+                                <div class="docs-card">
+                                    <div class="docs-card-icon">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0z"/></svg>
+                                    </div>
+                                    <h4>Интеграция VK</h4>
+                                    <p>Подключите сообщество, настройте Callback API и начните принимать сообщения.</p>
+                                    <a href="/company/vk">Настроить VK →</a>
+                                </div>
+                                <div class="docs-card">
+                                    <div class="docs-card-icon">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                    </div>
+                                    <h4>Диалоги</h4>
+                                    <p>Вся переписка с клиентами, история и статусы заявок в одном месте.</p>
+                                    <a href="/company/dialogs">Открыть диалоги →</a>
+                                </div>
+                                <div class="docs-card">
+                                    <div class="docs-card-icon">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                    </div>
+                                    <h4>Безопасность</h4>
+                                    <p>Токены хранятся на сервере, доступ к панели — только по авторизации.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="docs-section" id="quick-start">
+                            <h2>Быстрый старт</h2>
+                            <p>Минимальный путь от регистрации до первого ответа клиенту в VK.</p>
+                            <div class="docs-steps">
+                                <div class="docs-step">
+                                    <div class="docs-step-num">1</div>
+                                    <div>
+                                        <h4>Войдите в кабинет</h4>
+                                        <p>Используйте email и пароль, выданные администратором. После входа откроется главная панель компании.</p>
+                                    </div>
+                                </div>
+                                <div class="docs-step">
+                                    <div class="docs-step-num">2</div>
+                                    <div>
+                                        <h4>Настройте ИИ-ассистента</h4>
+                                        <p>Укажите тип бизнеса, услуги, стиль общения и правила поведения в разделе <a href="/company/ai">ИИ-ассистент</a>.</p>
+                                    </div>
+                                </div>
+                                <div class="docs-step">
+                                    <div class="docs-step-num">3</div>
+                                    <div>
+                                        <h4>Подключите VK</h4>
+                                        <p>В разделе <a href="/company/vk">VK</a> укажите ID сообщества, Access Token и настройте Callback API.</p>
+                                    </div>
+                                </div>
+                                <div class="docs-step">
+                                    <div class="docs-step-num">4</div>
+                                    <div>
+                                        <h4>Проверьте подключение</h4>
+                                        <p>В окне «Управление» нажмите <strong>Проверить подключение</strong> и отправьте тестовое сообщение в сообщество.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="docs-callout docs-callout--tip">
+                                <strong>Совет</strong>
+                                Сначала подключите VK, затем настройте ИИ-ассистента — так бот сразу сможет отвечать на входящие сообщения.
+                            </div>
+                        </section>
+
+                        <section class="docs-section" id="ai-assistant">
+                            <h2>ИИ-ассистент</h2>
+                            <p class="docs-lead">
+                                ИИ-ассистент — единый центр настройки поведения бота. Здесь вы задаёте,
+                                как система представляется клиенту и какие данные собирает.
+                            </p>
+                            <h3>Основные настройки</h3>
+                            <ul>
+                                <li><strong>Тип бизнеса</strong> — выберите шаблон (магазин, услуги, кафе и др.) или настройте вручную.</li>
+                                <li><strong>Услуги и цены</strong> — добавьте позиции, чтобы ассистент отвечал по вашему прайсу.</li>
+                                <li><strong>Стиль общения</strong> — дружелюбный, деловой или экспертный тон.</li>
+                                <li><strong>Правила поведения</strong> — уточнение бюджета, сроков, сбор контактов.</li>
+                            </ul>
+                            <h3>Дополнительные вкладки</h3>
+                            <ul>
+                                <li><strong>Шаблоны сообщений</strong> — готовые фразы для типовых ситуаций.</li>
+                                <li><strong>Сценарии диалога</strong> — логика ветвления разговора.</li>
+                                <li><strong>Интеграции</strong> — связь с подключёнными каналами.</li>
+                            </ul>
+                            <div class="docs-callout docs-callout--info">
+                                <strong>Важно</strong>
+                                Раздел ИИ-ассистента доступен после подключения VK — без интеграции бот не сможет принимать сообщения.
+                            </div>
+                        </section>
+
+                        <section class="docs-section" id="vk-integration">
+                            <h2>Интеграция VK</h2>
+                            <p>
+                                Подключение сообщества выполняется в разделе
+                                <a href="/company/vk">Настройка VK</a>. BizFlow использует
+                                Callback API для мгновенного получения входящих сообщений.
+                            </p>
+
+                            <h3 id="vk-token">Access Token</h3>
+                            <p>Токен нужен для чтения и отправки сообщений от имени сообщества.</p>
+                            <ol>
+                                <li>Откройте ваше сообщество VK → <strong>Управление</strong>.</li>
+                                <li>Перейдите в <strong>Работа с API → Ключи доступа</strong>.</li>
+                                <li>Создайте ключ с правами: <strong>Управление сообществом</strong>, <strong>Сообщения сообщества</strong>.</li>
+                                <li>Скопируйте токен и вставьте в форму BizFlow.</li>
+                            </ol>
+                            <div class="docs-callout docs-callout--warn">
+                                <strong>Безопасность</strong>
+                                Не публикуйте токен в открытом доступе. Если токен утёк — отзовите его в VK и создайте новый.
+                            </div>
+
+                            <h3>ID сообщества</h3>
+                            <p>
+                                Укажите числовой ID группы. Его можно найти в адресе страницы
+                                (<code>club123456789</code> → ID <code>123456789</code>) или в настройках сообщества.
+                                <a href="https://vk.com/faq18324" target="_blank" rel="noreferrer">Подробнее в FAQ VK</a>.
+                            </p>
+
+                            <h3 id="vk-callback">Callback API</h3>
+                            <p>
+                                Callback API позволяет VK отправлять новые сообщения в BizFlow.
+                                Адрес сервера и ключи генерируются автоматически — вам нужно только
+                                скопировать их в настройки сообщества.
+                            </p>
+                            <div class="docs-steps">
+                                <div class="docs-step">
+                                    <div class="docs-step-num">1</div>
+                                    <div>
+                                        <h4>Подключите сообщество в BizFlow</h4>
+                                        <p>Заполните форму и нажмите «Подключить сообщество». Система сгенерирует Secret Key и Confirmation token.</p>
+                                    </div>
+                                </div>
+                                <div class="docs-step">
+                                    <div class="docs-step-num">2</div>
+                                    <div>
+                                        <h4>Откройте «Управление» на карточке сообщества</h4>
+                                        <p>Скопируйте Callback URL, Secret Key и Confirmation token.</p>
+                                    </div>
+                                </div>
+                                <div class="docs-step">
+                                    <div class="docs-step-num">3</div>
+                                    <div>
+                                        <h4>Настройте VK → Callback API</h4>
+                                        <p>Укажите адрес сервера, строку подтверждения и секретный ключ. Включите событие <strong>Входящее сообщение</strong>.</p>
+                                    </div>
+                                </div>
+                                <div class="docs-step">
+                                    <div class="docs-step-num">4</div>
+                                    <div>
+                                        <h4>Нажмите «Настроить Callback API» в BizFlow</h4>
+                                        <p>Или выполните настройку вручную в панели VK — оба способа рабочие.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p>Callback URL для вашего аккаунта (копируется в разделе <a href="/company/vk">VK → Управление</a>):</p>
+                            <div class="docs-code"><code id="dynamicCallbackExample">https://ваш-адрес.bizflow.ru/api/vkbot/webhook</code></div>
+                            <div class="docs-callout docs-callout--info">
+                                <strong>Не нужно ничего настраивать вручную на сервере</strong>
+                                BizFlow уже развёрнут и принимает webhook. Просто вставьте Callback URL из кабинета в настройки VK.
+                            </div>
+
+                            <div class="docs-table-wrap">
+                                <table class="docs-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Поле</th>
+                                            <th>Где взять</th>
+                                            <th>Куда вставить</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Callback URL</td>
+                                            <td>BizFlow → Управление</td>
+                                            <td>VK → Callback API → Адрес</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Confirmation token</td>
+                                            <td>BizFlow → Управление</td>
+                                            <td>VK → Строка подтверждения</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Secret Key</td>
+                                            <td>BizFlow → Управление</td>
+                                            <td>VK → Секретный ключ</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Access Token</td>
+                                            <td>VK → Ключи доступа</td>
+                                            <td>BizFlow → форма подключения</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <section class="docs-section" id="vk-check">
+                            <h2>Проверка подключения</h2>
+                            <p>
+                                После сохранения настроек откройте карточку сообщества →
+                                <strong>Управление</strong> → <strong>Проверить подключение</strong>.
+                            </p>
+                            <p>Система проверит:</p>
+                            <ul>
+                                <li>корректность ID сообщества и токена;</li>
+                                <li>наличие Callback URL и confirmation token;</li>
+                                <li>совпадение данных в VK и в BizFlow;</li>
+                                <li>доступность API VK.</li>
+                            </ul>
+                            <div class="docs-callout docs-callout--tip">
+                                <strong>Тест вживую</strong>
+                                Напишите сообщение в ваше сообщество VK с другого аккаунта — ответ должен прийти от ИИ-ассистента в течение нескольких секунд.
+                            </div>
+                        </section>
+
+                        <section class="docs-section" id="dialogs">
+                            <h2>Диалоги и заявки</h2>
+                            <p>
+                                Когда клиент пишет в VK, BizFlow создаёт диалог и карточку клиента.
+                                ИИ ведёт разговор, уточняет детали и формирует заявку.
+                            </p>
+                            <ul>
+                                <li><strong>Диалоги</strong> — полная история переписки.</li>
+                                <li><strong>Клиенты</strong> — профили с контактами и интересами.</li>
+                                <li><strong>Заявки</strong> — структурированные запросы от клиентов.</li>
+                            </ul>
+                            <p>
+                                Разделы диалогов и заявок появятся в меню по мере подключения
+                                соответствующих модулей тарифа.
+                            </p>
+                        </section>
+
+                        <section class="docs-section" id="faq">
+                            <h2>Частые вопросы</h2>
+                            <div class="docs-faq">
+                                <details>
+                                    <summary>Бот не отвечает на сообщения в VK</summary>
+                                    <p>
+                                        Проверьте совпадение confirmation token и secret key,
+                                        права токена на сообщения и включено ли событие
+                                        «Входящее сообщение» в VK. Нажмите «Проверить подключение»
+                                        в разделе VK.
+                                    </p>
+                                </details>
+                                <details>
+                                    <summary>Ошибка «Подключите VK» в разделе ИИ</summary>
+                                    <p>
+                                        Сначала сохраните настройки сообщества в разделе VK.
+                                        ИИ-ассистент активируется только после успешной интеграции.
+                                    </p>
+                                </details>
+                                <details>
+                                    <summary>Где взять Access Token?</summary>
+                                    <p>
+                                        VK → Управление сообществом → Работа с API → Ключи доступа.
+                                        Нужны права на управление сообществом и сообщения.
+                                    </p>
+                                </details>
+                                <details>
+                                    <summary>Можно ли подключить личный аккаунт?</summary>
+                                    <p>
+                                        Да, в форме есть режим «Личный аккаунт менеджера». Для бизнеса
+                                        рекомендуем публичную страницу (сообщество).
+                                    </p>
+                                </details>
+                            </div>
+                        </section>
+
+                        <section class="docs-section" id="support">
+                            <h2>Поддержка</h2>
+                            <p>
+                                Если инструкция не помогла — напишите нам, приложив скриншот отчёта
+                                «Проверить подключение» и указав ID сообщества (без токена).
+                            </p>
+                            <div class="docs-footer-cta">
+                                <div>
+                                    <h3>Нужна помощь с настройкой?</h3>
+                                    <p>Команда поддержки поможет с подключением VK и настройкой ассистента.</p>
+                                </div>
+                                <div class="docs-footer-actions">
+                                    <a class="docs-btn docs-btn--ghost" href="mailto:support@bizflow.ru">support@bizflow.ru</a>
+                                    <a class="docs-btn docs-btn--primary" href="/company/vk">Настроить VK</a>
+                                </div>
+                            </div>
+                            <p style="margin-top: 18px">
+                                Официальная документация VK API:
+                                <a href="https://vk.com/dev/callback_api" target="_blank" rel="noreferrer">Callback API</a>,
+                                <a href="https://vk.com/dev/messages" target="_blank" rel="noreferrer">Сообщения</a>,
+                                <a href="https://vk.com/dev/access_token" target="_blank" rel="noreferrer">Ключи доступа</a>.
+                            </p>
+                        </section>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <script src="/assets/company-api.js?v=8"></script>
+        <script src="/assets/company-shell.js?v=8"></script>
+        <script src="/assets/company-docs.js?v=2"></script>
+    </body>
+</html>

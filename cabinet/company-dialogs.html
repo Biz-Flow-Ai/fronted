@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Диалоги — BizFlow</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/assets/company-shell.css?v=10" />
+        <link rel="stylesheet" href="/assets/company-dialogs.css?v=8" />
+    </head>
+    <body class="bf-app dlg-page" data-page="dialogs">
+        <div class="bf-layout">
+            <aside class="bf-sidebar" id="companySidebar"></aside>
+
+            <div class="bf-main">
+                <header class="dlg-header">
+                    <h1>Диалоги</h1>
+                </header>
+
+                <div class="dlg-layout">
+                    <aside class="dlg-list-panel">
+                        <div class="dlg-filters" id="dialogFilters">
+                            <button type="button" class="dlg-filter-btn active" data-filter="all">Все диалоги <span>0</span></button>
+                            <button type="button" class="dlg-filter-btn" data-filter="unread">Непрочитанные <span>0</span></button>
+                            <button type="button" class="dlg-filter-btn" data-filter="mine">Мои диалоги <span>0</span></button>
+                        </div>
+
+                        <div class="dlg-search-row">
+                            <input type="search" class="dlg-search" id="dialogSearch" placeholder="Поиск по имени или сообщению..." autocomplete="off" />
+                        </div>
+
+                        <div class="dlg-channels" id="dialogChannels"></div>
+                        <div id="channelNote" class="dlg-note" hidden></div>
+
+                        <div class="dlg-list" id="dialogsList"></div>
+                    </aside>
+
+                    <section class="dlg-chat-panel">
+                        <header class="dlg-chat-head" id="chatHead" hidden></header>
+
+                        <div class="dlg-chat-body">
+                            <div class="dlg-messages" id="chatMessages" hidden></div>
+
+                            <div class="dlg-empty" id="chatEmpty">
+                                <h3>Выберите диалог</h3>
+                                <p>Слева список переписок. У каждого диалога видно, откуда написал клиент: VK, Telegram, MAX или WhatsApp.</p>
+                            </div>
+                        </div>
+
+                        <footer class="dlg-compose">
+                            <div class="dlg-compose-tools">
+                                <button type="button" disabled>Быстрые ответы</button>
+                                <button type="button" disabled>Отправить файл</button>
+                                <button type="button" disabled>Заметка</button>
+                            </div>
+                            <div class="dlg-compose-row">
+                                <textarea placeholder="Ответ оператора — скоро" disabled rows="1"></textarea>
+                                <button type="button" class="dlg-send-btn" disabled aria-label="Отправить">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                                </button>
+                            </div>
+                        </footer>
+                    </section>
+
+                    <aside class="dlg-client-panel" id="clientPanel">
+                        <h3>Информация о клиенте</h3>
+                        <div class="dlg-empty" style="height: auto; padding: 24px 0">
+                            <p>Выберите диалог, чтобы увидеть карточку клиента</p>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+
+        <script src="/assets/company-api.js?v=9"></script>
+        <script src="/assets/company-shell.js?v=10"></script>
+        <script src="/assets/company-dialogs.js?v=9"></script>
+    </body>
+</html>

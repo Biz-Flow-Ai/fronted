@@ -1,0 +1,15 @@
+# Build / deps
+node_modules/
+dist/
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# IDE
+.vs/
+.idea/
+*.user

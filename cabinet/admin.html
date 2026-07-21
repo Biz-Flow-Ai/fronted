@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Панель администратора — BizFlow</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/assets/styles.css" />
+    </head>
+    <body class="admin-page">
+        <div class="admin-layout">
+            <aside class="sidebar" aria-label="Разделы панели">
+                <a class="sidebar-brand" href="/admin?section=dashboard">
+                    <span class="brand-mark compact">BF</span>
+                    <span>BizFlow</span>
+                </a>
+
+                <nav class="side-nav">
+                    <a
+                        data-section-link="dashboard"
+                        href="/admin?section=dashboard"
+                        >Обзор</a
+                    >
+                    <a
+                        data-section-link="companies"
+                        href="/admin?section=companies"
+                        >Компании</a
+                    >
+                    <a
+                        data-section-link="users"
+                        href="/admin?section=users"
+                        >Пользователи</a
+                    >
+                    <a
+                        data-section-link="vk-integrations"
+                        href="/admin?section=vk-integrations"
+                        >VK Интеграции</a
+                    >
+                    <a
+                        data-section-link="messages"
+                        href="/admin?section=messages"
+                        >Мониторинг сообщений</a
+                    >
+                    <a
+                        data-section-link="ai-requests"
+                        href="/admin?section=ai-requests"
+                        >Мониторинг AI</a
+                    >
+                    <a
+                        data-section-link="customer-cards"
+                        href="/admin?section=customer-cards"
+                        >Карточки клиентов</a
+                    >
+                    <a data-section-link="dialogs" href="/admin?section=dialogs"
+                        >Диалоги</a
+                    >
+                    <a data-section-link="logs" href="/admin?section=logs"
+                        >Логи</a
+                    >
+                    <a
+                        data-section-link="service-status"
+                        href="/admin?section=service-status"
+                        >Состояние сервисов</a
+                    >
+                    <a
+                        data-section-link="giga-chat"
+                        href="/admin?section=giga-chat"
+                        >GigaChat</a
+                    >
+                    <a
+                        data-section-link="test-vk-bot"
+                        href="/admin?section=test-vk-bot"
+                        >Тест VK Бота</a
+                    >
+                </nav>
+            </aside>
+
+            <div class="workspace">
+                <header class="topbar">
+                    <div>
+                        <p class="eyebrow">Администрирование</p>
+                        <h1 id="sectionTitle">Обзор</h1>
+                    </div>
+                    <div class="user-box">
+                        <span id="currentUser">...</span>
+                        <button
+                            id="logoutButton"
+                            class="ghost-button"
+                            type="button"
+                        >
+                            Выход
+                        </button>
+                    </div>
+                </header>
+
+                <main class="content admin-stack">
+                    <section id="dashboardSection" class="content-section">
+                        <div class="section-intro">
+                            <h2>Обзор системы</h2>
+                            <span class="badge">AI: GigaChat</span>
+                        </div>
+                        <div class="dashboard-cards">
+                            <div class="card">
+                                <p class="card-label">Компаний</p>
+                                <p class="card-value" id="totalCompanies">0</p>
+                            </div>
+                            <div class="card">
+                                <p class="card-label">Подключено VK</p>
+                                <p class="card-value" id="connectedVk">0</p>
+                            </div>
+                            <div class="card">
+                                <p class="card-label">Сообщений сегодня</p>
+                                <p class="card-value" id="messagesToday">0</p>
+                            </div>
+                            <div class="card">
+                                <p class="card-label">Ошибок</p>
+                                <p class="card-value" id="errors">0</p>
+                            </div>
+                            <div class="card">
+                                <p class="card-label">AI запросов</p>
+                                <p class="card-value" id="aiRequests">0</p>
+                            </div>
+                            <div class="card">
+                                <p class="card-label">Активных диалогов</p>
+                                <p class="card-value" id="activeDialogs">0</p>
+                            </div>
+                            <div class="card">
+                                <p class="card-label">
+                                    Среднее время ответа AI
+                                </p>
+                                <p class="card-value" id="avgAiResponseTime">
+                                    0 сек
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="admin-tools-grid">
+                            <section
+                                class="detail-card detail-card--visible access-card"
+                            >
+                                <div class="report-header">
+                                    <h3>Доступ и пользователи</h3>
+                                    <span class="badge">Admin tools</span>
+                                </div>
+                                <p class="muted-copy">
+                                    Создайте второго администратора, owner
+                                    компании или оператора прямо из панели.
+                                </p>
+                                <form
+                                    id="createUserForm"
+                                    class="settings-form compact-form"
+                                >
+                                    <div class="two-column-grid">
+                                        <label>
+                                            <span>Email</span>
+                                            <input
+                                                id="createUserEmail"
+                                                type="email"
+                                                placeholder="manager@bizflow.ru"
+                                                required
+                                            />
+                                        </label>
+                                        <label>
+                                            <span>Пароль</span>
+                                            <input
+                                                id="createUserPassword"
+                                                type="password"
+                                                placeholder="Минимум 6+ символов"
+                                                required
+                                            />
+                                        </label>
+                                    </div>
+                                    <div class="two-column-grid">
+                                        <label>
+                                            <span>Имя</span>
+                                            <input
+                                                id="createUserFirstName"
+                                                type="text"
+                                                placeholder="Иван"
+                                            />
+                                        </label>
+                                        <label>
+                                            <span>Фамилия</span>
+                                            <input
+                                                id="createUserLastName"
+                                                type="text"
+                                                placeholder="Петров"
+                                            />
+                                        </label>
+                                    </div>
+                                    <div class="two-column-grid">
+                                        <label>
+                                            <span>Роль</span>
+                                            <select id="createUserRole">
+                                                <option value="Admin">
+                                                    Admin
+                                                </option>
+                                                <option value="CompanyOwner">
+                                                    CompanyOwner
+                                                </option>
+                                                <option value="Operator">
+                                                    Operator
+                                                </option>
+                                            </select>
+                                        </label>
+                                        <label>
+                                            <span>Company ID</span>
+                                            <input
+                                                id="createUserCompanyId"
+                                                type="number"
+                                                min="1"
+                                                placeholder="Оставьте пустым для своей компании"
+                                            />
+                                        </label>
+                                    </div>
+                                    <button
+                                        class="primary-button"
+                                        type="submit"
+                                    >
+                                        Создать пользователя
+                                    </button>
+                                    <p
+                                        id="createUserMessage"
+                                        class="form-message"
+                                        role="status"
+                                    ></p>
+                                </form>
+                            </section>
+
+                            <section
+                                class="detail-card detail-card--visible access-card"
+                            >
+                                <div class="report-header">
+                                    <h3>Как выдать доступ</h3>
+                                    <span class="badge">Памятка</span>
+                                </div>
+                                <ol class="doc-list ordered">
+                                    <li>
+                                        Создайте первого admin на странице
+                                        входа, если система пустая.
+                                    </li>
+                                    <li>
+                                        Войдите под ним — BizFlow автоматически
+                                        отправит вас в <code>/admin</code>.
+                                    </li>
+                                    <li>
+                                        В блоке «Доступ и пользователи» создайте
+                                        второго admin или сотрудника.
+                                    </li>
+                                    <li>
+                                        Для сотрудников компании используйте
+                                        <code>CompanyOwner</code> или
+                                        <code>Operator</code>.
+                                    </li>
+                                    <li>
+                                        После входа пользователь будет
+                                        перенаправлен либо в
+                                        <code>/admin</code>, либо в
+                                        <code>/company</code> по роли.
+                                    </li>
+                                </ol>
+                            </section>
+                        </div>
+                    </section>
+
+                    <section id="usersSection" class="content-section" hidden>
+                        <div class="section-intro">
+                            <h2>Все пользователи</h2>
+                            <p class="muted-copy">Новые регистрации получают бесплатный тариф. Подписку можно изменить здесь.</p>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Email</th>
+                                        <th>Имя</th>
+                                        <th>Роль</th>
+                                        <th>Компания</th>
+                                        <th>Тариф</th>
+                                        <th>Статус</th>
+                                        <th>Регистрация</th>
+                                        <th>Действия</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersTableBody"></tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section
+                        id="companiesSection"
+                        class="content-section"
+                        hidden
+                    >
+                        <div class="section-intro">
+                            <h2>Список компаний</h2>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Название</th>
+                                        <th>Дата регистрации</th>
+                                        <th>Тариф</th>
+                                        <th>Статус</th>
+                                        <th>Клиентов</th>
+                                        <th>Диалогов</th>
+                                        <th>VK</th>
+                                        <th>Действия</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="companiesTableBody"></tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section
+                        id="vkIntegrationsSection"
+                        class="content-section"
+                        hidden
+                    >
+                        <div class="section-intro">
+                            <h2>Подключённые интеграции VK</h2>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Компания</th>
+                                        <th>Режим</th>
+                                        <th>Название</th>
+                                        <th>VK ID</th>
+                                        <th>Подключение</th>
+                                        <th>Callback</th>
+                                        <th>Активность</th>
+                                        <th>Сообщений/сутки</th>
+                                        <th>Действия</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="vkIntegrationsTableBody"></tbody>
+                            </table>
+                        </div>
+                        <div
+                            id="integrationDetailCard"
+                            class="detail-card"
+                            hidden
+                        ></div>
+                    </section>
+
+                    <section
+                        id="messagesSection"
+                        class="content-section"
+                        hidden
+                    >
+                        <div class="section-intro">
+                            <h2>Входящие сообщения</h2>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Компания</th>
+                                        <th>Клиент</th>
+                                        <th>VK ID</th>
+                                        <th>Текст</th>
+                                        <th>Дата</th>
+                                        <th>Статус</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="messagesTableBody"></tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section
+                        id="aiRequestsSection"
+                        class="content-section"
+                        hidden
+                    >
+                        <div class="section-intro">
+                            <h2>Все запросы к AI</h2>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Компания</th>
+                                        <th>VK ID</th>
+                                        <th>Контекст</th>
+                                        <th>Время</th>
+                                        <th>Статус</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="aiRequestsTableBody"></tbody>
+                            </table>
+                        </div>
+                        <div
+                            id="aiRequestDetail"
+                            class="detail-card"
+                            hidden
+                        ></div>
+                    </section>
+
+                    <section
+                        id="customerCardsSection"
+                        class="content-section"
+                        hidden
+                    >
+                        <div class="section-intro">
+                            <h2>Карточки клиентов</h2>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Имя</th>
+                                        <th>VK ID</th>
+                                        <th>Компания</th>
+                                        <th>Диалогов</th>
+                                        <th>Последнее сообщение</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="customerCardsTableBody"></tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section id="dialogsSection" class="content-section" hidden>
+                        <div class="section-intro dialog-filters">
+                            <h2>Диалоги</h2>
+                            <div class="filter-group inline-filters">
+                                <input
+                                    id="dialogCompanyFilter"
+                                    type="number"
+                                    placeholder="Company ID"
+                                />
+                                <input
+                                    id="dialogVkFilter"
+                                    type="number"
+                                    placeholder="VK ID"
+                                />
+                                <select id="dialogStatusFilter">
+                                    <option value="">Все статусы</option>
+                                    <option value="0">Open</option>
+                                    <option value="1">InProgress</option>
+                                    <option value="2">Closed</option>
+                                    <option value="3">Archived</option>
+                                </select>
+                                <button
+                                    class="ghost-button"
+                                    type="button"
+                                    id="applyDialogFilters"
+                                >
+                                    Фильтр
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Компания</th>
+                                        <th>VK ID</th>
+                                        <th>Статус</th>
+                                        <th>Создан</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dialogsTableBody"></tbody>
+                            </table>
+                        </div>
+                        <div id="dialogDetail" class="detail-card" hidden></div>
+                    </section>
+
+                    <section id="logsSection" class="content-section" hidden>
+                        <div class="section-intro">
+                            <h2>Backend логи</h2>
+                            <div class="filter-group">
+                                <button
+                                    class="ghost-button"
+                                    type="button"
+                                    onclick="filterLogs(null)"
+                                >
+                                    Все
+                                </button>
+                                <button
+                                    class="ghost-button"
+                                    type="button"
+                                    onclick="filterLogs(0)"
+                                >
+                                    INFO
+                                </button>
+                                <button
+                                    class="ghost-button"
+                                    type="button"
+                                    onclick="filterLogs(1)"
+                                >
+                                    WARNING
+                                </button>
+                                <button
+                                    class="ghost-button"
+                                    type="button"
+                                    onclick="filterLogs(2)"
+                                >
+                                    ERROR
+                                </button>
+                                <button
+                                    class="ghost-button"
+                                    type="button"
+                                    onclick="filterLogs(3)"
+                                >
+                                    CRITICAL
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Время</th>
+                                        <th>Модуль</th>
+                                        <th>Сообщение</th>
+                                        <th>Stack Trace</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="logsTableBody"></tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section
+                        id="serviceStatusSection"
+                        class="content-section"
+                        hidden
+                    >
+                        <div class="section-intro">
+                            <h2>Состояние сервисов</h2>
+                        </div>
+                        <div
+                            class="service-status-list"
+                            id="serviceStatusList"
+                        ></div>
+                    </section>
+
+                    <section
+                        id="gigaChatSection"
+                        class="content-section"
+                        hidden
+                    >
+                        <div class="section-intro">
+                            <h2>Настройка GigaChat API</h2>
+                        </div>
+                        <div
+                            id="gigaChatConfig"
+                            class="detail-card detail-card--visible"
+                        ></div>
+                    </section>
+
+                    <section
+                        id="testVkBotSection"
+                        class="content-section"
+                        hidden
+                    >
+                        <div class="section-intro">
+                            <h2>Тестирование VK Бота</h2>
+                        </div>
+                        <button
+                            class="primary-button"
+                            type="button"
+                            id="runVkTest"
+                        >
+                            Отправить тестовое сообщение
+                        </button>
+                        <div id="testReport" class="detail-card" hidden></div>
+                    </section>
+                </main>
+            </div>
+        </div>
+
+        <script src="/assets/admin.js"></script>
+    </body>
+</html>
