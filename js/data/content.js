@@ -1,5 +1,6 @@
 const plans = window.plans || [
   {
+    code: "free",
     name: "Free",
     price: "0",
     period: "",
@@ -16,6 +17,7 @@ const plans = window.plans || [
     popular: false,
   },
   {
+    code: "start",
     name: "Start",
     price: "990",
     period: "₽/мес",
@@ -32,6 +34,7 @@ const plans = window.plans || [
     popular: false,
   },
   {
+    code: "business",
     name: "Business",
     price: "2 990",
     period: "₽/мес",
@@ -49,6 +52,7 @@ const plans = window.plans || [
     popular: true,
   },
   {
+    code: "premium",
     name: "Premium",
     price: "7 990",
     period: "₽/мес",

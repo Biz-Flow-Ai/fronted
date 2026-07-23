@@ -682,6 +682,14 @@ function SupportSection() {
   );
 }
 
+function getPlanHref(plan) {
+  if (!plan) return "/register";
+  const code = plan.code || plan.name?.toLowerCase?.() || "";
+  const isFree = String(plan.price).replace(/[^\d]/g, "") === "0";
+  if (isFree) return "/register";
+  return `/pay?plan=${encodeURIComponent(code)}`;
+}
+
 function Pricing({ plans = [] }) {
   if (!plans.length) return null;
   return (
@@ -707,7 +715,7 @@ function Pricing({ plans = [] }) {
               <ul className="vf-price-features">
                 {(plan.features || []).slice(0, 6).map((f, j) => <li key={j}>{f}</li>)}
               </ul>
-              <a href="/register" className={`vf-price-btn${plan.primary ? " primary" : ""}`}>{plan.btn}</a>
+              <a href={getPlanHref(plan)} className={`vf-price-btn${plan.primary ? " primary" : ""}`}>{plan.btn}</a>
             </article>
           ))}
         </div>
