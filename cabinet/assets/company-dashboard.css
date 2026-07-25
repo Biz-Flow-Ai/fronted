@@ -99,6 +99,7 @@
 .bf-channel-icon--vk { background: #0077ff; color: #fff; }
 .bf-channel-icon--tg { background: #229ed9; color: #fff; }
 .bf-channel-icon--wa { background: #25d366; color: #fff; }
+.bf-channel-icon--kwork { background: #ff5b24; color: #fff; }
 
 .bf-channel-icon--max {
     background: transparent;
@@ -285,6 +286,7 @@
 .bf-dialog-channel-icon--vk { background: #0077ff; color: #fff; }
 .bf-dialog-channel-icon--tg { background: #229ed9; color: #fff; }
 .bf-dialog-channel-icon--wa { background: #25d366; color: #fff; }
+.bf-dialog-channel-icon--kwork { background: #ff5b24; color: #fff; }
 .bf-dialog-channel-icon--max {
     background: linear-gradient(135deg, #2aabee, #7c5cff, #ff4fd8);
     color: #fff;
@@ -344,6 +346,11 @@
 .bf-dialog-channel--max {
     background: rgba(124, 92, 255, 0.12);
     color: #c4b5fd;
+}
+
+.bf-dialog-channel--kwork {
+    background: rgba(255, 91, 36, 0.12);
+    color: #ff9466;
 }
 
 .bf-dialog-time {

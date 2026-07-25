@@ -153,6 +153,15 @@ html, body {
     place-items: center;
 }
 
+.bf-nav-badge--new {
+    background: rgba(255, 91, 36, 0.16);
+    color: #ff8a5b;
+    font-size: 9px;
+    letter-spacing: 0.03em;
+    padding: 0 7px;
+    min-width: 0;
+}
+
 .bf-nav-link.disabled {
     opacity: 0.45;
     pointer-events: none;
