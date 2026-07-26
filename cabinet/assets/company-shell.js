@@ -125,7 +125,7 @@ function renderSidebar(dialogBadge = "0") {
       ${link("staff", "#", "Сотрудники", "clients", "", true)}
       ${link("roles", "#", "Роли и права", "settings", "", true)}
       ${link("notify", "/company/notify", "Уведомления", "settings")}
-      ${link("payments", "#", "Платежи", "settings", "", true)}
+      ${link("payments", "/company/payments", "Платежи", "settings")}
       ${link("plans", "/company/plans", "Тарифы", "settings")}
     </nav>
 
