@@ -2018,8 +2018,12 @@ body {
 
 .final-cta-btn-primary {
   background: #f8fbff;
-  color: var(--text);
+  color: #08111e;
   box-shadow: 0 14px 34px rgba(255, 255, 255, 0.18);
+}
+
+.final-cta-btn-primary svg {
+  stroke: #08111e;
 }
 
 .final-cta-btn-secondary {
