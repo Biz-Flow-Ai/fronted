@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Документация — BizFlow</title>
+        <title>Документация — Virexo</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -20,7 +20,7 @@
             <div class="bf-main">
                 <header class="docs-header">
                     <div>
-                        <h1>Документация BizFlow</h1>
+                        <h1>Документация Virexo</h1>
                         <p>
                             База знаний по платформе: быстрый старт, ИИ-ассистент, интеграция VK
                             и решение типичных проблем.
@@ -61,7 +61,7 @@
 
                     <article class="docs-article">
                         <div class="docs-hero">
-                            <h2>Добро пожаловать в базу знаний BizFlow</h2>
+                            <h2>Добро пожаловать в базу знаний Virexo</h2>
                             <p>
                                 Здесь собраны пошаговые инструкции для настройки AI-менеджера и
                                 подключения VK. Используйте меню слева или поиск, чтобы быстро
@@ -69,7 +69,7 @@
                             </p>
                             <div class="docs-chips">
                                 <span class="docs-chip">VK Callback API</span>
-                                <span class="docs-chip">GigaChat</span>
+                                <span class="docs-chip">AI</span>
                                 <span class="docs-chip">Автонастройка</span>
                                 <span class="docs-chip">Автоответы 24/7</span>
                             </div>
@@ -78,7 +78,7 @@
                         <section class="docs-section" id="overview">
                             <h2>О платформе</h2>
                             <p class="docs-lead">
-                                BizFlow — это панель управления для бизнеса, где ИИ-ассистент
+                                Virexo — это панель управления для бизнеса, где ИИ-ассистент
                                 общается с клиентами в VK, собирает заявки и передаёт контекст
                                 менеджеру.
                             </p>
@@ -185,7 +185,7 @@
                             <h2>Интеграция VK</h2>
                             <p>
                                 Подключение сообщества выполняется в разделе
-                                <a href="/company/vk">Настройка VK</a>. BizFlow использует
+                                <a href="/company/vk">Настройка VK</a>. Virexo использует
                                 Callback API для мгновенного получения входящих сообщений.
                             </p>
 
@@ -195,7 +195,7 @@
                                 <li>Откройте ваше сообщество VK → <strong>Управление</strong>.</li>
                                 <li>Перейдите в <strong>Работа с API → Ключи доступа</strong>.</li>
                                 <li>Создайте ключ с правами: <strong>Управление сообществом</strong>, <strong>Сообщения сообщества</strong>.</li>
-                                <li>Скопируйте токен и вставьте в форму BizFlow.</li>
+                                <li>Скопируйте токен и вставьте в форму Virexo.</li>
                             </ol>
                             <div class="docs-callout docs-callout--warn">
                                 <strong>Безопасность</strong>
@@ -211,7 +211,7 @@
 
                             <h3 id="vk-callback">Callback API</h3>
                             <p>
-                                Callback API позволяет VK отправлять новые сообщения в BizFlow.
+                                Callback API позволяет VK отправлять новые сообщения в Virexo.
                                 Адрес сервера и ключи генерируются автоматически — вам нужно только
                                 скопировать их в настройки сообщества.
                             </p>
@@ -219,7 +219,7 @@
                                 <div class="docs-step">
                                     <div class="docs-step-num">1</div>
                                     <div>
-                                        <h4>Подключите сообщество в BizFlow</h4>
+                                        <h4>Подключите сообщество в Virexo</h4>
                                         <p>Заполните форму и нажмите «Подключить сообщество». Система сгенерирует Secret Key и Confirmation token.</p>
                                     </div>
                                 </div>
@@ -240,7 +240,7 @@
                                 <div class="docs-step">
                                     <div class="docs-step-num">4</div>
                                     <div>
-                                        <h4>Нажмите «Настроить Callback API» в BizFlow</h4>
+                                        <h4>Нажмите «Настроить Callback API» в Virexo</h4>
                                         <p>Или выполните настройку вручную в панели VK — оба способа рабочие.</p>
                                     </div>
                                 </div>
@@ -250,7 +250,7 @@
                             <div class="docs-code"><code id="dynamicCallbackExample">https://ваш-адрес.bizflow.ru/api/vkbot/webhook</code></div>
                             <div class="docs-callout docs-callout--info">
                                 <strong>Не нужно ничего настраивать вручную на сервере</strong>
-                                BizFlow уже развёрнут и принимает webhook. Просто вставьте Callback URL из кабинета в настройки VK.
+                                Virexo уже развёрнут и принимает webhook. Просто вставьте Callback URL из кабинета в настройки VK.
                             </div>
 
                             <div class="docs-table-wrap">
@@ -265,23 +265,23 @@
                                     <tbody>
                                         <tr>
                                             <td>Callback URL</td>
-                                            <td>BizFlow → Управление</td>
+                                            <td>Virexo → Управление</td>
                                             <td>VK → Callback API → Адрес</td>
                                         </tr>
                                         <tr>
                                             <td>Confirmation token</td>
-                                            <td>BizFlow → Управление</td>
+                                            <td>Virexo → Управление</td>
                                             <td>VK → Строка подтверждения</td>
                                         </tr>
                                         <tr>
                                             <td>Secret Key</td>
-                                            <td>BizFlow → Управление</td>
+                                            <td>Virexo → Управление</td>
                                             <td>VK → Секретный ключ</td>
                                         </tr>
                                         <tr>
                                             <td>Access Token</td>
                                             <td>VK → Ключи доступа</td>
-                                            <td>BizFlow → форма подключения</td>
+                                            <td>Virexo → форма подключения</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -298,7 +298,7 @@
                             <ul>
                                 <li>корректность ID сообщества и токена;</li>
                                 <li>наличие Callback URL и confirmation token;</li>
-                                <li>совпадение данных в VK и в BizFlow;</li>
+                                <li>совпадение данных в VK и в Virexo;</li>
                                 <li>доступность API VK.</li>
                             </ul>
                             <div class="docs-callout docs-callout--tip">
@@ -310,7 +310,7 @@
                         <section class="docs-section" id="dialogs">
                             <h2>Диалоги и заявки</h2>
                             <p>
-                                Когда клиент пишет в VK, BizFlow создаёт диалог и карточку клиента.
+                                Когда клиент пишет в VK, Virexo создаёт диалог и карточку клиента.
                                 ИИ ведёт разговор, уточняет детали и формирует заявку.
                             </p>
                             <ul>
@@ -393,3 +393,5 @@
         <script src="/assets/company-docs.js?v=2"></script>
     </body>
 </html>
+
+

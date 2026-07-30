@@ -44,7 +44,7 @@ const sections = {
     element: document.querySelector("#serviceStatusSection"),
   },
   "giga-chat": {
-    title: "GigaChat",
+    title: "AI",
     element: document.querySelector("#gigaChatSection"),
   },
   "test-vk-bot": {
@@ -558,15 +558,15 @@ async function loadGigaChatConfig() {
         <div class="setup-wizard">
             <div class="setup-steps">
                 <div class="setup-step done"><span>1</span><p>Получить Authorization key</p></div>
-                <div class="setup-step ${config.authKeyConfigured ? "done" : "active"}"><span>2</span><p>Сохранить в BizFlow</p></div>
+                <div class="setup-step ${config.authKeyConfigured ? "done" : "active"}"><span>2</span><p>Сохранить в Virexo</p></div>
                 <div class="setup-step"><span>3</span><p>Проверить API</p></div>
                 <div class="setup-step"><span>4</span><p>Бот VK отвечает через ИИ</p></div>
             </div>
         </div>
 
         <div class="report-item ${statusClass}" style="margin-bottom:18px">
-            <strong>${config.authKeyConfigured ? "✅" : "⚠️"} Статус GigaChat: ${statusLabel}</strong>
-            <p>${config.authKeyConfigured ? "Ключ сохранён. Проверьте соединение кнопкой ниже." : "Вставьте Authorization key из личного кабинета GigaChat."}</p>
+            <strong>${config.authKeyConfigured ? "✅" : "⚠️"} Статус AI: ${statusLabel}</strong>
+            <p>${config.authKeyConfigured ? "Ключ сохранён. Проверьте соединение кнопкой ниже." : "Вставьте Authorization key из личного кабинета AI-провайдера."}</p>
         </div>
 
         <div class="detail-grid">
@@ -581,12 +581,12 @@ async function loadGigaChatConfig() {
         <form id="gigaChatForm" class="settings-form" style="margin-top:20px">
             <label>
                 <span>Authorization key</span>
-                <input id="gigaChatAuthKey" type="password" placeholder="Вставьте ключ из кабинета GigaChat" />
+                <input id="gigaChatAuthKey" type="password" placeholder="Вставьте ключ AI-провайдера" />
                 <small>Ключ передаётся в заголовке Authorization: Basic при запросе Access token.</small>
             </label>
             <div class="form-actions">
                 <button class="primary-button" type="submit">Сохранить ключ</button>
-                <button class="ghost-button" type="button" id="testGigaChatButton">Проверить GigaChat</button>
+                <button class="ghost-button" type="button" id="testGigaChatButton">Проверить AI</button>
             </div>
             <p id="gigaChatMessage" class="form-message" role="status"></p>
         </form>
@@ -625,12 +625,12 @@ async function saveGigaChatConfig(event) {
   }
 
   try {
-    message.textContent = "Сохраняем ключ GigaChat...";
+    message.textContent = "Сохраняем AI-ключ...";
     message.className = "form-message";
     await apiPost("/api/superadmin/giga-chat/config", {
       authorizationKey: key,
     });
-    message.textContent = "Ключ сохранён. Нажмите «Проверить GigaChat».";
+    message.textContent = "Ключ сохранён. Нажмите «Проверить AI».";
     message.className = "form-message success";
     await loadGigaChatConfig();
   } catch (error) {
@@ -643,23 +643,23 @@ async function testGigaChatConnection() {
   const message = document.querySelector("#gigaChatMessage");
   const report = document.querySelector("#gigaChatTestReport");
   try {
-    message.textContent = "Проверяем GigaChat API...";
+    message.textContent = "Проверяем AI API...";
     message.className = "form-message";
     const result = await apiPost("/api/superadmin/giga-chat/test");
-    message.textContent = result.message || "GigaChat работает.";
+    message.textContent = result.message || "AI работает.";
     message.className = "form-message success";
     report.hidden = false;
     report.classList.add("detail-card--visible");
     report.innerHTML = `
             <div class="report-header">
-                <h3>Тестовый ответ GigaChat</h3>
+                <h3>Тестовый ответ AI</h3>
                 <span class="badge">OK</span>
             </div>
             <p>${escapeHtml(result.sampleResponse || "Ответ получен.")}</p>
         `;
   } catch (error) {
     message.textContent =
-      error.message || "GigaChat не отвечает. Проверьте Authorization key.";
+      error.message || "AI не отвечает. Проверьте Authorization key.";
     message.className = "form-message error";
   }
 }
@@ -851,3 +851,4 @@ function logout() {
   localStorage.removeItem("bizflow_company");
   window.location.href = "/auth?key=admin";
 }
+

@@ -60,7 +60,7 @@
       return data;
     } catch (error) {
       if (error.name === "AbortError") {
-        throw new Error("Сервер не отвечает. Проверьте, что BizFlow запущен на порту 5000.");
+        throw new Error("Сервер не отвечает. Проверьте, что Virexo запущен на порту 5000.");
       }
       throw error;
     } finally {

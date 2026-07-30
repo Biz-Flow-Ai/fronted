@@ -1,455 +1,787 @@
-const { useEffect, useRef, useState } = React;
+const { useState, useEffect, useRef } = React;
 
-function VkIcon({ size = 20 }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect width="24" height="24" rx="5.5" fill="#0077FF" />
-      <path
-        fill="#FFFFFF"
-        d="M12.785 16.241s.288-.032.436-.194c.136-.148.132-.427.132-.427s-.02-1.304.587-1.496c.598-.188 1.366 1.258 2.183 1.814.615.422 1.082.33 1.082.33l2.177-.03s1.138-.071.598-.967c-.044-.073-.314-.66-1.618-1.865-1.366-1.258-1.183-.105.462-3.218.998-1.678 1.397-2.7 1.272-3.14-.118-.412-.84-.303-.84-.303l-2.453.015s-.182-.025-.316.056-.522.43-.522.43-.937 2.504-2.183 4.63c-.415.707-.582.937-.804.937-.165 0-.165-.272-.165-.992V9.97c0-.84.025-1.19-.165-1.28-.165-.09-.57-.06-.735-.04-.15.015-.26.105-.26.21 0 .22.015.875.015 1.275 0 .39-.015 1.005-.015 1.005s-.015.39-.165.6c-.165.225-.48.24-.48.24h-1.08s-1.62.1-3.6-1.875C5.4 7.5 3.9 4.2 3.9 4.2s-.12-.3.015-.465c.12-.15.36-.195.36-.195h2.28s.165-.022.285.075c.105.09.165.285.165.285s.3.795.705 1.515c.855 1.635 1.2 1.725 1.335 1.62.33-.24.247-.975.247-1.5 0-.81-.12-1.155-.247-1.335-.195-.27-.555-.36-.735-.39-.165-.03.105-.075.45-.075.855 0 1.485.015 1.755.105.555.195.96.63.96.63s.51.675.51 1.65v2.475c0 .375.075.45.165.45.165 0 .45-.075.975-.75 1.335-1.755 2.295-4.455 2.295-4.455s.12-.285.33-.42c.255-.165.615-.12.615-.12l2.4-.015s.72-.045.855.33c.12.345-.285 1.245-1.335 2.7-.21.285-.375.525-.375.675 0 .165.12.315.375.615.855 1.005 1.935 2.16 2.145 2.895.21.72-.15 1.08-.15 1.08z"
-      />
+const Icons = {
+  Check: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <polyline points="20 6 9 17 4 12" />
     </svg>
-  );
-}
+  ),
+  ArrowRight: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+    </svg>
+  ),
+  Sparkles: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M19 14l.9 2.7L22 18l-2.1.9L19 22l-.9-3.1L16 18l2.1-1.3z"/><path d="M5 14l.7 2.3L8 17l-2.3.7L5 20l-.7-2.3L2 17l2.3-.7z"/>
+    </svg>
+  ),
+  Brain: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04z"/>
+    </svg>
+  ),
+  MessageCircle: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+    </svg>
+  ),
+  Users: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+    </svg>
+  ),
+  Chart: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+    </svg>
+  ),
+  Calendar: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+    </svg>
+  ),
+  Zap: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+    </svg>
+  ),
+  Shield: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    </svg>
+  ),
+  Lock: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    </svg>
+  ),
+  Eye: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+    </svg>
+  ),
+  Key: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+    </svg>
+  ),
+  Quote: (p) => (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
+      <path d="M7.17 17A5.17 5.17 0 0 1 2 11.83V9a7 7 0 0 1 7-7h1v4h-1a3 3 0 0 0-3 3v1h3a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-1v3h1.17zm10 0A5.17 5.17 0 0 1 12 11.83V9a7 7 0 0 1 7-7h1v4h-1a3 3 0 0 0-3 3v1h3a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-1v3h1.17z"/>
+    </svg>
+  ),
+  Send: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+    </svg>
+  ),
+  Plug: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0V8zM12 18v4"/>
+    </svg>
+  ),
+  Inbox: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>
+    </svg>
+  ),
+  VK: (p) => (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
+      <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.862-.523-2.049-1.721-1.033-1-1.479-1.137-1.743-1.137-.357 0-.459.102-.459.593v1.565c0 .424-.135.678-1.253.678-1.845 0-3.896-1.118-5.339-3.202C4.624 10.857 4 8.482 4 7.992c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.677.863 2.49 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.152.135-.305.339-.305h2.744c.287 0 .389.153.389.643v2.727c0 .372.17.508.271.508.221 0 .458-.17 1.001-.747 1.523-1.948 2.489-3.981 2.489-3.981.12-.22.27-.44.711-.44h1.744c.543 0 .66.27.542.66-.254.813-2.098 3.624-2.098 3.624-.186.304-.254.44 0 .78.254.338 1.085 1.22 1.66 2.065.863 1.253 1.523 2.167 1.523 2.578 0 .255-.204.509-.712.509z"/>
+    </svg>
+  ),
+  Telegram: (p) => (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
+      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+    </svg>
+  ),
+  WhatsApp: (p) => (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  ),
+  Mail: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+    </svg>
+  ),
+  Globe: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+    </svg>
+  ),
+  Hash: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/>
+    </svg>
+  ),
+  Layers: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
+    </svg>
+  ),
+  Clock: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+    </svg>
+  ),
+  Play: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <polygon points="5 3 19 12 5 21 5 3"/>
+    </svg>
+  ),
+};
 
-function LogoStrip({ logos, stripKey = "a", hidden = false }) {
-  return (
-    <div className="logos" aria-hidden={hidden ? "true" : undefined}>
-      {logos.map((logo, i) => (
-        <div className="logo-item" key={`${stripKey}-${logo.name}-${i}`}>
-          <img loading="lazy" src={logo.src} alt={logo.name} width="48" height="48" />
-        </div>
-      ))}
-    </div>
-  );
-}
+const channelLogos = [
+  { name: "ВКонтакте", src: "/images/integrations/vk.svg" },
+  { name: "Telegram", src: "/images/integrations/telegram.svg" },
+  { name: "WhatsApp", src: "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" },
+  { name: "Email", imgType: "icon" },
+  { name: "Сайт", imgType: "site" },
+  { name: "MAX", src: "/images/integrations/max.svg" },
+  { name: "Авито", src: "/images/integrations/avito.jpg" },
+  { name: "Wildberries", src: "/images/integrations/wildberries.svg" },
+  { name: "Я.Маркет", src: "/images/integrations/yandex-market.svg" },
+  { name: "Одноклассники", src: "/images/integrations/ok.svg" },
+  { name: "HH", src: "/images/integrations/hh.svg" },
+  { name: "Alfa CRM", src: "/images/integrations/alfa-crm.svg" },
+];
 
-function LogoCarousel({ logos, direction = "left", speed = 0.55 }) {
-  const trackRef = useRef(null);
-  const offsetRef = useRef(direction === "right" ? null : 0);
-  const stripWidthRef = useRef(0);
+const duplicateForMarquee = (arr) => [...arr, ...arr];
 
+function useReveal() {
+  const ref = useRef(null);
   useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    const items = el.querySelectorAll(".reveal");
+    items.forEach((i) => io.observe(i));
+    return () => io.disconnect();
+  }, []);
+  return ref;
+}
 
-    const measure = () => {
-      const firstStrip = track.querySelector(".logos");
-      stripWidthRef.current = firstStrip ? firstStrip.offsetWidth : 0;
-      if (direction === "right" && offsetRef.current === null) {
-        offsetRef.current = -stripWidthRef.current;
-      }
-    };
-
-    measure();
-    window.addEventListener("resize", measure);
-
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      track.style.transform = "translate3d(0, 0, 0)";
-      return () => window.removeEventListener("resize", measure);
-    }
-
-    let rafId = 0;
-    let last = performance.now();
-    const sign = direction === "left" ? -1 : 1;
-
-    const tick = (now) => {
-      const dt = Math.min(now - last, 32);
-      last = now;
-      const stripW = stripWidthRef.current;
-      if (stripW > 0) {
-        if (offsetRef.current === null) offsetRef.current = direction === "right" ? -stripW : 0;
-        offsetRef.current += sign * speed * (dt / 16);
-        while (offsetRef.current <= -stripW) offsetRef.current += stripW;
-        while (offsetRef.current > 0) offsetRef.current -= stripW;
-        track.style.transform = `translate3d(${offsetRef.current}px, 0, 0)`;
-      }
-      rafId = requestAnimationFrame(tick);
-    };
-
-    rafId = requestAnimationFrame(tick);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      window.removeEventListener("resize", measure);
-    };
-  }, [direction, speed, logos]);
-
+function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   return (
-    <div className="logo-carousel" data-direction={direction}>
-      <div className="logos-track" ref={trackRef}>
-        <LogoStrip logos={logos} stripKey="1" />
-        <LogoStrip logos={logos} stripKey="2" />
-        <LogoStrip logos={logos} stripKey="3" hidden />
-      </div>
+    <div className={`nav-shell ${scrolled ? "scrolled" : ""}`}>
+      <nav className="nav">
+        <a href="#" className="nav-logo">
+          <span className="nav-logo-mark">B</span>
+          Biz<span>Flow</span>
+        </a>
+        <div className="nav-pill">
+          <div className="nav-links">
+            <a href="#channels">Каналы</a>
+            <a href="#features">Возможности</a>
+            <a href="#ai">ИИ-ассистент</a>
+            <a href="#how">Как работает</a>
+            <a href="#pricing">Тарифы</a>
+          </div>
+        </div>
+        <div className="nav-buttons">
+          <a href="/login" className="nav-cta">Войти</a>
+          <a href="#pricing" className="nav-cta nav-cta-primary">Начать бесплатно</a>
+        </div>
+      </nav>
     </div>
   );
 }
 
-function ChannelMarquee() {
-  const logos = Array.isArray(window.channelLogos) ? window.channelLogos : [];
-  if (!logos.length) return null;
-
+function Hero() {
   return (
-    <section className="vf-channels" id="channels" aria-labelledby="vf-channels-title">
-      <div className="vf-channels-head reveal">
-        <h2 className="vf-channels-title" id="vf-channels-title">API на любой канал</h2>
-        <p className="vf-channels-lead">
-          Ведите переписку там, где клиент — VK, Telegram, MAX, сайт, CRM и маркетплейсы.
-        </p>
+    <section className="landing-hero">
+      <div className="hero-grid-bg" />
+      <div className="landing-shell hero-shell">
+        <div className="hero-copy reveal">
+          <div className="hero-announcement">
+            <span className="hero-announcement-dot" />
+            Ранний доступ уже открыт для первых 100 компаний
+          </div>
+          <h1 className="hero-title">
+            <span className="hero-title-line">Все каналы общения</span>
+            <span className="hero-title-line">с клиентами —</span>
+            <span className="hero-title-line hero-title-gradient">в одном окне</span>
+          </h1>
+          <p className="hero-lead">
+            Единая платформа для управления сообщениями из VK, Telegram, WhatsApp, сайта и почты. AI-ассистент отвечает 24/7, автоматизирует рутину и помогает превращать обращения в сделки.
+          </p>
+          <div className="hero-actions">
+            <a href="#pricing" className="hero-btn hero-btn-primary">
+              Начать бесплатно
+              <span className="hero-btn-arrow"><Icons.ArrowRight width="18" height="18" /></span>
+            </a>
+            <a href="#how" className="hero-btn hero-btn-secondary">
+              <Icons.Play width="16" height="16" />
+              Посмотреть как работает
+            </a>
+          </div>
+          <div className="hero-trust">
+            <div className="hero-trust-item">
+              <div className="hero-trust-icon">
+                <Icons.Clock width="18" height="18" />
+              </div>
+              <div className="hero-trust-copy">
+                <strong>Ответ за 30 секунд</strong>
+                <span>Круглосуточно, без выходных</span>
+              </div>
+            </div>
+            <div className="hero-trust-item">
+              <div className="hero-trust-icon" style={{ background: "var(--secondary-soft)", color: "var(--secondary-hover)" }}>
+                <Icons.Zap width="18" height="18" />
+              </div>
+              <div className="hero-trust-copy">
+                <strong>Подключение за 15 минут</strong>
+                <span>Без программистов и кода</span>
+              </div>
+            </div>
+            <div className="hero-trust-item">
+              <div className="hero-trust-icon" style={{ background: "rgba(139, 92, 246, 0.12)", color: "#7c3aed" }}>
+                <Icons.Brain width="18" height="18" />
+              </div>
+              <div className="hero-trust-copy">
+                <strong>ИИ на GigaChat</strong>
+                <span>Знает ваш бизнес из коробки</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="hero-visual reveal reveal-delay-2">
+          <div className="hero-visual-float">
+            <div className="hero-dashboard">
+              <div className="hero-dashboard-header">
+                <div className="hero-dash-dots"><span/><span/><span/></div>
+                <div className="hero-dash-title">Центр диалогов · BizFlow</div>
+                <div className="hero-dash-pill">В сети</div>
+              </div>
+              <div className="hero-dashboard-body">
+                <div className="hero-chat-list">
+                  <div className="hero-chat-item active">
+                    <div className="hero-chat-avatar vk">АП</div>
+                    <div className="hero-chat-copy">
+                      <strong>Анна Петрова</strong>
+                      <span>Добрый день! Скажите, сколько стоит доставка?</span>
+                    </div>
+                    <div className="hero-chat-meta">
+                      <time>14:32</time>
+                      <span className="hero-chat-badge">2</span>
+                    </div>
+                  </div>
+                  <div className="hero-chat-item">
+                    <div className="hero-chat-avatar tg">ИС</div>
+                    <div className="hero-chat-copy">
+                      <strong>Иван Смирнов</strong>
+                      <span>Хочу записаться на консультацию</span>
+                    </div>
+                    <div className="hero-chat-meta"><time>14:28</time></div>
+                  </div>
+                  <div className="hero-chat-item">
+                    <div className="hero-chat-avatar wa">ЕК</div>
+                    <div className="hero-chat-copy">
+                      <strong>Елена К.</strong>
+                      <span>ИИ: Здравствуйте! У нас есть 3 тарифа...</span>
+                    </div>
+                    <div className="hero-chat-meta"><time>14:21</time></div>
+                  </div>
+                  <div className="hero-chat-item">
+                    <div className="hero-chat-avatar site">МС</div>
+                    <div className="hero-chat-copy">
+                      <strong>Михаил (сайт)</strong>
+                      <span>Подскажите по поводу акции</span>
+                    </div>
+                    <div className="hero-chat-meta"><time>13:59</time></div>
+                  </div>
+                </div>
+                <div className="hero-stats-col">
+                  <div className="hero-mini-stat">
+                    <div className="hero-mini-stat-label">Диалоги</div>
+                    <div className="hero-mini-stat-value">128</div>
+                    <div className="hero-mini-stat-unit">за сегодня</div>
+                  </div>
+                  <div className="hero-mini-stat">
+                    <div className="hero-mini-stat-label">Заявок</div>
+                    <div className="hero-mini-stat-value">34</div>
+                    <div className="hero-mini-stat-unit">новых лидов</div>
+                  </div>
+                  <div className="hero-mini-stat">
+                    <div className="hero-mini-stat-label">Ответы ИИ</div>
+                    <div className="hero-mini-stat-value">86%</div>
+                    <div className="hero-mini-stat-unit">автоматически</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="hero-floating-tag ai">
+              <Icons.Sparkles width="16" height="16" style={{ color: "#8b5cf6" }} />
+              ИИ отвечает за вас
+            </div>
+            <div className="hero-floating-tag channels">
+              <Icons.MessageCircle width="16" height="16" style={{ color: "var(--primary)" }} />
+              6+ каналов связи
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="logos-section reveal">
-        <LogoCarousel logos={logos} direction="left" speed={0.52} />
-        <LogoCarousel logos={logos} direction="right" speed={0.48} />
-      </div>
-      <p className="vf-channels-note reveal">VK — уже работает · Telegram и MAX — в roadmap · API и сайт — Premium</p>
     </section>
   );
 }
 
-function Nav() {
-  const auth = window.BizFlowAuth;
-  const user = auth?.getUser?.();
-  const loggedIn = Boolean(auth?.getToken?.() && user);
-
+function StatsBand() {
+  const stats = [
+    { value: "200+", suffix: " тыс", label: "бизнесов подключено" },
+    { value: "14", suffix: " млн", label: "диалогов обработано" },
+    { value: "86", suffix: "%", label: "ответов ИИ-ассистентом" },
+    { value: "15", suffix: " мин", label: "на подключение" },
+  ];
   return (
-    <header className="nav-shell">
-      <nav className="nav" aria-label="Главная навигация">
-        <a href="/" className="nav-logo">
-          BizFlow <span>AI</span>
-        </a>
+    <section className="stats-section">
+      <div className="landing-shell">
+        <div className="stats-grid">
+          {stats.map((s, i) => (
+            <div key={i} className={`stat-card reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+              <strong>{s.value}<small>{s.suffix}</small></strong>
+              <span>{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
-        <div className="nav-pill">
-          <div className="nav-links">
-            <a href="/#channels">Каналы</a>
-            <a href="/#pipeline">Воронка</a>
-            <a href="/#features">Возможности</a>
-            <a href="/#integrations">Интеграции</a>
-            <a href="/#products">Продукты</a>
-            <a href="/#pricing">Тарифы</a>
+function LogoMarquee() {
+  const logos = duplicateForMarquee(channelLogos);
+  return (
+    <section className="logo-section">
+      <div className="landing-shell">
+        <div className="logo-section-label reveal">Интеграции с популярными сервисами</div>
+        <div className="logo-marquee reveal reveal-delay-1">
+          <div className="logo-track">
+            {logos.map((l, i) => (
+              <div key={i} className="logo-chip">
+                {l.imgType === "icon" && <Icons.Mail width="22" height="22" style={{ color: "var(--accent-amber)" }} />}
+                {l.imgType === "site" && <Icons.Globe width="22" height="22" style={{ color: "var(--accent-violet)" }} />}
+                {l.src && <img src={l.src} alt={l.name} onError={(e) => { e.currentTarget.style.display = "none"; }} />}
+                <span>{l.name}</span>
+              </div>
+            ))}
           </div>
         </div>
-
-        <div className="nav-buttons">
-          {loggedIn ? (
-            <a href="/company" className="nav-cta nav-cta-registr">Кабинет</a>
-          ) : (
-            <>
-              <a href="/login" className="nav-cta">Войти</a>
-              <a href="/register" className="nav-cta nav-cta-registr">Регистрация</a>
-            </>
-          )}
-        </div>
-      </nav>
-    </header>
-  );
-}
-
-const HERO_STACK = [
-  {
-    id: "dialogs",
-    label: "Диалоги",
-    hint: "Все сообщения из VK — в одном кабинете",
-    panelTitle: "Единая лента переписки",
-    panelDesc: "Входящие из VK-сообщества попадают в BizFlow. История, контекст и статусы — без переключения между вкладками и мессенджерами.",
-    panelBullets: ["Все чаты в одном окне", "Полная история по клиенту", "Работает круглосуточно"],
-  },
-  {
-    id: "leads",
-    label: "Заявки",
-    hint: "Структурированная заявка с контекстом диалога",
-    panelTitle: "Заявка из диалога",
-    panelDesc: "AI собирает имя, телефон, услугу и пожелания — менеджер получает готовую карточку с полным контекстом переписки.",
-    panelBullets: ["Автосбор контактов", "Контекст всего разговора", "Уведомление в кабинет"],
-  },
-  {
-    id: "manager",
-    label: "Менеджер",
-    hint: "Квалификация лидов и ответы на вопросы",
-    panelTitle: "ИИ-менеджер продаж",
-    panelDesc: "Выявляет потребности, отвечает на вопросы о ценах и услугах, доводит диалог до заявки — как лучший менеджер первой линии.",
-    panelBullets: ["Квалификация лидов", "Ответы из базы знаний", "Доведение до сделки"],
-  },
-  {
-    id: "consult",
-    label: "Консультант",
-    hint: "Экспертные ответы из базы знаний",
-    panelTitle: "ИИ-консультант",
-    panelDesc: "Спокойно и подробно консультирует по услугам, условиям и FAQ. Знает ваш бизнес — отвечает уверенно и по делу.",
-    panelBullets: ["Экспертный тон", "Ответы из документов", "Без шаблонных фраз"],
-  },
-  {
-    id: "booking",
-    label: "Запись",
-    hint: "Бронь и подтверждение без администратора",
-    panelTitle: "Запись на услугу",
-    panelDesc: "Уточняет услугу, удобное время и телефон, подтверждает запись прямо в VK — администратор не отвлекается на рутину.",
-    panelBullets: ["Сбор даты и времени", "Подтверждение в чате", "Напоминание клиенту"],
-  },
-];
-
-function StackDetailPanel({ item, className = "" }) {
-  if (!item) return null;
-  return (
-    <article className={`vf-stack-panel${className ? ` ${className}` : ""}`} aria-live="polite">
-      <div className="vf-stack-panel-glow" aria-hidden="true" />
-      <div className="vf-stack-panel-inner">
-        <div className="vf-stack-panel-head">
-          <span className="vf-stack-panel-kicker">Этап воронки</span>
-          <h3 className="vf-stack-panel-title">{item.panelTitle}</h3>
-        </div>
-        <p className="vf-stack-panel-desc">{item.panelDesc}</p>
-        <ul className="vf-stack-panel-list">
-          {(item.panelBullets || []).map((b) => (
-            <li key={b}><CheckIcon />{b}</li>
-          ))}
-        </ul>
       </div>
-    </article>
+    </section>
   );
 }
 
-function CheckIcon() {
+function ChannelsSection() {
+  const channels = [
+    {
+      cls: "vk", Icon: Icons.VK, title: "ВКонтакте",
+      desc: "Отвечайте на сообщения из ВК прямо в BizFlow. ИИ ответит даже в нерабочее время.",
+      list: ["История всех переписок", "Голосовые и текстовые", "Шаблоны и быстрые ответы", "Маршрутизация по менеджерам"]
+    },
+    {
+      cls: "tg", Icon: Icons.Telegram, title: "Telegram",
+      desc: "Храните всю переписку в безопасном месте. Ни одного потерянного обращения.",
+      list: ["Каналы и боты", "Защита данных клиентов", "Назначение ответственных", "Уведомления в реальном времени"]
+    },
+    {
+      cls: "wa", Icon: Icons.WhatsApp, title: "WhatsApp",
+      desc: "Запускайте рассылки и общайтесь с клиентами через официальный Business API.",
+      list: ["Единый аккаунт для команды", "Без риска блокировок", "Массовые рассылки", "Шаблоны сообщений"]
+    },
+    {
+      cls: "site", Icon: Icons.Globe, title: "Чат на сайте",
+      desc: "Приглашайте посетителей в диалог и отвечайте на вопросы, пока они на сайте.",
+      list: ["Умные приглашения", "Сбор контактов", "Оффлайн-сообщения", "Адаптивный виджет"]
+    },
+    {
+      cls: "email", Icon: Icons.Mail, title: "Электронная почта",
+      desc: "Обрабатывайте письма в том же интерфейсе, что и мессенджеры — без переключений.",
+      list: ["Любые почтовые ящики", "Автораспределение", "Теги и папки", "Отслеживание статуса"]
+    },
+    {
+      cls: "max", Icon: Icons.Hash, title: "MAX и другие",
+      desc: "Поддержка российских и международных мессенджеров — подключайте, что нужно.",
+      list: ["MAX Messenger", "Одноклассники", "Авито и маркетплейсы", "REST API для своих"]
+    },
+  ];
   return (
-    <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 8.5 6.5 12 13 4" />
-    </svg>
-  );
-}
-
-function AnimatedFestStack({ items, interval = 2600, ariaLabel, activeIndex, onActiveChange, interactive = false, autoPlay = false, hoverSelect = false }) {
-  const [internalActive, setInternalActive] = useState(0);
-  const isControlled = activeIndex !== undefined;
-  const active = isControlled ? activeIndex : internalActive;
-
-  const setActive = React.useCallback((next) => {
-    if (isControlled) {
-      const value = typeof next === "function" ? next(activeIndex) : next;
-      onActiveChange?.(value);
-    } else {
-      setInternalActive(next);
-    }
-  }, [isControlled, onActiveChange, activeIndex]);
-
-  const rowRefs = useRef([]);
-  const stackRef = useRef(null);
-  const [highlight, setHighlight] = useState({ top: 0, left: 0, height: 0, width: 0 });
-
-  const measure = React.useCallback(() => {
-    const row = rowRefs.current[active];
-    const stack = stackRef.current;
-    if (!row || !stack) return;
-    const word = row.querySelector(".vf-fest-word");
-    if (!word) return;
-    const stackRect = stack.getBoundingClientRect();
-    const wordRect = word.getBoundingClientRect();
-    setHighlight({
-      top: wordRect.top - stackRect.top,
-      left: wordRect.left - stackRect.left,
-      height: wordRect.height,
-      width: wordRect.width,
-    });
-  }, [active]);
-
-  useEffect(() => {
-    measure();
-    const raf = requestAnimationFrame(measure);
-    window.addEventListener("resize", measure);
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", measure);
-    };
-  }, [measure]);
-
-  useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!autoPlay || reduced || items.length < 2) return;
-    const id = setInterval(() => {
-      setActive((i) => (i + 1) % items.length);
-    }, interval);
-    return () => clearInterval(id);
-  }, [items.length, interval, setActive, autoPlay]);
-
-  return (
-    <div className={`vf-fest-stack${interactive ? " is-interactive" : ""}${hoverSelect ? " is-hover" : ""}`} ref={stackRef} aria-label={ariaLabel}>
-      <div
-        className="vf-fest-highlight"
-        style={{
-          transform: `translate(${highlight.left}px, ${highlight.top}px)`,
-          height: highlight.height || undefined,
-          width: highlight.width || undefined,
-        }}
-        aria-hidden="true"
-      />
-      <ul className="vf-fest-list">
-        {items.map((item, i) => (
-          <li
-            key={item.id}
-            ref={(el) => { rowRefs.current[i] = el; }}
-            className={`vf-fest-row${i === active ? " is-active" : ""}`}
-          >
-            {interactive ? (
-              <div
-                className="vf-fest-btn"
-                role="button"
-                tabIndex={0}
-                aria-pressed={i === active}
-                onMouseEnter={() => hoverSelect && setActive(i)}
-                onFocus={() => setActive(i)}
-                onClick={() => setActive(i)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setActive(i);
-                  }
-                }}
-              >
-                <span className="vf-fest-num">{String(i + 1).padStart(2, "0")}</span>
-                <span className="vf-fest-word">{item.label}</span>
-                <span className="vf-fest-arrow"><ArrowIcon /></span>
+    <section id="channels" className="landing-section channels-section">
+      <div className="landing-shell">
+        <div className="section-heading section-heading-center reveal">
+          <div className="section-kicker"><Icons.MessageCircle width="14" height="14" /> Каналы связи</div>
+          <h2>Общайтесь с клиентами <em>там, где им удобно</em></h2>
+          <p>Все входящие сообщения из VK, Telegram, WhatsApp, сайта и почты стекаются в единый центр. Не теряйте заявки, переключаясь между вкладками.</p>
+        </div>
+        <div className="channels-grid">
+          {channels.map((c, i) => (
+            <div key={c.title} className={`channel-card ${c.cls} reveal reveal-delay-${(i % 6) + 1}`}>
+              <div className="channel-card-icon">
+                <c.Icon />
               </div>
-            ) : (
-              <>
-                <span className="vf-fest-num">{String(i + 1).padStart(2, "0")}</span>
-                <span className="vf-fest-word">{item.label}</span>
-                <span className="vf-fest-arrow"><ArrowIcon /></span>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
+              <h3>{c.title}</h3>
+              <p>{c.desc}</p>
+              <ul>
+                {c.list.map((item) => (
+                  <li key={item}><Icons.Check width="16" height="16" />{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
-function useScrollReveal() {
-  useEffect(() => {
-    const els = document.querySelectorAll(".reveal");
-    if (!els.length) return;
-
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      els.forEach((el) => el.classList.add("visible"));
-      return;
-    }
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -32px 0px" }
-    );
-
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, []);
-}
-
-function ArrowIcon() {
+function FeaturesSection() {
+  const features = [
+    { Icon: Icons.MessageCircle, title: "Сотни диалогов одновременно", desc: "ИИ-ассистент параллельно ведёт переписку во всех каналах — клиенты не ждут в очереди." },
+    { Icon: Icons.Plug, title: "Подключение без кода", desc: "VK, Telegram, MAX, сайт и CRM подключаются из кабинета за 15 минут без разработчика." },
+    { Icon: Icons.Users, title: "Встроенная CRM", desc: "Карточки клиентов, статусы, телефоны и история переписки — без Excel и внешних сервисов." },
+    { Icon: Icons.Brain, title: "ИИ знает ваш бизнес", desc: "Загрузите услуги, цены и документы — ИИ отвечает как лучший менеджер по продажам." },
+    { Icon: Icons.Calendar, title: "Запись на консультации", desc: "Уточняет удобное время, собирает телефон и автоматически подтверждает встречу." },
+    { Icon: Icons.Inbox, title: "Сбор заявок 24/7", desc: "Формирует структурированную заявку из диалога и отправляет менеджеру в любой канал." },
+  ];
   return (
-    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M7 17 17 7M17 7H9M17 7v8" />
-    </svg>
+    <section id="features" className="landing-section">
+      <div className="landing-shell">
+        <div className="section-heading section-heading-center reveal">
+          <div className="section-kicker"><Icons.Layers width="14" height="14" /> Возможности</div>
+          <h2>Всё, что нужно для <em>продаж и поддержки</em></h2>
+          <p>Комплекс инструментов, который заменяет десятки разрозненных сервисов и помогает команде работать эффективнее.</p>
+        </div>
+        <div className="features-grid">
+          {features.map((f, i) => (
+            <div key={f.title} className={`feature-card reveal reveal-delay-${(i % 6) + 1}`}>
+              <div className="feature-icon"><f.Icon /></div>
+              <h3>{f.title}</h3>
+              <p>{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
-function FeatureIcon({ name }) {
-  const props = { viewBox: "0 0 24 24", width: 22, height: 22, fill: "none", stroke: "currentColor", strokeWidth: 1.75, "aria-hidden": true };
-  switch (name) {
-    case "vk":
-      return (
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="#0077FF" aria-hidden="true">
-          <path d="M12.785 16.241s.288-.032.436-.194c.136-.148.132-.427.132-.427s-.02-1.304.587-1.496c.598-.188 1.366 1.258 2.183 1.814.615.422 1.082.33 1.082.33l2.177-.03s1.138-.071.598-.967c-.044-.073-.314-.66-1.618-1.865-1.366-1.258-1.183-.105.462-3.218.998-1.678 1.397-2.7 1.272-3.14-.118-.412-.84-.303-.84-.303l-2.453.015s-.182-.025-.316.056-.522.43-.522.43-.937 2.504-2.183 4.63c-.415.707-.582.937-.804.937-.165 0-.165-.272-.165-.992V9.97c0-.84.025-1.19-.165-1.28-.165-.09-.57-.06-.735-.04-.15.015-.26.105-.26.21 0 .22.015.875.015 1.275 0 .39-.015 1.005-.015 1.005s-.015.39-.165.6c-.165.225-.48.24-.48.24h-1.08s-1.62.1-3.6-1.875C5.4 7.5 3.9 4.2 3.9 4.2s-.12-.3.015-.465c.12-.15.36-.195.36-.195h2.28s.165-.022.285.075c.105.09.165.285.165.285s.3.795.705 1.515c.855 1.635 1.2 1.725 1.335 1.62.33-.24.247-.975.247-1.5 0-.81-.12-1.155-.247-1.335-.195-.27-.555-.36-.735-.39-.165-.03.105-.075.45-.075.855 0 1.485.015 1.755.105.555.195.96.63.96.63s.51.675.51 1.65v2.475c0 .375.075.45.165.45.165 0 .45-.075.975-.75 1.335-1.755 2.295-4.455 2.295-4.455s.12-.285.33-.42c.255-.165.615-.12.615-.12l2.4-.015s.72-.045.855.33c.12.345-.285 1.245-1.335 2.7-.21.285-.375.525-.375.675 0 .165.12.315.375.615.855 1.005 1.935 2.16 2.145 2.895.21.72-.15 1.08-.15 1.08z"/>
-        </svg>
-      );
-    case "bolt":
-      return <svg {...props}><path d="M13 2 4 14h7l-1 8 10-14h-7l0-6z" strokeLinejoin="round" /></svg>;
-    case "calendar":
-      return <svg {...props}><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M8 3v4M16 3v4M3 10h18" strokeLinecap="round" /></svg>;
-    case "brain":
-      return <svg {...props}><path d="M8.5 8.5a3 3 0 0 1 5 0M9 12a2.5 2.5 0 0 1 4 0M12 3v2M6 6l1.5 1.5M18 6l-1.5 1.5M5 14a4 4 0 0 0 3 3.87V21h4v-3.13A4 4 0 0 0 19 14" strokeLinecap="round" strokeLinejoin="round" /></svg>;
-    case "inbox":
-      return <svg {...props}><path d="M4 4h16v12H4zM4 13h4l2 3h4l2-3h4" strokeLinejoin="round" /></svg>;
-    case "users":
-      return <svg {...props}><circle cx="9" cy="8" r="3" /><path d="M3 20c0-3.3 2.7-6 6-6M16 11a3 3 0 1 0 0-6M21 20c0-2.8-2.2-5-5-5" strokeLinecap="round" /></svg>;
-    case "plug":
-      return <svg {...props}><path d="M12 22v-5M9 8V2M15 8V2M9 8h6v4a4 4 0 0 1-8 0V8h2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
-    case "chart":
-      return <svg {...props}><path d="M4 19V5M4 19h16M8 17V11M12 17V7M16 17v-4" strokeLinecap="round" strokeLinejoin="round" /></svg>;
-    case "role":
-      return <svg {...props}><circle cx="12" cy="8" r="4" /><path d="M6 20v-1a6 6 0 0 1 12 0v1" strokeLinecap="round" /></svg>;
-    case "chat":
-      return <svg {...props}><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z" strokeLinejoin="round" /></svg>;
-    default:
-      return <svg {...props}><circle cx="12" cy="12" r="8" /></svg>;
-  }
-}
-
-function Footer() {
+function AiSection() {
+  const benefits = [
+    { Icon: Icons.Zap, title: "Ответ за 30 секунд", desc: "ИИ ведёт диалоги круглосуточно — клиенты не уходят к конкурентам, даже ночью." },
+    { Icon: Icons.Brain, title: "Знает ваш бизнес", desc: "Настраивается под ваши услуги, цены и правила. Отвечает точно, без галлюцинаций." },
+    { Icon: Icons.Users, title: "Разные роли ИИ", desc: "Менеджер по продажам, консультант или администратор — отдельная роль для каждого этапа воронки." },
+  ];
   return (
-    <footer id="contact" className="contact-section">
-      <div className="contact-inner">
-        <div className="contact-cta">
-          <div className="contact-cta-content">
-            <div className="section-label">Старт</div>
-            <h2 className="contact-cta-title">Готовы запустить AI-сотрудника?</h2>
-            <p className="contact-cta-text">
-              Создайте аккаунт, подключите VK и назначьте роль — настройка занимает около 15 минут.
-            </p>
-            <div className="contact-cta-actions">
-              <a href="/register" className="contact-cta-btn">Создать аккаунт →</a>
-              <a href="mailto:support@bizflow.ru" className="contact-cta-link">support@bizflow.ru</a>
+    <section id="ai" className="landing-section ai-section">
+      <div className="landing-shell ai-layout">
+        <div className="ai-copy reveal">
+          <div className="section-heading">
+            <div className="section-kicker"><Icons.Sparkles width="14" height="14" /> ИИ-ассистент</div>
+            <h2>ИИ, который <em>работает за вас</em></h2>
+            <p>Внедрите искусственный интеллект в свой бизнес за 5 минут. Без разработчиков, сложных настроек и проектирования промптов.</p>
+          </div>
+          <div className="ai-benefits">
+            {benefits.map((b, i) => (
+              <div key={b.title} className={`ai-benefit reveal-delay-${i + 1}`}>
+                <div className="ai-benefit-icon"><b.Icon /></div>
+                <div>
+                  <h4>{b.title}</h4>
+                  <p>{b.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="ai-visual reveal reveal-delay-3">
+          <div className="ai-chat-window">
+            <div className="ai-chat-header">
+              <div className="ai-chat-avatar">
+                <Icons.Brain width="20" height="20" />
+              </div>
+              <div className="ai-chat-head-copy">
+                <strong>BizFlow AI · Менеджер продаж</strong>
+                <span>Сейчас отвечает</span>
+              </div>
+            </div>
+            <div className="ai-chat-body">
+              <div className="ai-msg user">
+                <div className="ai-msg-bubble">Добрый день! Скажите, у вас есть доставка по Москве и сколько она стоит?</div>
+                <div className="ai-msg-time">14:32</div>
+              </div>
+              <div className="ai-msg ai">
+                <div className="ai-msg-bubble">Здравствуйте! Да, мы осуществляем доставку по всей Москве и Московской области. Стоимость доставки в пределах МКАД — 350 ₽, бесплатна при заказе от 5 000 ₽. Подскажите, какой товар вас интересует? Я подскажу сроки и варианты оплаты.</div>
+                <div className="ai-msg-time">14:32 · ИИ</div>
+              </div>
+              <div className="ai-msg user">
+                <div className="ai-msg-bubble">Хочу комплект №4. Можно оплатить при получении?</div>
+                <div className="ai-msg-time">14:33</div>
+              </div>
+              <div className="ai-msg ai">
+                <div className="ai-msg-bubble">Отличный выбор! Да, оплата при получении доступна. Для оформления заказа уточните, пожалуйста:<br/>• Ваш номер телефона<br/>• Адрес доставки<br/>• Удобное время</div>
+                <div className="ai-msg-time">14:33 · ИИ</div>
+              </div>
+            </div>
+            <div className="ai-chat-input">
+              <div className="ai-input-box">Напишите сообщение ИИ-ассистенту…</div>
+              <button className="ai-send-btn" type="button">
+                <Icons.Send width="16" height="16" />
+              </button>
             </div>
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
 
-        <div className="contact-grid">
-          <a href="mailto:support@bizflow.ru" className="contact-card">
-            <span className="contact-card-icon contact-card-icon--mail">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5L4 8V6l8 5 8-5v2z"/></svg>
-            </span>
-            <span className="contact-card-label">Email</span>
-            <span className="contact-card-value">support@bizflow.ru</span>
-          </a>
-          <a href="https://vk.com" target="_blank" rel="noopener noreferrer" className="contact-card contact-card--vk">
-            <span className="contact-card-icon contact-card-icon--vk">
-              <VkIcon size={22} />
-            </span>
-            <span className="contact-card-label">Сообщество</span>
-            <span className="contact-card-value">Мы в VK</span>
-          </a>
-          <a href="/login" className="contact-card">
-            <span className="contact-card-icon contact-card-icon--cabinet">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5z"/></svg>
-            </span>
-            <span className="contact-card-label">Кабинет</span>
-            <span className="contact-card-value">Войти в личный кабинет</span>
-          </a>
+function HowSection() {
+  const steps = [
+    { n: 1, title: "Зарегистрируйтесь", desc: "Создайте аккаунт за 2 минуты через почту или Telegram. Никаких звонков и менеджеров." },
+    { n: 2, title: "Подключите каналы", desc: "Добавьте VK, Telegram, WhatsApp и другие каналы из кабинета. На всё про всё — 15 минут." },
+    { n: 3, title: "Расскажите ИИ о бизнесе", desc: "Загрузите услуги, цены и правила. Настройте роли ИИ — и он начнёт работать за вас." },
+  ];
+  return (
+    <section id="how" className="landing-section">
+      <div className="landing-shell">
+        <div className="section-heading section-heading-center reveal">
+          <div className="section-kicker"><Icons.Clock width="14" height="14" /> Как начать</div>
+          <h2>Готово к работе <em>за 15 минут</em></h2>
+          <p>Три простых шага — и ваша команда работает в едином интерфейсе, а ИИ-ассистент отвечает на первые обращения.</p>
         </div>
+        <div className="how-steps">
+          {steps.map((s, i) => (
+            <div key={s.n} className={`step-card reveal reveal-delay-${i + 1}`}>
+              <div className="step-number">{s.n}</div>
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
-        <div className="contact-bar">
-          <div className="contact-bar-logo">
-            BizFlow <span>AI</span>
+function BenefitsSection() {
+  const cards = [
+    { Icon: Icons.Shield, title: "Защита базы клиентов", desc: "Храните контакты в BizFlow, а не в телефонах менеджеров. Увольнение сотрудника больше не проблема." },
+    { Icon: Icons.Key, title: "Пароли не нужны операторам", desc: "Менеджеры отвечают из приложения, не получая доступ к аккаунтам мессенджеров и соцсетей." },
+    { Icon: Icons.Eye, title: "Контроль переписки", desc: "Следите за качеством общения и анализируйте сохранённые диалоги — всегда знайте, что происходит." },
+    { Icon: Icons.Lock, title: "Аккаунты — ваша собственность", desc: "Предотвратить утечку клиентов легче, чем компенсировать урон от их потери." },
+  ];
+  return (
+    <section className="landing-section benefits-section">
+      <div className="landing-shell">
+        <div className="section-heading section-heading-center reveal">
+          <div className="section-kicker"><Icons.Shield width="14" height="14" /> Защита бизнеса</div>
+          <h2>Возьмите общение <em>под контроль</em></h2>
+          <p>Уволившиеся сотрудники, потерянные телефоны и забытые пароли больше не повод для тревоги.</p>
+        </div>
+        <div className="benefits-grid">
+          {cards.map((b, i) => (
+            <div key={b.title} className={`benefit-card reveal reveal-delay-${i + 1}`}>
+              <div className="benefit-card-icon"><b.Icon /></div>
+              <h3>{b.title}</h3>
+              <p>{b.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TestimonialsSection() {
+  const items = [
+    {
+      text: "С подключением BizFlow ИИ-ассистента количество лидов выросло на <strong>70%</strong>, а конверсия в сделки увеличилась на 15%. Теперь мы не пропускаем ни одного сообщения даже в нерабочее время.",
+      name: "Ольга Волкова", role: "Руководитель отдела обслуживания · «Ренессанс Жизнь»", avatar: "ОВ"
+    },
+    {
+      text: "Подключение мессенджеров позволило уже в первый месяц увеличить продажи на <strong>32%</strong>. Доступ к аккаунтам надёжно защищён — операторы отвечают из приложения, пароли знают только ответственные.",
+      name: "Дмитрий Ковалёв", role: "Руководитель интернет-маркетинга · «Авилон»", avatar: "ДК"
+    },
+    {
+      text: "Благодаря BizFlow мы можем оперативно связаться с клиентом и получить нужную информацию, не доставляя неудобства лишними звонками. Служба поддержки стала обрабатывать <strong>в 2 раза больше</strong> обращений.",
+      name: "Анна Морозова", role: "Директор по операциям · «Пеплос»", avatar: "АМ"
+    },
+  ];
+  return (
+    <section className="landing-section">
+      <div className="landing-shell">
+        <div className="section-heading section-heading-center reveal">
+          <div className="section-kicker"><Icons.Quote width="14" height="14" /> Отзывы</div>
+          <h2>Нам <em>доверяют</em></h2>
+          <p>От небольших студий до крупных корпораций — предприниматели масштабируют продажи и поддержку вместе с BizFlow.</p>
+        </div>
+        <div className="testimonials-grid">
+          {items.map((t, i) => (
+            <div key={t.name} className={`testimonial-card reveal reveal-delay-${i + 1}`}>
+              <div className="testimonial-quote"><Icons.Quote /></div>
+              <p className="testimonial-text" dangerouslySetInnerHTML={{ __html: t.text }} />
+              <div className="testimonial-author">
+                <div className="testimonial-avatar">{t.avatar}</div>
+                <div>
+                  <strong>{t.name}</strong>
+                  <span>{t.role}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PricingSection() {
+  const plans = [
+    {
+      code: "free", name: "Free", price: "0", period: "₽", desc: "Познакомьтесь с платформой",
+      features: ["До 20 диалогов в месяц", "VK-бот и AI-ответы", "База знаний о компании", "Сбор заявок", "История переписки"],
+      btn: "Начать бесплатно", primary: false, popular: false,
+    },
+    {
+      code: "start", name: "Start", price: "990", period: "₽/мес", desc: "Для небольших команд",
+      features: ["До 100 диалогов", "1 роль AI", "Сбор заявок из VK, TG, WA", "Уведомления о лидах", "FAQ и сценарии ответов"],
+      btn: "Подключить Start", primary: false, popular: false,
+    },
+    {
+      code: "business", name: "Business", price: "2 990", period: "₽/мес", desc: "Оптимальный тариф для роста",
+      features: ["До 500 диалогов", "До 5 ролей AI", "Аналитика и воронка", "Запись на консультации", "Ежедневные сводки", "Полная CRM в кабинете"],
+      btn: "Подключить Business", primary: true, popular: true,
+    },
+    {
+      code: "premium", name: "Premium", price: "7 990", period: "₽/мес", desc: "Для агентств и большого потока",
+      features: ["Безлимитные диалоги", "API и интеграции", "White Label", "Приоритетная поддержка", "Персональные роли ИИ"],
+      btn: "Подключить Premium", primary: false, popular: false,
+    },
+  ];
+  return (
+    <section id="pricing" className="landing-section pricing-section">
+      <div className="landing-shell">
+        <div className="section-heading section-heading-center reveal">
+          <div className="section-kicker"><Icons.Chart width="14" height="14" /> Тарифы</div>
+          <h2>Честные цены <em>без сюрпризов</em></h2>
+          <p>Выберите подходящий план и начните бесплатно. Меняйте тариф в любой момент без переплат.</p>
+        </div>
+        <div className="pricing-grid">
+          {plans.map((p, i) => (
+            <div key={p.code} className={`price-card ${p.popular ? "is-popular" : ""} reveal reveal-delay-${i + 1}`}>
+              {p.popular && <div className="price-badge-popular">Популярный выбор</div>}
+              <div className="price-head">
+                <h3>{p.name}</h3>
+                <p>{p.desc}</p>
+              </div>
+              <div className="price-value">
+                <strong>{p.price}</strong>
+                <span>{p.period}</span>
+              </div>
+              <ul className="price-features">
+                {p.features.map((f) => (
+                  <li key={f}><Icons.Check width="16" height="16" />{f}</li>
+                ))}
+              </ul>
+              <a href="/login" className={`price-button ${p.primary ? "price-button-primary" : ""}`}>{p.btn}</a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FinalCTA() {
+  return (
+    <section className="final-cta-section">
+      <div className="landing-shell">
+        <div className="final-cta reveal">
+          <div className="final-cta-grid">
+            <div className="final-cta-copy">
+              <h2>Готовы начать получать больше заявок уже сегодня?</h2>
+              <p>Подключите BizFlow и убедитесь сами. Ранний доступ бесплатен для первых 100 компаний.</p>
+            </div>
+            <div className="final-cta-actions">
+              <a href="/login" className="final-cta-btn final-cta-btn-primary">
+                Создать аккаунт бесплатно
+                <Icons.ArrowRight width="18" height="18" />
+              </a>
+              <a href="#channels" className="final-cta-btn final-cta-btn-secondary">
+                Узнать больше о каналах
+              </a>
+            </div>
           </div>
-          <div className="contact-bar-links">
-            <a href="/login">Войти</a>
-            <a href="/register">Регистрация</a>
-            <a href="/#pricing">Тарифы</a>
-            <a href="/#features">Возможности</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  const year = new Date().getFullYear();
+  return (
+    <footer className="footer-section">
+      <div className="landing-shell">
+        <div className="footer-shell">
+          <div className="footer-brand">
+            <a href="#" className="footer-logo">
+              <span className="nav-logo-mark">B</span>
+              Biz<span>Flow</span>
+            </a>
+            <p>Многофункциональная CRM-платформа для автоматизации взаимодействия с клиентами. Объединяем все каналы коммуникации в едином интерфейсе.</p>
           </div>
-          <div className="contact-bar-copy">© 2026 BizFlow AI</div>
+          <div className="footer-col">
+            <h4>Продукт</h4>
+            <ul className="footer-links">
+              <li><a href="#channels">Каналы связи</a></li>
+              <li><a href="#features">Возможности</a></li>
+              <li><a href="#ai">ИИ-ассистент</a></li>
+              <li><a href="#pricing">Тарифы</a></li>
+            </ul>
+          </div>
+          <div className="footer-col">
+            <h4>Компания</h4>
+            <ul className="footer-links">
+              <li><a href="/login">Войти</a></li>
+              <li><a href="/login">Регистрация</a></li>
+              <li><a href="/panel">Панель</a></li>
+              <li><a href="#">Блог</a></li>
+            </ul>
+          </div>
+          <div className="footer-col">
+            <h4>Контакты</h4>
+            <ul className="footer-contacts">
+              <li><a href="mailto:hello@bizflow.ru">hello@bizflow.ru</a></li>
+              <li><a href="tel:+78000000000">8 (800) 000-00-00</a></li>
+              <li><a href="https://t.me/bizflow">Telegram</a></li>
+              <li><a href="https://vk.com/bizflow">ВКонтакте</a></li>
+            </ul>
+          </div>
+        </div>
+        <div className="footer-meta">
+          <span>© {year} BizFlow. Все права защищены.</span>
+          <span>Сделано с любовью для российского бизнеса</span>
         </div>
       </div>
     </footer>
   );
 }
 
+<<<<<<< Updated upstream
 function HeroVisual() {
   return (
     <div className="vf-hero-visual" aria-hidden="true">
@@ -763,11 +1095,24 @@ function LandingPage() {
   );
 }
 
+=======
+>>>>>>> Stashed changes
 function App() {
+  const rootRef = useReveal();
   return (
-    <div className="app-container">
+    <div className="app-container" ref={rootRef}>
       <Nav />
-      <LandingPage />
+      <Hero />
+      <StatsBand />
+      <LogoMarquee />
+      <ChannelsSection />
+      <FeaturesSection />
+      <AiSection />
+      <HowSection />
+      <BenefitsSection />
+      <TestimonialsSection />
+      <PricingSection />
+      <FinalCTA />
       <Footer />
     </div>
   );

@@ -224,7 +224,7 @@ function renderWarnings(config) {
 
   if (!config.confirmationTokenConfigured) {
     warnings.push(
-      "Укажите confirmation token в BizFlow и вставьте ту же строку в VK → Callback API → Строка подтверждения.",
+      "Укажите confirmation token в Virexo и вставьте ту же строку в VK → Callback API → Строка подтверждения.",
     );
   }
 
@@ -291,7 +291,7 @@ async function saveConfig(event) {
   }
 
   try {
-    setMessage("Сохраняем настройки BizFlow для VK...", "");
+    setMessage("Сохраняем настройки Virexo для VK...", "");
     await apiPost("/api/company/my/vk-config", payload);
     setMessage(
       "Настройки сохранены. Если хотите, чтобы сообщения реально приходили из VK, дальше обязательно настройте Callback API, confirmation code и публичный URL вместо localhost.",
