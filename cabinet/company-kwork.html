@@ -1,302 +1,365 @@
 <!doctype html>
 <html lang="ru">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Kwork — BizFlow AI</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-            rel="stylesheet"
-        />
-        <link rel="stylesheet" href="/assets/company-shell.css?v=8" />
-        <link rel="stylesheet" href="/assets/company-kwork.css?v=1" />
-    </head>
-    <body class="bf-app" data-page="kwork">
-        <div class="bf-layout">
-            <aside class="bf-sidebar" id="companySidebar"></aside>
 
-            <div class="bf-main">
-                <header class="bf-header">
-                    <div class="bf-header-left">
-                        <nav class="kw-breadcrumbs" aria-label="Навигация">
-                            <span>Интеграции</span>
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-                            <span class="kw-breadcrumb-current">Kwork</span>
-                        </nav>
-                    </div>
-                    <div class="bf-header-actions">
-                        <button class="bf-btn bf-btn--ghost" type="button">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kwork — BizFlow AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/company-shell.css?v=9?v=9" />
+    <link rel="stylesheet" href="/assets/company-kwork.css?v=4" />
+</head>
+
+<body class="bf-app" data-page="kwork">
+    <div class="bf-layout">
+        <aside class="bf-sidebar" id="companySidebar"></aside>
+
+        <div class="bf-main">
+            <header class="bf-header">
+                <div class="bf-header-left">
+                    <nav class="kw-breadcrumbs" aria-label="Навигация">
+                        <span>Интеграции</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                        <span class="kw-breadcrumb-current">Kwork</span>
+                    </nav>
+                </div>
+                <div class="bf-header-actions">
+                    <button class="bf-btn bf-btn--ghost" type="button">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
                             Что нового?
                         </button>
-                        <button class="bf-icon-btn" type="button" aria-label="Уведомления">
+                    <button class="bf-icon-btn" type="button" aria-label="Уведомления">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
                             <span class="bf-badge-dot">3</span>
                         </button>
-                    </div>
-                </header>
+                </div>
+            </header>
 
-                <div class="bf-content">
-                    <section class="kw-hero">
-                        <div class="kw-hero-main">
-                            <div class="kw-hero-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24"><text x="12" y="17" text-anchor="middle" fill="#fff" font-size="15" font-weight="800" font-family="Inter,Arial,sans-serif">K</text></svg>
-                            </div>
-                            <div class="kw-hero-body">
-                                <div class="kw-hero-title-row">
-                                    <h1>Kwork</h1>
-                                    <span class="bf-status bf-status--ok" id="kwStatusBadge">Подключено</span>
-                                </div>
-                                <p>Интеграция с Kwork позволяет получать заказы и сообщения от покупателей прямо в BizFlow AI и автоматически обрабатывать их с помощью ИИ-ассистента.</p>
-                            </div>
+            <div class="bf-content">
+                <section class="kw-hero">
+                    <div class="kw-hero-main">
+                        <div class="kw-hero-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><text x="12" y="17" text-anchor="middle" fill="#fff" font-size="15" font-weight="800" font-family="Inter,Arial,sans-serif">K</text></svg>
                         </div>
-                        <button type="button" class="bf-btn bf-btn--outline kw-disconnect" id="disconnectButton">Отключить интеграцию</button>
-                    </section>
+                        <div class="kw-hero-body">
+                            <div class="kw-hero-title-row">
+                                <h1>Kwork</h1>
+                                <span class="bf-status bf-status--ok" id="kwStatusBadge">Подключено</span>
+                            </div>
+                            <p>Интеграция с Kwork позволяет получать заказы и сообщения от покупателей прямо в BizFlow AI и автоматически обрабатывать их с помощью ИИ-ассистента.</p>
+                        </div>
+                    </div>
+                    <button type="button" class="bf-btn bf-btn--outline kw-disconnect" id="disconnectButton">Отключить интеграцию</button>
+                </section>
 
-                    <section class="kw-mini-stats" id="kwMiniStats">
-                        <article class="kw-mini-stat">
-                            <div class="kw-mini-icon kw-mini-icon--blue">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-                            </div>
-                            <div>
-                                <p class="kw-mini-label">Новые заказы</p>
-                                <p class="kw-mini-value" id="kwNewOrders">7</p>
-                                <p class="kw-mini-trend kw-mini-trend--up" id="kwNewOrdersTrend">+40% за неделю</p>
-                            </div>
-                        </article>
-                        <article class="kw-mini-stat">
-                            <div class="kw-mini-icon kw-mini-icon--purple">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                            </div>
-                            <div>
-                                <p class="kw-mini-label">Сообщения</p>
-                                <p class="kw-mini-value" id="kwMessages">23</p>
-                                <p class="kw-mini-trend kw-mini-trend--up" id="kwMessagesTrend">+15% за неделю</p>
-                            </div>
-                        </article>
-                        <article class="kw-mini-stat">
-                            <div class="kw-mini-icon kw-mini-icon--green">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-                            </div>
-                            <div>
-                                <p class="kw-mini-label">Конверсия в заявки</p>
-                                <p class="kw-mini-value" id="kwConversion">28%</p>
-                                <p class="kw-mini-trend kw-mini-trend--up" id="kwConversionTrend">+5% за неделю</p>
-                            </div>
-                        </article>
-                        <article class="kw-mini-stat">
-                            <div class="kw-mini-icon kw-mini-icon--orange">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                            </div>
-                            <div>
-                                <p class="kw-mini-label">Выручка</p>
-                                <p class="kw-mini-value" id="kwRevenue">124 000 ₽</p>
-                                <p class="kw-mini-trend kw-mini-trend--up" id="kwRevenueTrend">+22% за неделю</p>
-                            </div>
-                        </article>
-                    </section>
+                <section class="kw-mini-stats" id="kwMiniStats">
+                    <article class="kw-mini-stat">
+                        <div class="kw-mini-icon kw-mini-icon--blue">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                        </div>
+                        <div>
+                            <p class="kw-mini-label">Новые заказы</p>
+                            <p class="kw-mini-value" id="kwNewOrders">7</p>
+                            <p class="kw-mini-trend kw-mini-trend--up" id="kwNewOrdersTrend">+40% за неделю</p>
+                        </div>
+                    </article>
+                    <article class="kw-mini-stat">
+                        <div class="kw-mini-icon kw-mini-icon--purple">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        </div>
+                        <div>
+                            <p class="kw-mini-label">Сообщения</p>
+                            <p class="kw-mini-value" id="kwMessages">23</p>
+                            <p class="kw-mini-trend kw-mini-trend--up" id="kwMessagesTrend">+15% за неделю</p>
+                        </div>
+                    </article>
+                    <article class="kw-mini-stat">
+                        <div class="kw-mini-icon kw-mini-icon--green">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+                        </div>
+                        <div>
+                            <p class="kw-mini-label">Конверсия в заявки</p>
+                            <p class="kw-mini-value" id="kwConversion">28%</p>
+                            <p class="kw-mini-trend kw-mini-trend--up" id="kwConversionTrend">+5% за неделю</p>
+                        </div>
+                    </article>
+                    <article class="kw-mini-stat">
+                        <div class="kw-mini-icon kw-mini-icon--orange">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </div>
+                        <div>
+                            <p class="kw-mini-label">Выручка</p>
+                            <p class="kw-mini-value" id="kwRevenue">124 000 ₽</p>
+                            <p class="kw-mini-trend kw-mini-trend--up" id="kwRevenueTrend">+22% за неделю</p>
+                        </div>
+                    </article>
+                </section>
 
-                    <div class="kw-grid-3">
-                        <section class="bf-card">
-                            <h2 class="bf-card-title">Настройки подключения</h2>
-                            <form class="kw-form" id="kwConnectionForm" novalidate autocomplete="off">
-                                <div class="kw-field">
-                                    <label class="kw-label" for="kwApiKey">API ключ</label>
-                                    <div class="kw-input-wrap">
-                                        <input id="kwApiKey" class="kw-input" type="password" value="sk_live_kwork_9f3a7c21b6" autocomplete="off" />
-                                        <button type="button" class="kw-eye" id="kwToggleKey" aria-label="Показать ключ">
-                                            <svg class="kw-eye-icon kw-eye-icon--hide" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
-                                            <svg class="kw-eye-icon kw-eye-icon--show" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" hidden><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="kw-field">
-                                    <label class="kw-label" for="kwLogin">Логин Kwork</label>
-                                    <input id="kwLogin" class="kw-input" type="text" value="alexander_web" autocomplete="off" />
-                                </div>
-                                <div class="kw-field">
-                                    <span class="kw-label">Статус</span>
-                                    <div><span class="bf-status bf-status--ok">Активно</span></div>
-                                </div>
-                                <button type="submit" class="bf-btn bf-btn--primary kw-form-submit">Сохранить изменения</button>
-                            </form>
-                        </section>
-
-                        <section class="bf-card">
-                            <h2 class="bf-card-title">Webhook</h2>
-                            <p class="kw-card-desc">Webhook позволяет получать новые заказы и сообщения в реальном времени.</p>
+                <div class="kw-grid-3">
+                    <section class="bf-card">
+                        <h2 class="bf-card-title">Настройки подключения</h2>
+                        <form class="kw-form" id="kwConnectionForm" novalidate autocomplete="off">
                             <div class="kw-field">
-                                <label class="kw-label" for="kwWebhookUrl">Webhook URL</label>
-                                <div class="kw-copy-row">
-                                    <input id="kwWebhookUrl" class="kw-input" type="text" readonly value="https://app.bizflow.ai/integrations/kwork/webhook" />
-                                    <button type="button" class="kw-copy-btn" id="kwCopyWebhook" aria-label="Скопировать ссылку">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                                <label class="kw-label" for="kwApiKey">API ключ</label>
+                                <div class="kw-input-wrap">
+                                    <input id="kwApiKey" class="kw-input" type="password" value="sk_live_kwork_9f3a7c21b6" autocomplete="off" />
+                                    <button type="button" class="kw-eye" id="kwToggleKey" aria-label="Показать ключ">
+                                            <svg class="kw-eye-icon" data-eye="hide" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                                            <svg class="kw-eye-icon" data-eye="show" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" hidden><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                                     </button>
                                 </div>
                             </div>
-                            <div class="kw-webhook-meta">
-                                <div>
-                                    <span class="kw-label">Статус</span>
-                                    <div><span class="bf-status bf-status--ok">Активен</span></div>
-                                </div>
-                                <div>
-                                    <span class="kw-label">Последняя проверка</span>
-                                    <p class="kw-meta-value" id="kwLastCheck">—</p>
-                                </div>
+                            <div class="kw-field">
+                                <label class="kw-label" for="kwLogin">Логин Kwork</label>
+                                <input id="kwLogin" class="kw-input" type="text" value="alexander_web" autocomplete="off" />
                             </div>
-                            <button type="button" class="bf-btn bf-btn--primary kw-form-submit" id="kwTestWebhook">Протестировать</button>
-                        </section>
+                            <div class="kw-field">
+                                <span class="kw-label">Статус</span>
+                                <div><span class="bf-status bf-status--ok">Активно</span></div>
+                            </div>
+                            <button type="submit" class="bf-btn bf-btn--primary kw-form-submit">Сохранить изменения</button>
+                        </form>
+                    </section>
 
-                        <section class="bf-card">
-                            <div class="bf-card-head">
-                                <h2 class="bf-card-title">Статистика за 7 дней</h2>
+                    <section class="bf-card">
+                        <h2 class="bf-card-title">Webhook</h2>
+                        <p class="kw-card-desc">Webhook позволяет получать новые заказы и сообщения в реальном времени.</p>
+                        <div class="kw-field">
+                            <label class="kw-label" for="kwWebhookUrl">Webhook URL</label>
+                            <div class="kw-copy-row">
+                                <input id="kwWebhookUrl" class="kw-input" type="text" readonly value="https://app.bizflow.ai/integrations/kwork/webhook" />
+                                <button type="button" class="kw-copy-btn" id="kwCopyWebhook" aria-label="Скопировать ссылку">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                                    </button>
                             </div>
-                            <div class="bf-chart-legend">
-                                <span><i class="bf-legend-dot" style="background:#3b82f6"></i> Заказы</span>
-                                <span><i class="bf-legend-dot" style="background:#8b5cf6"></i> Сообщения</span>
+                        </div>
+                        <div class="kw-webhook-meta">
+                            <div>
+                                <span class="kw-label">Статус</span>
+                                <div><span class="bf-status bf-status--ok">Активен</span></div>
                             </div>
-                            <div class="bf-chart-wrap">
-                                <canvas id="kwActivityChart" height="220"></canvas>
+                            <div>
+                                <span class="kw-label">Последняя проверка</span>
+                                <p class="kw-meta-value" id="kwLastCheck">—</p>
                             </div>
-                        </section>
-                    </div>
+                        </div>
+                        <button type="button" class="bf-btn bf-btn--primary kw-form-submit" id="kwTestWebhook">Протестировать</button>
+                    </section>
 
-                    <div class="kw-grid-3">
-                        <section class="bf-card">
-                            <h2 class="bf-card-title">Автоответы на сообщения</h2>
-                            <p class="kw-card-desc">ИИ-ассистент будет автоматически отвечать на новые сообщения от покупателей.</p>
+                    <section class="bf-card">
+                        <div class="bf-card-head">
+                            <h2 class="bf-card-title">Статистика за 7 дней</h2>
+                        </div>
+                        <div class="bf-chart-legend">
+                            <span><i class="bf-legend-dot" style="background:#3b82f6"></i> Заказы</span>
+                            <span><i class="bf-legend-dot" style="background:#8b5cf6"></i> Сообщения</span>
+                        </div>
+                        <div class="bf-chart-wrap">
+                            <canvas id="kwActivityChart" height="220"></canvas>
+                        </div>
+                    </section>
+                </div>
 
-                            <div class="kw-toggle-row">
-                                <span>Статус автоответов</span>
-                                <label class="kw-switch">
+                <div class="kw-grid-3">
+                    <section class="bf-card">
+                        <h2 class="bf-card-title">Автоответы на сообщения</h2>
+                        <p class="kw-card-desc">ИИ-ассистент будет автоматически отвечать на новые сообщения от покупателей.</p>
+
+                        <div class="kw-toggle-row">
+                            <span>Статус автоответов</span>
+                            <label class="kw-switch">
                                     <input type="checkbox" id="kwAutoReplyToggle" checked />
                                     <span></span>
                                 </label>
-                                <span class="kw-toggle-state" id="kwAutoReplyState">Включено</span>
-                            </div>
+                            <span class="kw-toggle-state" id="kwAutoReplyState">Включено</span>
+                        </div>
 
-                            <div class="kw-field">
-                                <label class="kw-label" for="kwReplyStyle">Стиль общения</label>
-                                <div class="kw-select-wrap">
-                                    <select id="kwReplyStyle" class="kw-select">
-                                        <option>Дружелюбный и профессиональный</option>
-                                        <option>Формальный и лаконичный</option>
-                                        <option>Неформальный и тёплый</option>
-                                    </select>
-                                    <svg class="kw-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        <div class="kw-field">
+                            <label class="kw-label" for="kwReplyStyle">Стиль общения</label>
+                            <select id="kwReplyStyle" class="kw-select" style="display:none;" aria-hidden="true">
+                                    <option>Дружелюбный и профессиональный</option>
+                                    <option>Формальный и лаконичный</option>
+                                    <option>Неформальный и тёплый</option>
+                                </select>
+                            <div class="kw-custom-select" id="kwReplyStyleCustom" role="listbox" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+                                <button type="button" class="kw-custom-select__trigger"><span class="kw-custom-select__label">Дружелюбный и профессиональный</span></button>
+                                <svg class="kw-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                                <div class="kw-custom-select__dropdown" role="listbox" aria-hidden="true">
+                                    <button type="button" class="kw-custom-select__option selected" role="option" data-value="Дружелюбный и профессиональный" aria-selected="true">
+                                            <span>Дружелюбный и профессиональный</span>
+                                            <svg class="kw-custom-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                        </button>
+                                    <button type="button" class="kw-custom-select__option" role="option" data-value="Формальный и лаконичный" aria-selected="false">
+                                            <span>Формальный и лаконичный</span>
+                                            <svg class="kw-custom-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                        </button>
+                                    <button type="button" class="kw-custom-select__option" role="option" data-value="Неформальный и тёплый" aria-selected="false">
+                                            <span>Неформальный и тёплый</span>
+                                            <svg class="kw-custom-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                        </button>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="kw-field">
-                                <label class="kw-label" for="kwReplyLength">Максимальная длина ответа</label>
-                                <div class="kw-select-wrap">
-                                    <select id="kwReplyLength" class="kw-select">
-                                        <option>Средний (2–4 предложения)</option>
-                                        <option>Короткий (1–2 предложения)</option>
-                                        <option>Развёрнутый (5+ предложений)</option>
-                                    </select>
-                                    <svg class="kw-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        <div class="kw-field">
+                            <label class="kw-label" for="kwReplyLength">Максимальная длина ответа</label>
+                            <select id="kwReplyLength" class="kw-select" style="display:none;" aria-hidden="true">
+                                    <option>Средний (2–4 предложения)</option>
+                                    <option>Короткий (1–2 предложения)</option>
+                                    <option>Развёрнутый (5+ предложений)</option>
+                                </select>
+                            <div class="kw-custom-select" id="kwReplyLengthCustom" role="listbox" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+                                <button type="button" class="kw-custom-select__trigger"><span class="kw-custom-select__label">Средний (2–4 предложения)</span></button>
+                                <svg class="kw-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                                <div class="kw-custom-select__dropdown" role="listbox" aria-hidden="true">
+                                    <button type="button" class="kw-custom-select__option selected" role="option" data-value="Средний (2–4 предложения)" aria-selected="true">
+                                            <span>Средний (2–4 предложения)</span>
+                                            <svg class="kw-custom-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                        </button>
+                                    <button type="button" class="kw-custom-select__option" role="option" data-value="Короткий (1–2 предложения)" aria-selected="false">
+                                            <span>Короткий (1–2 предложения)</span>
+                                            <svg class="kw-custom-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                        </button>
+                                    <button type="button" class="kw-custom-select__option" role="option" data-value="Развёрнутый (5+ предложений)" aria-selected="false">
+                                            <span>Развёрнутый (5+ предложений)</span>
+                                            <svg class="kw-custom-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                        </button>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="kw-toggle-row">
-                                <span>Использовать контекст компании</span>
-                                <label class="kw-switch">
+                        <div class="kw-toggle-row">
+                            <span>Использовать контекст компании</span>
+                            <label class="kw-switch">
                                     <input type="checkbox" id="kwContextToggle" checked />
                                     <span></span>
                                 </label>
-                                <span class="kw-toggle-state" id="kwContextState">Включено</span>
-                            </div>
+                            <span class="kw-toggle-state" id="kwContextState">Включено</span>
+                        </div>
 
-                            <button type="button" class="bf-btn bf-btn--primary kw-form-submit" id="kwSaveAutoReply">Сохранить настройки</button>
-                        </section>
+                        <button type="button" class="bf-btn bf-btn--primary kw-form-submit" id="kwSaveAutoReply">Сохранить настройки</button>
+                    </section>
 
-                        <section class="bf-card">
-                            <h2 class="bf-card-title">Создание заявок</h2>
-                            <p class="kw-card-desc">Настройте автоматическое создание заявок из заказов Kwork.</p>
+                    <section class="bf-card">
+                        <h2 class="bf-card-title">Создание заявок</h2>
+                        <p class="kw-card-desc">Настройте автоматическое создание заявок из заказов Kwork.</p>
 
-                            <div class="kw-toggle-row">
-                                <span>Создавать заявку при новом заказе</span>
-                                <label class="kw-switch">
+                        <div class="kw-toggle-row">
+                            <span>Создавать заявку при новом заказе</span>
+                            <label class="kw-switch">
                                     <input type="checkbox" id="kwCreateLeadToggle" checked />
                                     <span></span>
                                 </label>
-                                <span class="kw-toggle-state" id="kwCreateLeadState">Включено</span>
-                            </div>
+                            <span class="kw-toggle-state" id="kwCreateLeadState">Включено</span>
+                        </div>
 
-                            <div class="kw-field">
-                                <label class="kw-label" for="kwLeadStatus">Статус заявки по умолчанию</label>
-                                <div class="kw-select-wrap">
-                                    <select id="kwLeadStatus" class="kw-select">
-                                        <option>Новая</option>
-                                        <option>В работе</option>
-                                    </select>
-                                    <svg class="kw-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        <div class="kw-field">
+                            <label class="kw-label" for="kwLeadStatus">Статус заявки по умолчанию</label>
+                            <select id="kwLeadStatus" class="kw-select" style="display:none;" aria-hidden="true">
+                                    <option>Новая</option>
+                                    <option>В работе</option>
+                                </select>
+                            <div class="kw-custom-select" id="kwLeadStatusCustom" role="listbox" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+                                <button type="button" class="kw-custom-select__trigger"><span class="kw-custom-select__label">Новая</span></button>
+                                <svg class="kw-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                                <div class="kw-custom-select__dropdown" role="listbox" aria-hidden="true">
+                                    <button type="button" class="kw-custom-select__option selected" role="option" data-value="Новая" aria-selected="true">
+                                            <span>Новая</span>
+                                            <svg class="kw-custom-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                        </button>
+                                    <button type="button" class="kw-custom-select__option" role="option" data-value="В работе" aria-selected="false">
+                                            <span>В работе</span>
+                                            <svg class="kw-custom-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                        </button>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="kw-field">
-                                <label class="kw-label" for="kwLeadOwner">Ответственный по умолчанию</label>
-                                <div class="kw-select-wrap">
-                                    <select id="kwLeadOwner" class="kw-select">
-                                        <option>Не назначен</option>
-                                    </select>
-                                    <svg class="kw-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        <div class="kw-field">
+                            <label class="kw-label" for="kwLeadOwner">Ответственный по умолчанию</label>
+                            <select id="kwLeadOwner" class="kw-select" style="display:none;" aria-hidden="true">
+                                    <option>Не назначен</option>
+                                </select>
+                            <div class="kw-custom-select" id="kwLeadOwnerCustom" role="listbox" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+                                <button type="button" class="kw-custom-select__trigger"><span class="kw-custom-select__label">Не назначен</span></button>
+                                <svg class="kw-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                                <div class="kw-custom-select__dropdown" role="listbox" aria-hidden="true">
+                                    <button type="button" class="kw-custom-select__option selected" role="option" data-value="Не назначен" aria-selected="true">
+                                            <span>Не назначен</span>
+                                            <svg class="kw-custom-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                        </button>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="kw-field">
-                                <label class="kw-label" for="kwLeadPriority">Приоритет заявки</label>
-                                <div class="kw-select-wrap">
-                                    <select id="kwLeadPriority" class="kw-select">
-                                        <option>Средний</option>
-                                        <option>Низкий</option>
-                                        <option>Высокий</option>
-                                    </select>
-                                    <svg class="kw-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        <div class="kw-field">
+                            <label class="kw-label" for="kwLeadPriority">Приоритет заявки</label>
+                            <select id="kwLeadPriority" class="kw-select" style="display:none;" aria-hidden="true">
+                                    <option>Средний</option>
+                                    <option>Низкий</option>
+                                    <option>Высокий</option>
+                                </select>
+                            <div class="kw-custom-select" id="kwLeadPriorityCustom" role="listbox" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+                                <button type="button" class="kw-custom-select__trigger"><span class="kw-custom-select__label">Средний</span></button>
+                                <svg class="kw-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                                <div class="kw-custom-select__dropdown" role="listbox" aria-hidden="true">
+                                    <button type="button" class="kw-custom-select__option selected" role="option" data-value="Средний" aria-selected="true">
+                                            <span>Средний</span>
+                                            <svg class="kw-custom-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                        </button>
+                                    <button type="button" class="kw-custom-select__option" role="option" data-value="Низкий" aria-selected="false">
+                                            <span>Низкий</span>
+                                            <svg class="kw-custom-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                        </button>
+                                    <button type="button" class="kw-custom-select__option" role="option" data-value="Высокий" aria-selected="false">
+                                            <span>Высокий</span>
+                                            <svg class="kw-custom-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                        </button>
                                 </div>
                             </div>
+                        </div>
 
-                            <button type="button" class="bf-btn bf-btn--primary kw-form-submit" id="kwSaveLeads">Сохранить настройки</button>
-                        </section>
+                        <button type="button" class="bf-btn bf-btn--primary kw-form-submit" id="kwSaveLeads">Сохранить настройки</button>
+                    </section>
 
-                        <section class="bf-card">
-                            <div class="bf-card-head">
-                                <h2 class="bf-card-title">Последние заказы</h2>
-                                <a class="kw-link" href="/company/leads">Перейти к заявкам →</a>
-                            </div>
-                            <div class="kw-orders" id="kwOrdersList"></div>
-                            <a class="kw-link kw-link--footer" href="https://kwork.ru/orders" target="_blank" rel="noreferrer">
+                    <section class="bf-card">
+                        <div class="bf-card-head">
+                            <h2 class="bf-card-title">Последние заказы</h2>
+                            <a class="kw-link" href="/company/leads">Перейти к заявкам →</a>
+                        </div>
+                        <div class="kw-orders" id="kwOrdersList"></div>
+                        <a class="kw-link kw-link--footer" href="https://kwork.ru/orders" target="_blank" rel="noreferrer">
                                 Смотреть все заказы на Kwork
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                             </a>
-                        </section>
-                    </div>
+                    </section>
+                </div>
 
-                    <section class="kw-help-banner">
-                        <div class="kw-help-text">
-                            <span class="kw-help-icon" aria-hidden="true">
+                <section class="kw-help-banner">
+                    <div class="kw-help-text">
+                        <span class="kw-help-icon" aria-hidden="true">
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                             </span>
-                            <div>
-                                <strong>Нужна помощь с настройкой?</strong>
-                                <p>Мы подготовили подробную инструкцию по интеграции с Kwork.</p>
-                            </div>
+                        <div>
+                            <strong>Нужна помощь с настройкой?</strong>
+                            <p>Мы подготовили подробную инструкцию по интеграции с Kwork.</p>
                         </div>
-                        <a class="bf-btn bf-btn--light" href="/company/docs#kwork-integration">
+                    </div>
+                    <a class="bf-btn bf-btn--light" href="/company/docs#kwork-integration">
                             Открыть инструкцию
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                         </a>
-                    </section>
-                </div>
+                </section>
             </div>
         </div>
+    </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-        <script src="/assets/company-api.js?v=8"></script>
-        <script src="/assets/company-shell.js?v=8"></script>
-        <script src="/assets/company-kwork.js?v=1"></script>
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="/assets/company-api.js?v=8"></script>
+    <script src="/assets/company-shell.js?v=9"></script>
+    <script src="/assets/company-kwork.js?v=6"></script>
+</body>
+
 </html>

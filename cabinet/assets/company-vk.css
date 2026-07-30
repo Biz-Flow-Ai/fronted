@@ -222,6 +222,115 @@
     transform: translateY(-50%);
     pointer-events: none;
     color: var(--bf-text-dim);
+    transition: transform 0.2s;
+}
+
+.vks-custom-select {
+    position: relative;
+    width: 100%;
+}
+
+.vks-custom-select__trigger {
+    width: 100%;
+    min-height: 46px;
+    padding: 0 40px 0 14px;
+    border-radius: 10px;
+    border: 1px solid var(--bf-card-border);
+    background: rgba(0, 0, 0, 0.25);
+    color: var(--bf-text);
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    user-select: none;
+}
+
+.vks-custom-select__trigger:hover {
+    border-color: rgba(124, 58, 237, 0.35);
+}
+
+.vks-custom-select.open .vks-custom-select__trigger,
+.vks-custom-select__trigger:focus {
+    outline: none;
+    border-color: rgba(124, 58, 237, 0.55);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+.vks-custom-select.open .vks-select-chevron {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.vks-custom-select__dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: 6px;
+    border-radius: 12px;
+    border: 1px solid var(--bf-card-border);
+    background: #161622;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(124, 58, 237, 0.08);
+    opacity: 0;
+    transform: translateY(-4px);
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.vks-custom-select.open .vks-custom-select__dropdown {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.vks-custom-select__option {
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--bf-text-muted);
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    text-align: left;
+    transition: background 0.1s, color 0.1s;
+}
+
+.vks-custom-select__option:hover {
+    background: rgba(124, 58, 237, 0.12);
+    color: var(--bf-text);
+}
+
+.vks-custom-select__option.selected {
+    background: rgba(124, 58, 237, 0.2);
+    color: #e9d5ff;
+    font-weight: 600;
+}
+
+.vks-custom-select__option.selected:hover {
+    background: rgba(124, 58, 237, 0.26);
+}
+
+.vks-custom-select__check {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: #a78bfa;
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+
+.vks-custom-select__option.selected .vks-custom-select__check {
+    opacity: 1;
 }
 
 .vks-input {
@@ -257,8 +366,21 @@
     background: transparent;
     color: var(--bf-text-dim);
     cursor: pointer;
-    display: grid;
-    place-items: center;
+    display: block;
+    flex-shrink: 0;
+    z-index: 1;
+}
+
+.vks-eye svg {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 18px;
+    height: 18px;
+}
+
+.vks-eye-icon[hidden] {
+    display: none !important;
 }
 
 .vks-eye:hover {
@@ -685,13 +807,7 @@
 .vks-step-arrow {
     align-self: center;
     height: 2px;
-    background: repeating-linear-gradient(
-        90deg,
-        rgba(99, 102, 241, 0.5) 0,
-        rgba(99, 102, 241, 0.5) 6px,
-        transparent 6px,
-        transparent 12px
-    );
+    background: repeating-linear-gradient( 90deg, rgba(99, 102, 241, 0.5) 0, rgba(99, 102, 241, 0.5) 6px, transparent 6px, transparent 12px);
     position: relative;
 }
 
@@ -905,15 +1021,12 @@
     .vks-grid {
         grid-template-columns: 1fr;
     }
-
     .vks-steps {
         grid-template-columns: 1fr;
     }
-
     .vks-step-arrow {
         display: none;
     }
-
     .vks-stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -925,20 +1038,16 @@
         padding-left: 20px;
         padding-right: 20px;
     }
-
     .vks-header {
         flex-direction: column;
     }
-
     .vks-help {
         flex-direction: column;
         align-items: stretch;
     }
-
     .vks-help-actions {
         flex-direction: column;
     }
-
     .vks-help-actions .vks-btn {
         width: 100%;
     }

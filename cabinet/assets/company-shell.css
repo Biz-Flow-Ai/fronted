@@ -610,3 +610,51 @@ html, body {
 .bf-page-loading {
     opacity: 0.7;
 }
+
+/* ========= SPA Page Transition ========= */
+.bf-app {
+    position: relative;
+    background: var(--bf-bg);
+}
+
+.bf-page-transition {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    pointer-events: none;
+    opacity: 0;
+    background: var(--bf-bg);
+    transition: opacity 180ms ease;
+    display: grid;
+    place-items: center;
+}
+
+.bf-page-transition.is-active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.bf-page-transition__spinner {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 2.5px solid rgba(124, 58, 237, 0.28);
+    border-top-color: #8b5cf6;
+    animation: bf-spin 0.7s linear infinite;
+    opacity: 0;
+    transition: opacity 120ms ease 120ms;
+}
+
+.bf-page-transition.is-active .bf-page-transition__spinner {
+    opacity: 1;
+}
+
+@keyframes bf-spin { to { transform: rotate(360deg); } }
+
+.bf-layout {
+    transition: opacity 140ms ease;
+}
+
+.bf-layout--fading {
+    opacity: 0;
+}

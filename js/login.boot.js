@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 (function() {
     function boot() {
         if (typeof Babel === "undefined") {
@@ -47,18 +46,3 @@
         boot();
     }
 })();
-=======
-(function () {
-  // Fallback boot for older login.html that kept JSX in type="text/plain".
-  var source = document.getElementById("login-source");
-  if (!source || !window.Babel) return;
-  try {
-    var result = Babel.transform(source.textContent, { presets: ["react"] });
-    var script = document.createElement("script");
-    script.textContent = result.code;
-    document.body.appendChild(script);
-  } catch (err) {
-    console.error("login.boot.js failed", err);
-  }
-})();
->>>>>>> Stashed changes

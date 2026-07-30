@@ -183,3 +183,260 @@ function setDialogBadge(count) {
     renderSidebar(String(count));
     bindUserCard();
 }
+
+/* ======================== SPA Router: smooth page transitions ======================== */
+const SPA_ROUTER = (() => {
+    const pageCache = new Map();
+    let transitionEl = null;
+    const PERSISTENT_CSS_HREFS = ["/assets/company-shell.css"];
+    const SHELL_SCRIPT_HREFS = ["/assets/company-api.js", "/assets/company-shell.js"];
+    let navigating = false;
+
+    function ensureTransitionEl() {
+        if (transitionEl && document.body.contains(transitionEl)) return transitionEl;
+        transitionEl = document.createElement("div");
+        transitionEl.className = "bf-page-transition";
+        transitionEl.setAttribute("aria-hidden", "true");
+        transitionEl.innerHTML = '<div class="bf-page-transition__spinner"></div>';
+        document.body.appendChild(transitionEl);
+        return transitionEl;
+    }
+
+    function normalizeUrl(url) {
+        try {
+            const u = new URL(url, location.origin);
+            return u.pathname + (u.search || "") + (u.hash || "");
+        } catch {
+            return url;
+        }
+    }
+
+    function isSpaRoute(url) {
+        try {
+            const u = new URL(url, location.origin);
+            if (u.origin !== location.origin) return false;
+            if (!u.pathname.startsWith("/company")) return false;
+            if (u.pathname.includes(".") && !u.pathname.endsWith("/")) {
+                // allow /company/foo but not .php/etc
+                const last = u.pathname.split("/").pop();
+                if (last.includes(".")) return false;
+            }
+            return true;
+        } catch { return false; }
+    }
+
+    function showOverlay() {
+        const el = ensureTransitionEl();
+        el.setAttribute("aria-hidden", "false");
+        requestAnimationFrame(() => el.classList.add("is-active"));
+    }
+
+    function hideOverlay() {
+        if (!transitionEl) return;
+        transitionEl.classList.remove("is-active");
+        transitionEl.setAttribute("aria-hidden", "true");
+    }
+
+    function parsePageScriptSrcs(doc) {
+        const out = [];
+        doc.querySelectorAll("script[src]").forEach((s) => {
+            const src = s.getAttribute("src");
+            if (src && !SHELL_SCRIPT_HREFS.some((h) => src.startsWith(h)) && !src.startsWith("http") && !src.startsWith("data:") && !src.includes("chart.js")) {
+                out.push(src);
+            }
+            if (src && src.includes("chart.js")) {
+                // skip
+            }
+        });
+        return Array.from(new Set(out));
+    }
+
+    function parsePageStyles(doc) {
+        const links = [];
+        doc.querySelectorAll('link[rel="stylesheet"]').forEach((l) => {
+            const href = l.getAttribute("href") || "";
+            if (PERSISTENT_CSS_HREFS.includes(href)) return;
+            if (href.startsWith("https://fonts.googleapis")) return;
+            if (href.startsWith("https://cdn.jsdelivr")) return;
+            links.push(href);
+        });
+        return Array.from(new Set(links));
+    }
+
+    function parseHeadInlineStyles(doc) {
+        return Array.from(doc.head.querySelectorAll("style")).map((s) => s.textContent);
+    }
+
+    async function loadPageDoc(url) {
+        const key = url.split("#")[0].split("?")[0] || url;
+        if (pageCache.has(key)) return pageCache.get(key);
+        const res = await fetch(url, { credentials: "same-origin", headers: { "X-Spa-Navigate": "1" } });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const text = await res.text();
+        const doc = new DOMParser().parseFromString(text, "text/html");
+        const entry = {
+            title: doc.title || document.title,
+            page: doc.body ?.dataset ?.page || (new URL(url, location.origin).pathname.replace(/^\/company\/?/, "") || "home"),
+            layoutHtml: doc.querySelector(".bf-layout") ? doc.querySelector(".bf-layout").innerHTML : "",
+            styleHrefs: parsePageStyles(doc),
+            headInlineStyles: parseHeadInlineStyles(doc),
+            pageScriptSrcs: parsePageScriptSrcs(doc),
+            scriptsInline: Array.from(doc.body.querySelectorAll("script:not([src])")).map((s) => s.textContent),
+            stylesInlineBody: Array.from(doc.body.querySelectorAll("style")).map((s) => s.textContent),
+            bodyClass: doc.body ? doc.body.className : "",
+        };
+        pageCache.set(key, entry);
+        return entry;
+    }
+
+    function applyCachedPage(entry) {
+        document.title = entry.title;
+        document.body.dataset.page = entry.page;
+        if (entry.bodyClass) {
+            document.body.className = entry.bodyClass;
+            if (!document.body.classList.contains("bf-app")) document.body.classList.add("bf-app");
+        }
+
+        /* Head styles — swap page css links */
+        const head = document.head;
+        head.querySelectorAll('link[rel="stylesheet"]').forEach((l) => {
+            const href = l.getAttribute("href") || "";
+            if (PERSISTENT_CSS_HREFS.includes(href)) return;
+            if (href.startsWith("https://fonts.googleapis")) return;
+            if (href.startsWith("https://cdn.jsdelivr")) return;
+            l.remove();
+        });
+        entry.styleHrefs.forEach((href) => {
+            if (head.querySelector(`link[rel="stylesheet"][href="${href}"]`)) return;
+            const ln = document.createElement("link");
+            ln.rel = "stylesheet";
+            ln.href = href;
+            head.appendChild(ln);
+        });
+
+        /* Head inline styles swap */
+        head.querySelectorAll("style[data-spa-inline]").forEach((s) => s.remove());
+        entry.headInlineStyles.forEach((txt) => {
+            const st = document.createElement("style");
+            st.setAttribute("data-spa-inline", "1");
+            st.textContent = txt;
+            head.appendChild(st);
+        });
+
+        /* Body inline styles (if any on pages with cards) */
+        document.body.querySelectorAll(":scope > style[data-spa-inline-body]").forEach((s) => s.remove());
+        entry.stylesInlineBody.forEach((txt) => {
+            const st = document.createElement("style");
+            st.setAttribute("data-spa-inline-body", "1");
+            st.textContent = txt;
+            document.body.appendChild(st);
+        });
+
+        /* Replace layout DOM */
+        const layout = document.querySelector(".bf-layout");
+        if (layout) {
+            layout.innerHTML = entry.layoutHtml || "";
+            layout.classList.remove("bf-layout--fading");
+        }
+
+        /* Re-init shell renderers (sidebar, user card) */
+        renderSidebar();
+        bindUserCard();
+        if (typeof updateGreeting === "function") updateGreeting();
+
+        /* Ensure SPA transition overlay back into new body */
+        if (transitionEl && !document.body.contains(transitionEl)) document.body.appendChild(transitionEl);
+
+        const runScripts = async() => {
+            for (const src of entry.pageScriptSrcs) {
+                await new Promise((resolve) => {
+                    const bust = "v=" + Date.now();
+                    const sep = src.includes("?") ? "&" : "?";
+                    const s = document.createElement("script");
+                    s.src = src + sep + bust;
+                    s.async = false;
+                    s.onload = resolve;
+                    s.onerror = () => {
+                        console.warn("SpaRouter: failed to load", src);
+                        resolve();
+                    };
+                    document.body.appendChild(s);
+                });
+            }
+            for (const code of entry.scriptsInline) {
+                try {
+                    (0, eval)(code); } catch (err) { console.error("SpaRouter inline script err:", err); }
+            }
+            window.scrollTo({ top: 0, behavior: "auto" });
+            hideOverlay();
+            requestAnimationFrame(() => {
+                document.dispatchEvent(new CustomEvent("spa-navigated", { detail: { url: location.pathname, page: entry.page } }));
+            });
+        };
+
+        Promise.resolve().then(runScripts);
+    }
+
+    async function navigateTo(rawUrl, opts = {}) {
+        if (navigating) return;
+        const url = normalizeUrl(rawUrl);
+        const cur = normalizeUrl(location.href);
+        if (!isSpaRoute(rawUrl)) {
+            location.href = rawUrl;
+            return;
+        }
+        if (url === cur && !opts.force) return;
+        navigating = true;
+        const layout = document.querySelector(".bf-layout");
+        if (layout) layout.classList.add("bf-layout--fading");
+        showOverlay();
+        try {
+            const entry = await loadPageDoc(url);
+            if (opts.pushState !== false) {
+                history.pushState({ spa: true, url: url }, "", rawUrl);
+            }
+            applyCachedPage(entry);
+        } catch (err) {
+            console.warn("SpaRouter fallthrough:", err);
+            hideOverlay();
+            if (layout) layout.classList.remove("bf-layout--fading");
+            location.href = rawUrl;
+        } finally {
+            navigating = false;
+        }
+    }
+
+    function installLinkInterceptor() {
+        document.addEventListener("click", (e) => {
+            if (e.defaultPrevented) return;
+            if (e.button !== 0) return;
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+            const a = e.target.closest("a[href]");
+            if (!a) return;
+            const href = a.getAttribute("href") || "";
+            if (a.target && a.target !== "_self") return;
+            if (a.hasAttribute("download")) return;
+            if (a.getAttribute("rel") && /\bexternal\b/.test(a.getAttribute("rel"))) return;
+            if (href.startsWith("#")) return;
+            if (href.startsWith("mailto:") || href.startsWith("tel:")) return;
+            if (!isSpaRoute(href.startsWith("/") ? href : a.href)) return;
+            e.preventDefault();
+            navigateTo(href.startsWith("/") ? href : a.href);
+        }, true);
+
+        window.addEventListener("popstate", () => {
+            if (!history.state || !history.state.spa) return;
+            navigateTo(location.pathname + location.search + location.hash, { pushState: false, force: true });
+        });
+    }
+
+    function start() {
+        ensureTransitionEl();
+        installLinkInterceptor();
+    }
+
+    return { start, navigateTo, clearCache: () => pageCache.clear() };
+})();
+
+document.addEventListener("DOMContentLoaded", () => SPA_ROUTER.start(), { once: true });
+window.BizFlowSpa = SPA_ROUTER;

@@ -1,309 +1,291 @@
 <!doctype html>
 <html lang="ru">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Настройка VK — Virexo</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-            rel="stylesheet"
-        />
-        <link rel="stylesheet" href="/assets/company-shell.css?v=8" />
-        <link rel="stylesheet" href="/assets/company-vk.css?v=9" />
-    </head>
-    <body class="bf-app" data-page="vk">
-        <div class="bf-layout">
-            <aside class="bf-sidebar" id="companySidebar"></aside>
 
-            <div class="bf-main vks-page">
-                <header class="vks-header">
-                    <div>
-                        <h1>Настройка VK</h1>
-                        <p>
-                            Подключите ваше сообщество VK для приёма сообщений и заявок от
-                            клиентов
-                        </p>
-                    </div>
-                    <div class="vks-header-actions">
-                        <a class="vks-btn vks-btn--ghost" href="/company/docs#vk-integration">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                            Документация
-                        </a>
-                        <button type="button" class="vks-btn vks-btn--icon" id="copyDocsLinkButton" title="Скопировать ссылку на документацию">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Настройка VK — Virexo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/company-shell.css?v=9?v=9" />
+    <link rel="stylesheet" href="/assets/company-vk.css?v=12" />
+</head>
+
+<body class="bf-app" data-page="vk">
+    <div class="bf-layout">
+        <aside class="bf-sidebar" id="companySidebar"></aside>
+
+        <div class="bf-main vks-page">
+            <header class="vks-header">
+                <div>
+                    <h1>Настройка VK</h1>
+                    <p>
+                        Подключите ваше сообщество VK для приёма сообщений и заявок от клиентов
+                    </p>
+                </div>
+                <div class="vks-header-actions">
+                    <a class="vks-btn vks-btn--ghost" href="/company/docs#vk-integration">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Документация
+                    </a>
+                    <button type="button" class="vks-btn vks-btn--icon" id="copyDocsLinkButton" title="Скопировать ссылку на документацию">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
                         </button>
-                    </div>
-                </header>
+                </div>
+            </header>
 
-                <div class="vks-content" id="vksContent">
-                    <div id="pageError" class="vks-message error" hidden role="alert"></div>
+            <div class="vks-content" id="vksContent">
+                <div id="pageError" class="vks-message error" hidden role="alert"></div>
 
-                    <div class="vks-grid">
-                        <section class="vks-card" id="addCommunitySection">
-                            <div class="vks-card-head">
-                                <h2 id="addFormTitle">Подключение сообщества VK</h2>
-                                <p id="addFormSubtitle">Укажите данные вашего сообщества для интеграции с Virexo</p>
-                            </div>
-
-                            <div id="addFormConnectedHint" class="vks-connected-hint" hidden>
-                                <p>Сообщество уже подключено. Чтобы изменить настройки, нажмите <strong>Управление</strong> на карточке справа.</p>
-                                <p class="vks-hint">Форма ниже — только для подключения другого сообщества (заменит текущее).</p>
+                <div class="vks-grid">
+                    <section class="vks-card" id="addCommunitySection">
+                        <div class="vks-card-head">
+                            <h2 id="addFormTitle">Подключение сообщества VK</h2>
+                            <p id="addFormSubtitle">Укажите данные вашего сообщества для интеграции с Virexo</p>
                         </div>
 
-                            <form id="vkConfigForm" class="vks-form" novalidate autocomplete="off">
-                                <div class="vks-field">
-                                    <label class="vks-label" for="communityName">Название сообщества</label>
-                                    <input
-                                        id="communityName"
-                                        class="vks-input"
-                                        type="text"
-                                        placeholder="Например: Virexo"
-                                        autocomplete="organization"
-                                    />
-                                </div>
+                        <div id="addFormConnectedHint" class="vks-connected-hint" hidden>
+                            <p>Сообщество уже подключено. Чтобы изменить настройки, нажмите <strong>Управление</strong> на карточке справа.</p>
+                            <p class="vks-hint">Форма ниже — только для подключения другого сообщества (заменит текущее).</p>
+                        </div>
 
-                                <div class="vks-field">
-                                    <label class="vks-label" for="connectionType">
+                        <form id="vkConfigForm" class="vks-form" novalidate autocomplete="off">
+                            <div class="vks-field">
+                                <label class="vks-label" for="communityName">Название сообщества</label>
+                                <input id="communityName" class="vks-input" type="text" placeholder="Например: Virexo" autocomplete="organization" />
+                            </div>
+
+                            <div class="vks-field">
+                                <label class="vks-label">
                                         Тип сообщества
                                         <button type="button" class="vks-info" title="Публичная страница — стандартный режим для бизнеса. Личный аккаунт — вспомогательный сценарий.">i</button>
                                     </label>
-                                    <div class="vks-select-wrap">
-                                        <select id="connectionType" class="vks-select">
-                                            <option value="group">Публичная страница (паблик)</option>
-                                            <option value="personal">Личный аккаунт менеджера</option>
-                                        </select>
-                                        <svg class="vks-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                                </div>
-                                </div>
-
-                                <div class="vks-field">
-                                    <label class="vks-label" for="targetId" id="targetIdLabel">ID сообщества</label>
-                                    <input
-                                        id="targetId"
-                                        class="vks-input"
-                                        type="text"
-                                        required
-                                        placeholder="Введите ID вашего сообщества"
-                                        autocomplete="off"
-                                    />
-                                    <a
-                                        class="vks-link"
-                                        href="https://vk.com/faq18324"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >Где найти ID сообщества?</a>
-                                </div>
-
-                                <div class="vks-field">
-                                    <label class="vks-label" for="vkAccessToken">Access Token</label>
-                                    <div class="vks-input-wrap">
-                                        <input
-                                            id="vkAccessToken"
-                                            class="vks-input vks-input--token"
-                                            type="password"
-                                            placeholder="Введите Access Token"
-                                            autocomplete="off"
-                                        />
-                                        <button type="button" class="vks-eye" id="toggleTokenButton" aria-label="Показать токен">
-                                            <svg class="vks-eye-icon vks-eye-icon--hide" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
-                                            <svg class="vks-eye-icon vks-eye-icon--show" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" hidden><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <select id="connectionType" class="vks-select" style="display:none;" aria-hidden="true">
+                                        <option value="group">Публичная страница (паблик)</option>
+                                        <option value="personal">Личный аккаунт менеджера</option>
+                                    </select>
+                                <div class="vks-custom-select" id="connectionTypeCustom" role="listbox" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+                                    <button type="button" class="vks-custom-select__trigger" id="connectionTypeTrigger" aria-labelledby="connectionTypeLabel">
+                                            <span class="vks-custom-select__label">Публичная страница (паблик)</span>
                                         </button>
+                                    <svg class="vks-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                                    <div class="vks-custom-select__dropdown" role="listbox" aria-hidden="true">
+                                        <button type="button" class="vks-custom-select__option selected" role="option" data-value="group" aria-selected="true">
+                                                <span>Публичная страница (паблик)</span>
+                                                <svg class="vks-custom-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                            </button>
+                                        <button type="button" class="vks-custom-select__option" role="option" data-value="personal" aria-selected="false">
+                                                <span>Личный аккаунт менеджера</span>
+                                                <svg class="vks-custom-select__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                            </button>
                                     </div>
-                                    <p class="vks-hint" id="maskedTokenHint">Токен необходим для получения и отправки сообщений</p>
-                        </div>
+                                </div>
+                            </div>
 
-                                <input id="callbackUrl" type="hidden" />
-                                <input id="secretKey" type="hidden" />
-                                <input id="confirmationToken" type="hidden" />
+                            <div class="vks-field">
+                                <label class="vks-label" for="targetId" id="targetIdLabel">ID сообщества</label>
+                                <input id="targetId" class="vks-input" type="text" required placeholder="Введите ID вашего сообщества" autocomplete="off" />
+                                <a class="vks-link" href="https://vk.com/faq18324" target="_blank" rel="noreferrer">Где найти ID сообщества?</a>
+                            </div>
 
-                                <button type="submit" class="vks-btn vks-btn--primary vks-btn--block" id="connectButton">
+                            <div class="vks-field">
+                                <label class="vks-label" for="vkAccessToken">Access Token</label>
+                                <div class="vks-input-wrap">
+                                    <input id="vkAccessToken" class="vks-input vks-input--token" type="password" placeholder="Введите Access Token" autocomplete="off" />
+                                    <button type="button" class="vks-eye" id="toggleTokenButton" aria-label="Показать токен">
+                                            <svg class="vks-eye-icon" data-eye="hide" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                                            <svg class="vks-eye-icon" data-eye="show" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" hidden><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                    </button>
+                                </div>
+                                <p class="vks-hint" id="maskedTokenHint">Токен необходим для получения и отправки сообщений</p>
+                            </div>
+
+                            <input id="callbackUrl" type="hidden" />
+                            <input id="secretKey" type="hidden" />
+                            <input id="confirmationToken" type="hidden" />
+
+                            <button type="submit" class="vks-btn vks-btn--primary vks-btn--block" id="connectButton">
                                     <span>Подключить сообщество</span>
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
                                 </button>
 
-                                <p id="vkConfigMessage" class="vks-message" role="status" hidden></p>
-                            </form>
-                        </section>
+                            <p id="vkConfigMessage" class="vks-message" role="status" hidden></p>
+                        </form>
+                    </section>
 
-                        <section class="vks-card">
-                            <div class="vks-card-head">
-                                <h2>Подключенные сообщества</h2>
-                                <p>Список ваших подключенных сообществ VK</p>
-                            </div>
+                    <section class="vks-card">
+                        <div class="vks-card-head">
+                            <h2>Подключенные сообщества</h2>
+                            <p>Список ваших подключенных сообществ VK</p>
+                        </div>
 
-                            <div id="connectedList" class="vks-connected-list">
-                                <div class="vks-empty" id="connectedEmpty">
-                                    <div class="vks-empty-icon">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0z"/></svg>
-                                    </div>
-                                    <p>Пока нет подключённых сообществ</p>
-                                    <span>Заполните форму слева и нажмите «Подключить сообщество»</span>
+                        <div id="connectedList" class="vks-connected-list">
+                            <div class="vks-empty" id="connectedEmpty">
+                                <div class="vks-empty-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0z"/></svg>
                                 </div>
+                                <p>Пока нет подключённых сообществ</p>
+                                <span>Заполните форму слева и нажмите «Подключить сообщество»</span>
                             </div>
+                        </div>
 
-                            <button type="button" class="vks-add-slot" id="addCommunityButton">
+                        <button type="button" class="vks-add-slot" id="addCommunityButton">
                                 <span class="vks-add-icon">+</span>
                                 Подключить ещё одно сообщество
                             </button>
-                        </section>
+                    </section>
+                </div>
+
+                <section class="vks-card vks-instructions">
+                    <div class="vks-card-head vks-card-head--center">
+                        <h2>Инструкция по подключению VK</h2>
+                        <p>Следуйте этим шагам для успешной интеграции</p>
                     </div>
 
-                    <section class="vks-card vks-instructions">
-                        <div class="vks-card-head vks-card-head--center">
-                            <h2>Инструкция по подключению VK</h2>
-                            <p>Следуйте этим шагам для успешной интеграции</p>
-                        </div>
-
-                        <div class="vks-steps">
-                            <article class="vks-step">
-                                <div class="vks-step-num">1</div>
-                                <h3>Создайте ключ доступа</h3>
-                                <p>Перейдите в настройки сообщества VK и создайте ключ доступа</p>
-                                <a href="https://vk.com/dev/access_token" target="_blank" rel="noreferrer">
+                    <div class="vks-steps">
+                        <article class="vks-step">
+                            <div class="vks-step-num">1</div>
+                            <h3>Создайте ключ доступа</h3>
+                            <p>Перейдите в настройки сообщества VK и создайте ключ доступа</p>
+                            <a href="https://vk.com/dev/access_token" target="_blank" rel="noreferrer">
                                     Документация VK
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                                 </a>
-                            </article>
-                            <div class="vks-step-arrow" aria-hidden="true"></div>
-                            <article class="vks-step">
-                                <div class="vks-step-num">2</div>
-                                <h3>Получите Access Token</h3>
-                                <p>Скопируйте токен с нужными правами для работы с сообщениями</p>
-                                <a href="https://vk.com/dev/permissions" target="_blank" rel="noreferrer">
+                        </article>
+                        <div class="vks-step-arrow" aria-hidden="true"></div>
+                        <article class="vks-step">
+                            <div class="vks-step-num">2</div>
+                            <h3>Получите Access Token</h3>
+                            <p>Скопируйте токен с нужными правами для работы с сообщениями</p>
+                            <a href="https://vk.com/dev/permissions" target="_blank" rel="noreferrer">
                                     Подробнее о правах
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                                 </a>
-                            </article>
-                            <div class="vks-step-arrow" aria-hidden="true"></div>
-                            <article class="vks-step">
-                                <div class="vks-step-num">3</div>
-                                <h3>Получите ID сообщества</h3>
-                                <p>Найдите numeric ID в адресной строке или настройках группы</p>
-                                <a href="https://vk.com/faq18324" target="_blank" rel="noreferrer">
+                        </article>
+                        <div class="vks-step-arrow" aria-hidden="true"></div>
+                        <article class="vks-step">
+                            <div class="vks-step-num">3</div>
+                            <h3>Получите ID сообщества</h3>
+                            <p>Найдите numeric ID в адресной строке или настройках группы</p>
+                            <a href="https://vk.com/faq18324" target="_blank" rel="noreferrer">
                                     Как найти ID?
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                                 </a>
-                            </article>
-                            <div class="vks-step-arrow" aria-hidden="true"></div>
-                            <article class="vks-step">
-                                <div class="vks-step-num">4</div>
-                                <h3>Подключите сообщество</h3>
-                                <p>Вставьте данные в форму и нажмите «Подключить сообщество»</p>
-                                <a href="https://vk.com/dev/callback_api" target="_blank" rel="noreferrer">
+                        </article>
+                        <div class="vks-step-arrow" aria-hidden="true"></div>
+                        <article class="vks-step">
+                            <div class="vks-step-num">4</div>
+                            <h3>Подключите сообщество</h3>
+                            <p>Вставьте данные в форму и нажмите «Подключить сообщество»</p>
+                            <a href="https://vk.com/dev/callback_api" target="_blank" rel="noreferrer">
                                     FAQ по подключению
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                                 </a>
-                            </article>
-                        </div>
-                    </section>
+                        </article>
+                    </div>
+                </section>
 
-                    <section class="vks-help">
-                        <div class="vks-help-text">
-                            <span class="vks-help-icon" aria-hidden="true">
+                <section class="vks-help">
+                    <div class="vks-help-text">
+                        <span class="vks-help-icon" aria-hidden="true">
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
                             </span>
-                            <p>
-                                <strong>Нужна помощь?</strong>
-                                Если у вас возникли сложности с подключением, обратитесь к нашей
-                                документации или свяжитесь с поддержкой.
-                            </p>
-                        </div>
-                        <div class="vks-help-actions">
-                            <a class="vks-btn vks-btn--outline" href="/company/docs">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                                Документация
-                            </a>
-                            <a class="vks-btn vks-btn--primary" href="mailto:support@bizflow.ru">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
-                                Связаться с поддержкой
-                            </a>
-                        </div>
-                    </section>
+                        <p>
+                            <strong>Нужна помощь?</strong> Если у вас возникли сложности с подключением, обратитесь к нашей документации или свяжитесь с поддержкой.
+                        </p>
+                    </div>
+                    <div class="vks-help-actions">
+                        <a class="vks-btn vks-btn--outline" href="/company/docs">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>                            Документация
+                        </a>
+                        <a class="vks-btn vks-btn--primary" href="mailto:support@bizflow.ru">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>                            Связаться с поддержкой
+                        </a>
+                    </div>
+                </section>
 
-                    <div id="connectionWarnings" class="vks-warnings" hidden></div>
-                    <div id="checkReport" class="vks-report" hidden></div>
+                <div id="connectionWarnings" class="vks-warnings" hidden></div>
+                <div id="checkReport" class="vks-report" hidden></div>
+            </div>
+        </div>
+    </div>
+
+    <dialog class="vks-modal" id="manageModal">
+        <div class="vks-modal-inner">
+            <header class="vks-modal-head">
+                <div>
+                    <h2>Управление сообществом</h2>
+                    <p id="manageModalSubtitle">Расширенные настройки Callback API</p>
+                </div>
+                <button type="button" class="vks-modal-close" id="closeManageModal" aria-label="Закрыть">&times;</button>
+            </header>
+
+            <div class="vks-modal-body">
+                <div class="vks-field">
+                    <label class="vks-label">Тип сообщества</label>
+                    <div class="vks-type-toggle" id="manageTypeToggle">
+                        <button type="button" class="vks-type-btn active" data-type="group">Публичная страница</button>
+                        <button type="button" class="vks-type-btn" data-type="personal">Личный аккаунт</button>
+                    </div>
+                </div>
+
+                <div class="vks-field">
+                    <label class="vks-label" for="manageCommunityName">Название сообщества</label>
+                    <input id="manageCommunityName" class="vks-input" type="text" placeholder="Например: Virexo" />
+                </div>
+
+                <div class="vks-field">
+                    <label class="vks-label" for="manageTargetId" id="manageTargetIdLabel">ID сообщества</label>
+                    <input id="manageTargetId" class="vks-input" type="text" placeholder="ID сообщества VK" autocomplete="off" />
+                </div>
+
+                <div class="vks-field">
+                    <label class="vks-label" for="manageVkAccessToken">Access Token</label>
+                    <div class="vks-input-wrap">
+                        <input id="manageVkAccessToken" class="vks-input vks-input--token" type="password" placeholder="Оставьте пустым, чтобы не менять" autocomplete="off" />
+                        <button type="button" class="vks-eye" id="manageToggleTokenButton" aria-label="Показать токен">
+                                <svg class="vks-eye-icon" data-eye="hide" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                                <svg class="vks-eye-icon" data-eye="show" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" hidden><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </button>
+                    </div>
+                    <p class="vks-hint" id="manageTokenHint">Токен необходим для получения и отправки сообщений</p>
+                </div>
+
+                <div class="vks-credential">
+                    <span class="vks-label">Callback URL</span>
+                    <div class="vks-copy-row">
+                        <code id="managedCallbackPreview">—</code>
+                        <button type="button" class="vks-btn vks-btn--ghost vks-btn--sm" id="copyCallbackButton">Копировать</button>
+                    </div>
+                </div>
+
+                <div class="vks-credential">
+                    <span class="vks-label">Secret Key</span>
+                    <div class="vks-copy-row">
+                        <code id="managedSecretPreview">—</code>
+                        <button type="button" class="vks-btn vks-btn--ghost vks-btn--sm" id="generateSecretButton">Сгенерировать</button>
+                        <button type="button" class="vks-btn vks-btn--ghost vks-btn--sm" id="copySecretButton">Копировать</button>
+                    </div>
+                </div>
+
+                <div class="vks-field">
+                    <label class="vks-label" for="confirmationToken">Confirmation token</label>
+                    <input id="confirmationTokenVisible" class="vks-input" type="text" placeholder="Строка подтверждения для VK" />
+                    <p class="vks-hint">Вставьте ту же строку в VK → Callback API → Строка подтверждения</p>
+                </div>
+
+                <div class="vks-modal-actions">
+                    <button type="button" class="vks-btn vks-btn--primary" id="saveManageButton">Сохранить</button>
+                    <button type="button" class="vks-btn vks-btn--ghost" id="checkVkButton">Проверить подключение</button>
+                    <button type="button" class="vks-btn vks-btn--ghost" id="setupCallbackButton">Настроить Callback API</button>
                 </div>
             </div>
         </div>
+    </dialog>
 
-        <dialog class="vks-modal" id="manageModal">
-            <div class="vks-modal-inner">
-                <header class="vks-modal-head">
-                    <div>
-                        <h2>Управление сообществом</h2>
-                        <p id="manageModalSubtitle">Расширенные настройки Callback API</p>
-                    </div>
-                    <button type="button" class="vks-modal-close" id="closeManageModal" aria-label="Закрыть">&times;</button>
-                </header>
+    <script src="/assets/company-api.js?v=8"></script>
+    <script src="/assets/company-shell.js?v=9"></script>
+    <script src="/assets/company-vk.js?v=14"></script>
+</body>
 
-                <div class="vks-modal-body">
-                    <div class="vks-field">
-                        <label class="vks-label">Тип сообщества</label>
-                        <div class="vks-type-toggle" id="manageTypeToggle">
-                            <button type="button" class="vks-type-btn active" data-type="group">Публичная страница</button>
-                            <button type="button" class="vks-type-btn" data-type="personal">Личный аккаунт</button>
-                        </div>
-                    </div>
-
-                    <div class="vks-field">
-                        <label class="vks-label" for="manageCommunityName">Название сообщества</label>
-                        <input id="manageCommunityName" class="vks-input" type="text" placeholder="Например: Virexo" />
-                    </div>
-
-                    <div class="vks-field">
-                        <label class="vks-label" for="manageTargetId" id="manageTargetIdLabel">ID сообщества</label>
-                        <input id="manageTargetId" class="vks-input" type="text" placeholder="ID сообщества VK" autocomplete="off" />
-                    </div>
-
-                    <div class="vks-field">
-                        <label class="vks-label" for="manageVkAccessToken">Access Token</label>
-                        <div class="vks-input-wrap">
-                            <input id="manageVkAccessToken" class="vks-input vks-input--token" type="password" placeholder="Оставьте пустым, чтобы не менять" autocomplete="off" />
-                            <button type="button" class="vks-eye" id="manageToggleTokenButton" aria-label="Показать токен">
-                                <svg class="vks-eye-icon vks-eye-icon--hide-manage" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
-                                <svg class="vks-eye-icon vks-eye-icon--show-manage" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" hidden><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                            </button>
-                        </div>
-                        <p class="vks-hint" id="manageTokenHint">Токен необходим для получения и отправки сообщений</p>
-                    </div>
-
-                    <div class="vks-credential">
-                        <span class="vks-label">Callback URL</span>
-                        <div class="vks-copy-row">
-                            <code id="managedCallbackPreview">—</code>
-                            <button type="button" class="vks-btn vks-btn--ghost vks-btn--sm" id="copyCallbackButton">Копировать</button>
-                        </div>
-                    </div>
-
-                    <div class="vks-credential">
-                        <span class="vks-label">Secret Key</span>
-                        <div class="vks-copy-row">
-                            <code id="managedSecretPreview">—</code>
-                            <button type="button" class="vks-btn vks-btn--ghost vks-btn--sm" id="generateSecretButton">Сгенерировать</button>
-                            <button type="button" class="vks-btn vks-btn--ghost vks-btn--sm" id="copySecretButton">Копировать</button>
-                        </div>
-                    </div>
-
-                    <div class="vks-field">
-                        <label class="vks-label" for="confirmationToken">Confirmation token</label>
-                        <input id="confirmationTokenVisible" class="vks-input" type="text" placeholder="Строка подтверждения для VK" />
-                        <p class="vks-hint">Вставьте ту же строку в VK → Callback API → Строка подтверждения</p>
-                    </div>
-
-                    <div class="vks-modal-actions">
-                        <button type="button" class="vks-btn vks-btn--primary" id="saveManageButton">Сохранить</button>
-                        <button type="button" class="vks-btn vks-btn--ghost" id="checkVkButton">Проверить подключение</button>
-                        <button type="button" class="vks-btn vks-btn--ghost" id="setupCallbackButton">Настроить Callback API</button>
-                    </div>
-                </div>
-            </div>
-        </dialog>
-
-        <script src="/assets/company-api.js?v=8"></script>
-        <script src="/assets/company-shell.js?v=8"></script>
-        <script src="/assets/company-vk.js?v=9"></script>
-    </body>
 </html>
-
